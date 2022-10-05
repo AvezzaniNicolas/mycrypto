@@ -1,13 +1,13 @@
 <?php
 session_start();
-$title="Editar Red";
+$title="Editar Proyectos";
 /* Llamar la Cadena de Conexion*/ 
 include ("../conexion.php");
 $SELECT=mysqli_query($conexion, "SELECT * FROM estados");
 
 
-$idred=$_GET['id'];
-$sql=mysqli_query($conexion,"SELECT * FROM redes WHERE idred='$idred' limit 0,1");
+$idproyecto=$_GET['id_proyecto'];
+$sql=mysqli_query($conexion,"SELECT * FROM proyectos WHERE idproyecto='$idproyecto' limit 0,1");
 $count=mysqli_num_rows($sql);
 if ($count==0){
 	
@@ -15,9 +15,10 @@ if ($count==0){
 while($rw=mysqli_fetch_array($sql)){
 
 
-$nombre_red=$rw['nombre_red'];
-$imagen_red=$rw['imagen_red'];
-$orden=$rw['orden'];
+$nombre_proyecto=$rw['nombre_proyecto'];
+$imagen_proyecto=$rw['imagen_proyecto'];
+$moneda_proyecto=$rw['moneda_proyecto'];
+$precio_proyecto=$rw['precio_proyecto'];
 $idestado=$rw['idestado'];
 }
 $active_config="active";
@@ -33,7 +34,7 @@ $active_banner="active";
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../images/ico/favicon.ico">
-    <title>Editar Red</title>
+    <title>Editar Proyecto</title>
     <!-- Bootstrap core CSS -->
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -51,31 +52,42 @@ $active_banner="active";
 	  
 	   <ol class="breadcrumb">
 		  <li><a href="../inicio.php">Inicio</a></li>
-		  <li><a href="redeslist.php">Red</a></li>
+		  <li><a href="proyectoslist.php">Proyectos</a></li>
 		  <li class="active">Editar</li>
 		</ol>
 		 <div class="col-md-7">
-		 <h3 ><span class="glyphicon glyphicon-edit"></span> Editar Red</h3>
+		 <h3 ><span class="glyphicon glyphicon-edit"></span> Editar Proyecto</h3>
 
 		 	
-		 <form action="abm_red.php" class="form-horizontal"  method="POST" enctype="multipart/form-data">
+		 <form action="abm_proyectos.php" class="form-horizontal"  method="POST" enctype="multipart/form-data">
 				 
 			 
 			  
 			  <div class="form-group">
-				<label for="nombre_red" class="col-sm-3 control-label">Nombre Red</label>
+				<label for="nombre_proyecto" class="col-sm-3 control-label">Nombre Proyecto</label>
 				<div class="col-sm-9">
-				  <input type="text" class="form-control" id="nombre_red" value="<?php echo $nombre_red;?>" required name="nombre_red">
-				  
+				  <input type="text" class="form-control" id="nombre_proyecto" value="<?php echo $nombre_proyecto;?>" required name="nombre_proyecto">
 				</div>
 			  </div>
 
-			  
-					  
-			  <div class="form-group">
-				<label for="orden" class="col-sm-3 control-label">Orden</label>
+              <div class="form-group">
+				<label for="orden" class="col-sm-3 control-label">Moneda del Proyecto</label>
 				<div class="col-sm-9">
-				  <input type="number" class="form-control" id="orden" name="orden" value="<?php echo $orden;?>">
+				  <input type="number" class="form-control" id="moneda_proyecto" name="moneda_proyecto" >
+				</div>
+			  </div>
+
+              <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Precio de Moneda del Proyecto</label>
+				<div class="col-sm-9">
+				  <input type="number" class="form-control" id="precio_proyecto" name="precio_proyecto" >
+				</div>
+			  </div>
+
+              <div class="form-group">
+				<label for="nombre_red" class="col-sm-3 control-label">Red</label>
+				<div class="col-sm-9">
+                    <input type="text" class="form-control" id="nombre_red" name="nombre_red" value="  <?php echo $nombre_red['nombre_red'] ;?>" readonly>  
 				</div>
 			  </div>
 			  
@@ -104,7 +116,7 @@ $active_banner="active";
 			  <div id='loader'></div>
 			  <div class='outer_div'></div>
 				<div class="col-sm-offset-3 col-sm-9">
-					<input type="text" name="idred" id="idred" value="<?php echo $idred;?>" hidden> 
+					<input type="text" name="idproyecto" id="idproyecto" value="<?php echo $idproyecto;?>" hidden> 
 				  <button name="update" id="update" value="update" type="submit" class="btn btn-success">Actualizar datos</button>
 				</div>
 			  </div>
@@ -125,7 +137,7 @@ $active_banner="active";
 				 
 				 <div class="fileinput fileinput-new" data-provides="fileinput">
 								  <div class="fileinput-new thumbnail" style="max-width: 100%;" >
-									  <img class="img-rounded" src="../img/Redes/<?php echo $imagen_red;?>" />
+									  <img class="img-rounded" src="../img/Proyectos/<?php echo $imagen_proyecto;?>" />
 								  </div>
 								  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 250px; max-height: 250px;"></div>
 								  <div>
@@ -170,15 +182,15 @@ $active_banner="active";
 	<script>
 			function upload_image(){
 				$(".upload-msg").text('Cargando...');
-				var idred=$("#idred").val();
+				var idproyecto=$("#idproyecto").val();
 				var inputFileImage = document.getElementById("fileToUpload");
 				var file = inputFileImage.files[0];
 				var data = new FormData();
 				data.append('fileToUpload',file);
-				data.append('idred',idred);
+				data.append('idproyecto',idproyecto);
 				
 				$.ajax({
-					url: "ajax/upload_red.php",        // Url to which the request is send
+					url: "ajax/upload_proyecto.php",        // Url to which the request is send
 					type: "POST",             // Type of request to be send, called as method
 					data: data, 			  // Data sent to server, a set of key/value pairs (i.e. form fields and values)
 					contentType: false,       // The content type used when sending data to the server.
@@ -196,8 +208,8 @@ $active_banner="active";
 				
 			}
 			
-			function eliminar(idred){
-				var parametros = {"action":"delete","idred":idred};
+			function eliminar(idproyecto){
+				var parametros = {"action":"delete","idproyecto":idproyecto};
 						$.ajax({
 							url:'ajax/upload2.php',
 							data: parametros,
@@ -218,12 +230,12 @@ $active_banner="active";
 			
 	</script>
 	<script>
-		$("#editar_red").submit(function(e) {
+		$("#editar_proyecto").submit(function(e) {
 			
 			  $.ajax({
-				  url: "ajax/editar_red.php",
+				  url: "ajax/editar_proyecto.php",
 				  type: "POST",
-				  data: $("#editar_red").serialize(),
+				  data: $("#editar_proyecto").serialize(),
 				   beforeSend: function(objeto){
 					$("#loader").html("Cargando...");
 				  },
@@ -235,6 +247,3 @@ $active_banner="active";
 			 e.preventDefault();
 		});
 	</script>
-
-	
-

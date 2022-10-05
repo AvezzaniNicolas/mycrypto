@@ -26,9 +26,9 @@ $active4="active";
 
 <div class="container gallery-container">
 
-    <h1>Bootstrap 3 Gallery</h1>
+    <h1>Redes De Juegos Crypto</h1>
 
-    <p class="page-description text-center">Thumbnails With Title And Description</p>
+    
     
     <div class="tz-gallery">
 
