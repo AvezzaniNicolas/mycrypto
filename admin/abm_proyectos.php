@@ -124,14 +124,14 @@ if(isset($_POST['insert']) && !empty ($_POST['insert'])){
 $imagen=imagen();
 
 $nombre_proyecto=$_POST['nombre_proyecto'];
-$idred=$_POST['idred'];
-$idestado=$_POST['estado'];
+$idred=$_POST['nombre_red'];
+$idestado=$_POST['estado_proyecto'];
 $moneda_proyecto=$_POST['moneda_proyecto'];
 $precio_proyecto=$_POST['precio_proyecto'];
 $imagen_proyecto=$_POST['imagen_proyecto'];
-$sqlidred=mysqli_query($conexion,"SELECT idred FROM redes WHERE idred=$idred");
-$sqlidestado=mysqli_query($conexion,"SELECT idestado FROM estados WHERE idestado=$idestado");
-$insert=mysqli_query($conexion,"INSERT INTO proyectos (nombre_proyecto, moneda_proyecto, precio_proyecto, imagen_proyecto, idred, idestado) values ('$nombre_proyecto','$moneda_proyecto','$precio_proyecto','$imagen_proyecto','$sqlidred','$sqlidestado')");
+//$sqlidred=mysqli_query($conexion,"SELECT idred FROM redes WHERE idred=$idred");
+//$sqlidestado=mysqli_query($conexion,"SELECT idestado FROM estados WHERE idestado=$idestado");
+$insert=mysqli_query($conexion,"INSERT INTO proyectos (nombre_proyecto, moneda_proyecto, precio_proyecto, imagen_proyecto, idred, idestado) values ('$nombre_proyecto','$moneda_proyecto','$precio_proyecto','$imagen','$idred','$idestado')");
 
 
 header("location:proyectoslist.php");
@@ -141,20 +141,21 @@ header("location:proyectoslist.php");
 if(isset($_POST['update']) && !empty ($_POST['update'])){
 
     $imagen=imagen();
+    $idred=$_POST['idred'];
     $id_proyecto=$_POST['idproyecto'];
     $moneda_proyecto=$_POST['moneda_proyecto'];
     $precio_proyecto=$_POST['precio_proyecto'];
     $imagen_proyecto=$_POST['imagen_proyecto'];
     $idestado=$_POST['estado'];
-    $sqlidestado=mysqli_query($conexion,"SELECT idestado FROM estados WHERE idestado=$idestado");
-    $sqlidred=mysqli_query($conexion,"SELECT idred FROM redes WHERE idred=$idred");
+    //$sqlidestado=mysqli_query($conexion,"SELECT idestado FROM estados WHERE idestado=$idestado");
+    //$sqlidred=mysqli_query($conexion,"SELECT idred FROM redes WHERE idred=$idred");
     $nombre_proyecto=$_POST['nombre_proyecto'];
     if (!is_null($imagen)) {
-        $update=mysqli_query($conexion,"UPDATE proyectos SET nombre_proyecto='$nombre_proyecto', moneda_proyecto='$moneda_proyecto', precio_proyecto='$precio_proyecto', imagen_proyecto='$imagen', idred='$sqlidred', idestado='$sqlidestado', orden='$orden' WHERE idproyecto='$id_proyecto'");
+        $update=mysqli_query($conexion,"UPDATE proyectos SET nombre_proyecto='$nombre_proyecto', moneda_proyecto='$moneda_proyecto', precio_proyecto='$precio_proyecto', imagen_proyecto='$imagen', idred='$idred', idestado='$idestado' WHERE idproyecto='$id_proyecto'");
 
         header("location:proyectoslist.php");
     }else{
-        $update=mysqli_query($conexion,"UPDATE proyectos SET nombre_proyecto='$nombre_proyecto', moneda_proyecto='$moneda_proyecto', precio_proyecto='$precio_proyecto', idred='$sqlidred', idestado='$sqlidestado', orden='$orden' WHERE idproyecto='$id_proyecto'");
+        $update=mysqli_query($conexion,"UPDATE proyectos SET nombre_proyecto='$nombre_proyecto', moneda_proyecto='$moneda_proyecto', precio_proyecto='$precio_proyecto', idred='$idred', idestado='$idestado' WHERE idproyecto='$id_proyecto'");
 
         header("location:proyectoslist.php");
     }

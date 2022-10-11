@@ -4,9 +4,10 @@ $title="Editar Proyectos";
 /* Llamar la Cadena de Conexion*/ 
 include ("../conexion.php");
 $SELECT=mysqli_query($conexion, "SELECT * FROM estados");
+$SELECT_red=mysqli_query($conexion, "SELECT * FROM redes");
 
 
-$idproyecto=$_GET['id_proyecto'];
+$idproyecto=$_GET['id'];
 $sql=mysqli_query($conexion,"SELECT * FROM proyectos WHERE idproyecto='$idproyecto' limit 0,1");
 $count=mysqli_num_rows($sql);
 if ($count==0){
@@ -14,7 +15,7 @@ if ($count==0){
 }
 while($rw=mysqli_fetch_array($sql)){
 
-
+$idred=$rw['idred'];
 $nombre_proyecto=$rw['nombre_proyecto'];
 $imagen_proyecto=$rw['imagen_proyecto'];
 $moneda_proyecto=$rw['moneda_proyecto'];
@@ -73,21 +74,30 @@ $active_banner="active";
               <div class="form-group">
 				<label for="orden" class="col-sm-3 control-label">Moneda del Proyecto</label>
 				<div class="col-sm-9">
-				  <input type="number" class="form-control" id="moneda_proyecto" name="moneda_proyecto" >
+				  <input type="text" class="form-control" id="moneda_proyecto" value="<?php echo $moneda_proyecto;?>" required name="moneda_proyecto" >
 				</div>
 			  </div>
 
               <div class="form-group">
 				<label for="precio_proyecto" class="col-sm-3 control-label">Precio de Moneda del Proyecto</label>
 				<div class="col-sm-9">
-				  <input type="number" class="form-control" id="precio_proyecto" name="precio_proyecto" >
+				  <input type="number" class="form-control" id="precio_proyecto"  value="<?php echo $precio_proyecto;?>" required name="precio_proyecto" >
 				</div>
 			  </div>
 
               <div class="form-group">
 				<label for="nombre_red" class="col-sm-3 control-label">Red</label>
 				<div class="col-sm-9">
-                    <input type="text" class="form-control" id="nombre_red" name="nombre_red" value="  <?php echo $nombre_red['nombre_red'] ;?>" readonly>  
+				<select class="form-control" id="idred" required name="idred">
+					<?php
+					while($r=mysqli_fetch_array($SELECT_red)){
+					
+					?>
+					<option value="<?php echo $r['idred'];?>" <?php  if($idred==$r['idred']){ echo'selected';}?>>  <?php echo $r['nombre_red'] ?>  </option>
+					<?php
+					}
+				?>
+				 </select>
 				</div>
 			  </div>
 			  

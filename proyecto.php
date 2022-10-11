@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Sistema de comentarios de PHP (Me gusta, No me gusta)</title>
+    <title>Perfil de Proyecto</title>
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -12,28 +12,28 @@
 
 
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                <a class="navbar-brand" href="https://www.configuroweb.com/46-aplicaciones-gratuitas-en-php-python-y-javascript/#Aplicaciones-gratuitas-en-PHP,-Python-y-Javascript">ConfiguroWeb</a>
-            </div>
+    
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="./">INICIO <span class="sr-only">(current)</span></a></li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
+<!--  caja de comentarios para todos los proyectos  -->
+    <?php 
+    
+    require ('conexion.php');
+
+    $idproyecto=$_GET['id'];
+    $SELECT=mysqli_query($conexion, "SELECT * FROM proyectos WHERE idproyecto=$idproyecto");
+    while($r=mysqli_fetch_array($SELECT)){
+
+        $nombre_proyecto=$r['nombre_proyecto'];
+        $precio_proyecto=$r['precio_proyecto'];
+        $moneda_proyecto=$r['moneda_proyecto'];
+        $imagen_proyecto=$r['imagen_proyecto'];
+        $idred=$r['idred'];
+    }
+    ?>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4>Sistema de comentarios PHP (Me gusta, No me gusta)</h4>
+                <h4><?php echo $nombre_proyecto; ?></h4>
             </div>
         </div>
         <div class="row">
@@ -77,7 +77,7 @@
                             var str = $("#frm-comment").serialize();
 
                             $.ajax({
-                                url: "AgregarComentario.php",
+                                url: "AgregarComentario.php?id=<?php echo $idproyecto; ?>",
                                 data: str,
                                 type: 'post',
                                 success: function(response) {
@@ -101,7 +101,7 @@
                         });
 
                         function listComment() {
-                            $.post("ListaDeComentarios.php",
+                            $.post("ListaDeComentarios.php?id=<?php echo $idproyecto; ?>",
                                 function(data) {
                                     var data = JSON.parse(data);
 

@@ -2,7 +2,7 @@
 session_start();
 include ("../conexion.php");
 $SELECT=mysqli_query($conexion, "SELECT * FROM estados");
-$SELECT_red=mysqli_query($conexion, "SELECT nombre_red FROM redes");
+$SELECT_red=mysqli_query($conexion, "SELECT * FROM redes");
 
 
 	
@@ -69,15 +69,17 @@ $SELECT_red=mysqli_query($conexion, "SELECT nombre_red FROM redes");
 			  <div class="form-group">
 				<label for="nombre_red" class="col-sm-3 control-label">Red</label>
 				<div class="col-sm-9">
+				<select class="form-control" id="nombre_red" required name="nombre_red">
 				<?php
 					while($nombre_red=mysqli_fetch_array($SELECT_red)){
 					
 					?>
 
-                    <input type="text" class="form-control" id="nombre_red" name="nombre_red" value="<?php echo $nombre_red['nombre_red'] ;?>" readonly>  
+					<option value="<?php echo $nombre_red['idred'];?>">  <?php echo $nombre_red['nombre_red'] ?>  </option>
 					<?php
 					}
 					?>
+					</select>
 				</div>
 			  </div>
 			  

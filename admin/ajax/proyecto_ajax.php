@@ -69,7 +69,7 @@ if($action == 'ajax'){
 					
 					  <div class="col-sm-6 col-md-3">
 						<div class="thumbnail">
-						  <img src="../img/Proyectos/<?php echo $imagen_proyecto;?>" alt="...">
+						   <a href="../proyecto.php?id=<?php echo $idproyecto;?>" ><img src="../img/Proyectos/<?php echo $imagen_proyecto;?>" alt="..." ></a>
 						  <div class="caption">
 							<h3><?php echo $nombre_proyecto;?></h3>
 							
