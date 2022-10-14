@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-10-2022 a las 19:51:54
+-- Tiempo de generación: 14-10-2022 a las 20:05:07
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.9
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comentario` (
   `comentario_id` int(11) NOT NULL,
+  `idproyecto` int(11) NOT NULL,
   `parent_comentario_id` int(11) DEFAULT NULL,
   `comment` varchar(200) CHARACTER SET latin1 NOT NULL,
   `comment_sender_name` varchar(40) CHARACTER SET latin1 NOT NULL,
@@ -39,19 +40,29 @@ CREATE TABLE `comentario` (
 -- Volcado de datos para la tabla `comentario`
 --
 
-INSERT INTO `comentario` (`comentario_id`, `parent_comentario_id`, `comment`, `comment_sender_name`, `date`) VALUES
-(4, 0, 'Me fascina la programacion, muy interesante.', 'Luisa Maron', '2018-03-23 07:50:37'),
-(5, 0, 'Los lenguajes de programacion nos ayudan a crear plataformas de todo tipo', 'Claudia Guillen', '2018-03-23 08:09:48'),
-(6, 0, '  Excelente idea, muchas gracias ', 'Pedro Programador', '2022-04-26 08:36:39'),
-(7, 6, '  Por nada a la orden', 'Juan Programador', '2022-04-26 08:37:20'),
-(8, 0, '  qwdqwd', 'Ave22', '2022-10-01 04:11:26'),
-(9, 4, '3333', 'asdasd', '2022-10-01 04:12:15'),
-(10, 0, '  hola', 'juliana', '2022-10-01 04:30:40'),
-(11, 10, 'hola', 'juliana2', '2022-10-01 04:30:58'),
-(12, 0, 'nashe', 'Avenazi', '2022-10-01 04:32:32'),
-(13, 12, 'nasheeeeeeeeee', 'Ave22', '2022-10-01 04:32:40'),
-(15, 0, '  sdsd', 'juliana', '2022-10-01 04:41:25'),
-(16, 15, 'dsgdsg', 'dgsdgs', '2022-10-01 04:41:36');
+INSERT INTO `comentario` (`comentario_id`, `idproyecto`, `parent_comentario_id`, `comment`, `comment_sender_name`, `date`) VALUES
+(4, 1, 0, 'Me fascina la programacion, muy interesante.', 'Luisa Maron', '2018-03-23 07:50:37'),
+(5, 1, 0, 'Los lenguajes de programacion nos ayudan a crear plataformas de todo tipo', 'Claudia Guillen', '2018-03-23 08:09:48'),
+(6, 0, 0, '  Excelente idea, muchas gracias ', 'Pedro Programador', '2022-04-26 08:36:39'),
+(7, 0, 6, '  Por nada a la orden', 'Juan Programador', '2022-04-26 08:37:20'),
+(8, 0, 0, '  qwdqwd', 'Ave22', '2022-10-01 04:11:26'),
+(9, 0, 4, '3333', 'asdasd', '2022-10-01 04:12:15'),
+(10, 0, 0, '  hola', 'juliana', '2022-10-01 04:30:40'),
+(11, 0, 10, 'hola', 'juliana2', '2022-10-01 04:30:58'),
+(12, 0, 0, 'nashe', 'Avenazi', '2022-10-01 04:32:32'),
+(13, 0, 12, 'nasheeeeeeeeee', 'Ave22', '2022-10-01 04:32:40'),
+(15, 0, 0, '  sdsd', 'juliana', '2022-10-01 04:41:25'),
+(16, 0, 15, 'dsgdsg', 'dgsdgs', '2022-10-01 04:41:36'),
+(17, 0, 0, 'holas', 'franco', '2022-10-12 03:19:16'),
+(30, 0, 0, '  me encanta perder plata en axie', 'Ave22', '2022-10-12 04:09:17'),
+(31, 2, 0, '  hola axie', 'Ave22', '2022-10-12 04:14:39'),
+(32, 2, 0, 'me gusta mucho axie ', 'juliana', '2022-10-12 04:14:55'),
+(33, 1, 0, '  dddd', 'juliana', '2022-10-12 04:17:07'),
+(34, 0, 0, '  aasdasd', 'Avenazi', '2022-10-12 04:19:11'),
+(35, 0, 0, '  aasdasd', 'Avenazi', '2022-10-12 04:19:13'),
+(36, 0, 0, '  aasdasd', 'Avenazi', '2022-10-12 04:19:13'),
+(38, 1, 0, '  ddd', 'MyCryptodd', '2022-10-12 04:20:50'),
+(39, 2, 0, '  asdd', 'Ave22asd', '2022-10-12 04:32:37');
 
 -- --------------------------------------------------------
 
@@ -132,8 +143,8 @@ CREATE TABLE `megusta_nomegusta` (
 
 INSERT INTO `megusta_nomegusta` (`id`, `member_id`, `comentario_id`, `like_unlike`, `date`) VALUES
 (2, 1, 3, 1, '2018-03-23 02:09:56'),
-(3, 1, 5, 1, '2018-03-23 02:09:52'),
-(4, 1, 4, 1, '2022-09-30 23:11:36'),
+(3, 1, 5, 0, '2022-10-11 23:17:19'),
+(4, 1, 4, 0, '2022-10-11 22:38:29'),
 (5, 1, 6, 1, '2022-04-26 01:37:04'),
 (6, 1, 7, 0, '2022-09-30 23:41:22'),
 (7, 1, 8, 1, '2022-09-30 23:41:17'),
@@ -143,7 +154,10 @@ INSERT INTO `megusta_nomegusta` (`id`, `member_id`, `comentario_id`, `like_unlik
 (11, 1, 10, 1, '2022-09-30 23:41:08'),
 (12, 1, 11, 0, '2022-09-30 23:41:11'),
 (13, 1, 15, 1, '2022-09-30 23:41:29'),
-(14, 1, 16, 1, '2022-09-30 23:41:39');
+(14, 1, 16, 1, '2022-09-30 23:41:39'),
+(15, 1, 32, 0, '2022-10-11 23:33:00'),
+(16, 1, 31, 0, '2022-10-11 23:33:00'),
+(17, 1, 39, 0, '2022-10-11 23:32:59');
 
 -- --------------------------------------------------------
 
@@ -216,7 +230,8 @@ CREATE TABLE `proyectos` (
 --
 
 INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `precio_proyecto`, `imagen_proyecto`, `idred`, `idestado`) VALUES
-(1, 'alien world', NULL, NULL, 'alevi813_midjourney_multiverse_of_eyeball_galaxies_c3f4e7f5-fcd0-4f1f-8530-b04b836859e3.png', 56, 1);
+(1, 'Alien Worlds', 'TLMs', '100', 'Alex_Dudley_The_Midjourney_Multiverse_movie_poster_epic_cosmic__8bbe1fde-c29c-4998-b53b-fee4590211ea.png', 59, 1),
+(2, 'Axie Inifnity ', 'SLP, AXS', '0.023', 'descarga (1).png', 56, 1);
 
 -- --------------------------------------------------------
 
@@ -462,7 +477,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `inventarios`
@@ -474,13 +489,31 @@ ALTER TABLE `inventarios`
 -- AUTO_INCREMENT de la tabla `megusta_nomegusta`
 --
 ALTER TABLE `megusta_nomegusta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT de la tabla `noticias`
+--
+ALTER TABLE `noticias`
+  MODIFY `idnoticia` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `idproducto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `proyectos`
+--
+ALTER TABLE `proyectos`
+  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `redes`
@@ -528,7 +561,6 @@ ALTER TABLE `inventarios`
 -- Filtros para la tabla `noticias`
 --
 ALTER TABLE `noticias`
-  
   ADD CONSTRAINT `noticias_ibfk_2` FOREIGN KEY (`idestado`) REFERENCES `estados` (`idestado`);
 
 --
@@ -556,14 +588,6 @@ ALTER TABLE `proyectos`
 --
 ALTER TABLE `redes`
   ADD CONSTRAINT `redes_ibfk_1` FOREIGN KEY (`idestado`) REFERENCES `estados` (`idestado`);
-
---
--- Filtros para la tabla `reporte_comentarios`
---
-ALTER TABLE `reporte_comentarios`
-  ADD CONSTRAINT `FK_estado` FOREIGN KEY (`idestado`) REFERENCES `estados` (`idestado`),
-  ADD CONSTRAINT `reporte_comentarios_ibfk_1` FOREIGN KEY (`idcomentario`) REFERENCES `comentarios` (`idcomentario`),
-  ADD CONSTRAINT `reporte_comentarios_ibfk_2` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`);
 
 --
 -- Filtros para la tabla `rol_usuarios`
