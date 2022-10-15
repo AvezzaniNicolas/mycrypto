@@ -25,7 +25,9 @@ if($action == 'ajax'){
 	$offset = ($page - 1) * $per_page;
 	
 	//Count the total number of row in your table*/
-	$count_query   = mysqli_query($conexion,"SELECT count(*) AS numrows FROM $tables");
+	
+
+	$count_query   = mysqli_query($conexion,"SELECT count(*) AS numrows FROM $tables ");
 	if ($row= mysqli_fetch_array($count_query))
 	{
 	$numrows = $row['numrows'];
@@ -34,7 +36,12 @@ if($action == 'ajax'){
 	$total_pages = ceil($numrows/$per_page);
 	$reload = './productslist.php';
 	//main query to fetch the data
-	$query = mysqli_query($conexion,"SELECT * FROM  $tables  LIMIT $offset,$per_page");
+	if(isset($_GET['id'] ) && !empty($_GET['id'])){
+	$idred=$_GET['id'];
+	$query = mysqli_query($conexion,"SELECT * FROM  $tables WHERE idred=$idred LIMIT $offset,$per_page ");
+	}else{
+	$query = mysqli_query($conexion,"SELECT * FROM  $tables LIMIT $offset,$per_page ");
+	}
 	
 	if (isset($message)){
 		?>
@@ -64,7 +71,8 @@ if($action == 'ajax'){
 					$imagen_proyecto=$row['imagen_proyecto'];
 					$nombre_proyecto=$row['nombre_proyecto'];
 					$idproyecto=$row['idproyecto'];
-			
+					$idred=$row['idred'];
+					
 					?>
 					
 					  <div class="col-sm-6 col-md-3">

@@ -68,12 +68,14 @@ if($action == 'ajax'){
 					$imagen_red=$row['imagen_red'];
 					$nombre_red=$row['nombre_red'];
 					$idred=$row['idred'];
-			
+					
+					
 					?>
 					
 					  <div class="col-sm-6 col-md-3">
 						<div class="thumbnail">
-						  <img src="../img/Redes/<?php echo $imagen_red;?>" alt="...">
+						  
+						  <a href="../admin/proyectoslist.php?id=<?php echo $idred;?>" ><img src="../img/Redes/<?php echo $imagen_red;?>" alt="..."></a>
 						  <div class="caption">
 							<h3><?php echo $nombre_red;?></h3>
 							
