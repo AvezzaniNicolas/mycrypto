@@ -65,7 +65,14 @@ $active_banner="active";
 	function load(page){
 		var parametros = {"action":"ajax","page":page};
 		$.ajax({
+			<?php 
+			if(isset($_GET['id'] ) && !empty($_GET['id'])){
+			$idred=$_GET['id'];
+			?>
+			url:'./ajax/proyecto_ajax.php?id=<?php echo $idred;?>',
+			<?php }else{ ?>
 			url:'./ajax/proyecto_ajax.php',
+			 <?php } ?>
 			data: parametros,
 			 beforeSend: function(objeto){
 			$("#loader").html("<img src='../img/ajax-loader.gif'>");
