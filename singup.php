@@ -58,31 +58,31 @@ require ("conexion.php");
 					Las Contraseñas coinciden ! (Procesando formulario ... )
 				</div>
 					<span class="login100-form-title p-b-49">
-						Welcome!
+						Bienvenido!
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "mail is reauired">
 						<span class="label-input100">Nickname</span>
-						<input class="input100" type="text" name="nick" id="nick" placeholder="Type your nickname">
+						<input class="input100" type="text" name="nick" id="nick" placeholder="Ingrese su nickname">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "mail is reauired">
 						<span class="label-input100">EMail</span>
-						<input class="input100" type="text" name="mail" id="mail" placeholder="Type your email">
+						<input class="input100" type="text" name="mail" id="mail" placeholder="Ingrese su email">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 					
 
 					<div class="wrap-input100 validate-input" data-validate="Contraseña is required">
 						<span class="label-input100">Contraseña</span>
-						<input class="input100" type="password" name="contrasenia" id="contrasenia" placeholder="Type your contraseña">
+						<input class="input100" type="password" name="contrasenia" id="contrasenia" placeholder="Ingrese su contraseña">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Contraseña is required">
 						<span class="label-input100">Repetir Contraseña</span>
-						<input class="input100" type="password" name="contrasenia2" id="contrasenia2" placeholder="Type your contraseña">
+						<input class="input100" type="password" name="contrasenia2" id="contrasenia2" placeholder="Vuelva a ingresar su contraseña">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 
@@ -91,7 +91,7 @@ require ("conexion.php");
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn" name="registrar" value="registrar" type="submit"> 
-								Sing up
+								Registrarse
 							</button>
 						</div>
 					</div>
@@ -100,7 +100,7 @@ require ("conexion.php");
      <form action="registrar.php" method="POST">
 					<div class="txt1 text-center p-t-54 p-b-20">
 						<span>
-							Or Sign Up Using
+							O registrese utilizando
 						</span>
 					</div>
 
