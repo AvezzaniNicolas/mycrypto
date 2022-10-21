@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-10-2022 a las 20:05:07
+-- Tiempo de generación: 22-10-2022 a las 00:57:43
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.9
 
@@ -41,10 +41,6 @@ CREATE TABLE `comentario` (
 --
 
 INSERT INTO `comentario` (`comentario_id`, `idproyecto`, `parent_comentario_id`, `comment`, `comment_sender_name`, `date`) VALUES
-(4, 1, 0, 'Me fascina la programacion, muy interesante.', 'Luisa Maron', '2018-03-23 07:50:37'),
-(5, 1, 0, 'Los lenguajes de programacion nos ayudan a crear plataformas de todo tipo', 'Claudia Guillen', '2018-03-23 08:09:48'),
-(6, 0, 0, '  Excelente idea, muchas gracias ', 'Pedro Programador', '2022-04-26 08:36:39'),
-(7, 0, 6, '  Por nada a la orden', 'Juan Programador', '2022-04-26 08:37:20'),
 (8, 0, 0, '  qwdqwd', 'Ave22', '2022-10-01 04:11:26'),
 (9, 0, 4, '3333', 'asdasd', '2022-10-01 04:12:15'),
 (10, 0, 0, '  hola', 'juliana', '2022-10-01 04:30:40'),
@@ -52,16 +48,9 @@ INSERT INTO `comentario` (`comentario_id`, `idproyecto`, `parent_comentario_id`,
 (12, 0, 0, 'nashe', 'Avenazi', '2022-10-01 04:32:32'),
 (13, 0, 12, 'nasheeeeeeeeee', 'Ave22', '2022-10-01 04:32:40'),
 (15, 0, 0, '  sdsd', 'juliana', '2022-10-01 04:41:25'),
-(16, 0, 15, 'dsgdsg', 'dgsdgs', '2022-10-01 04:41:36'),
-(17, 0, 0, 'holas', 'franco', '2022-10-12 03:19:16'),
-(30, 0, 0, '  me encanta perder plata en axie', 'Ave22', '2022-10-12 04:09:17'),
 (31, 2, 0, '  hola axie', 'Ave22', '2022-10-12 04:14:39'),
 (32, 2, 0, 'me gusta mucho axie ', 'juliana', '2022-10-12 04:14:55'),
 (33, 1, 0, '  dddd', 'juliana', '2022-10-12 04:17:07'),
-(34, 0, 0, '  aasdasd', 'Avenazi', '2022-10-12 04:19:11'),
-(35, 0, 0, '  aasdasd', 'Avenazi', '2022-10-12 04:19:13'),
-(36, 0, 0, '  aasdasd', 'Avenazi', '2022-10-12 04:19:13'),
-(38, 1, 0, '  ddd', 'MyCryptodd', '2022-10-12 04:20:50'),
 (39, 2, 0, '  asdd', 'Ave22asd', '2022-10-12 04:32:37');
 
 -- --------------------------------------------------------
@@ -121,7 +110,8 @@ INSERT INTO `inventarios` (`idinventario`, `idusuario`, `imagen1`, `imagen2`, `i
 (2, 3, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (3, 4, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (4, 16, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(5, 17, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+(5, 17, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(6, 18, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -157,7 +147,10 @@ INSERT INTO `megusta_nomegusta` (`id`, `member_id`, `comentario_id`, `like_unlik
 (14, 1, 16, 1, '2022-09-30 23:41:39'),
 (15, 1, 32, 0, '2022-10-11 23:33:00'),
 (16, 1, 31, 0, '2022-10-11 23:33:00'),
-(17, 1, 39, 0, '2022-10-11 23:32:59');
+(17, 1, 39, 0, '2022-10-11 23:32:59'),
+(18, 1, 46, 0, '2022-10-15 00:16:58'),
+(19, 1, 47, 1, '2022-10-15 00:17:08'),
+(20, 1, 43, 1, '2022-10-15 00:17:09');
 
 -- --------------------------------------------------------
 
@@ -222,16 +215,22 @@ CREATE TABLE `proyectos` (
   `precio_proyecto` varchar(255) DEFAULT NULL,
   `imagen_proyecto` varchar(255) DEFAULT NULL,
   `idred` int(11) NOT NULL,
-  `idestado` int(11) NOT NULL
+  `idestado` int(11) NOT NULL,
+  `tipo_proyecto` varchar(16) NOT NULL,
+  `estado_proyecto` varchar(10) NOT NULL,
+  `descripcion_proyecto` varchar(99) NOT NULL,
+  `pagina_proyecto` varchar(99) NOT NULL,
+  `whitepaper_proyecto` varchar(999) NOT NULL,
+  `descripcion2_proyecto` varchar(999) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `proyectos`
 --
 
-INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `precio_proyecto`, `imagen_proyecto`, `idred`, `idestado`) VALUES
-(1, 'Alien Worlds', 'TLMs', '100', 'Alex_Dudley_The_Midjourney_Multiverse_movie_poster_epic_cosmic__8bbe1fde-c29c-4998-b53b-fee4590211ea.png', 59, 1),
-(2, 'Axie Inifnity ', 'SLP, AXS', '0.023', 'descarga (1).png', 56, 1);
+INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `precio_proyecto`, `imagen_proyecto`, `idred`, `idestado`, `tipo_proyecto`, `estado_proyecto`, `descripcion_proyecto`, `pagina_proyecto`, `whitepaper_proyecto`, `descripcion2_proyecto`) VALUES
+(1, 'Alien Worlds', 'TLMs', '100', 'Alex_Dudley_The_Midjourney_Multiverse_movie_poster_epic_cosmic__8bbe1fde-c29c-4998-b53b-fee4590211ea.png', 59, 1, '', '', '', '', '', ''),
+(2, 'Axie Inifnity ', 'SLP, AXS', '0.023', 'descarga (1).png', 56, 1, '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -320,7 +319,8 @@ INSERT INTO `rol_usuarios` (`idrol`, `idusuario`) VALUES
 (2, 14),
 (2, 15),
 (2, 16),
-(2, 17);
+(2, 17),
+(2, 18);
 
 -- --------------------------------------------------------
 
@@ -360,7 +360,8 @@ INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `imagen
 (14, 'ttrte', 'asdasdww2@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', '', '', '', 1),
 (15, 'brian22', 'brian@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1),
 (16, 'brian123', 'brian12@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es una descripcion para brian', 'https://www.facebook.com/brian/', '', '', 1),
-(17, 'nico9244', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es 9244', '', '', '', 1);
+(17, 'nico9244', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es 9244', '', '', '', 1),
+(18, 'Zychsz', 'Zoppinicolas4@gmail.com', 'c60ebb3ba7101473428a20617c6092e144164065', NULL, NULL, NULL, NULL, NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -477,19 +478,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `inventarios`
 --
 ALTER TABLE `inventarios`
-  MODIFY `idinventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idinventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `megusta_nomegusta`
 --
 ALTER TABLE `megusta_nomegusta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `noticias`
@@ -537,7 +538,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restricciones para tablas volcadas
