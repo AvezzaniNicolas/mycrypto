@@ -23,7 +23,9 @@ $active_banner="active";
     <!-- Custom styles for this template -->
     <link href="css/navbar-fixed-top.css" rel="stylesheet">
   </head>
-  <body>
+  <body style="
+    background: #212529;
+">
 	<?php include("top_menu.php");?>
 	
     <div class="container">
