@@ -125,15 +125,20 @@ $imagen=imagen();
 
 $nombre_proyecto=$_POST['nombre_proyecto'];
 $idred=$_POST['nombre_red'];
-$idestado=$_POST['estado_proyecto'];
+$idestado=$_POST['estado'];
 $moneda_proyecto=$_POST['moneda_proyecto'];
 $precio_proyecto=$_POST['precio_proyecto'];
 $imagen_proyecto=$_POST['imagen_proyecto'];
-//$sqlidred=mysqli_query($conexion,"SELECT idred FROM redes WHERE idred=$idred");
-//$sqlidestado=mysqli_query($conexion,"SELECT idestado FROM estados WHERE idestado=$idestado");
-$insert=mysqli_query($conexion,"INSERT INTO proyectos (nombre_proyecto, moneda_proyecto, precio_proyecto, imagen_proyecto, idred, idestado) values ('$nombre_proyecto','$moneda_proyecto','$precio_proyecto','$imagen','$idred','$idestado')");
+$tipo_proyecto=$_POST['tipo_proyecto'];
+$estado_proyecto=$_POST['estado_proyecto'];
+$descripcion_proyecto=$_POST['descripcion_proyecto'];
+$pagina_proyecto=$_POST['pagina_proyecto'];
+$whitepaper_proyecto=$_POST['whitepaper_proyecto'];
+$descripcion2_proyecto=$_POST['descripcion2_proyecto'];
 
+$insert=mysqli_query($conexion,"INSERT INTO proyectos (nombre_proyecto, moneda_proyecto, precio_proyecto, imagen_proyecto, idred, idestado, tipo_proyecto, estado_proyecto, descripcion_proyecto, pagina_proyecto, whitepaper_proyecto, descripcion2_proyecto) values ('$nombre_proyecto','$moneda_proyecto','$precio_proyecto','$imagen','$idred','$idestado','$tipo_proyecto','$estado_proyecto','$descripcion_proyecto','$pagina_proyecto','$whitepaper_proyecto','$descripcion2_proyecto')");
 
+//echo 'nombre: '. $nombre_proyecto; echo 'nombre: '. $moneda_proyecto; echo 'nombre: '. $precio_proyecto; echo 'nombre: '. $imagen; echo 'nombre: '. $idred; echo 'nombre: '. $estado; echo 'nombre: '. $tipo_proyecto;  echo 'nombre: '. $estado_proyecto; echo 'nombre: '. $descripcion_proyecto; echo 'nombre: '. $pagina_proyecto; echo 'nombre: '. $whitepaper_proyecto;  echo 'nombre: '. $descripcion2_proyecto; 
 header("location:proyectoslist.php");
 
 }
@@ -147,15 +152,20 @@ if(isset($_POST['update']) && !empty ($_POST['update'])){
     $precio_proyecto=$_POST['precio_proyecto'];
     $imagen_proyecto=$_POST['imagen_proyecto'];
     $idestado=$_POST['estado'];
-    //$sqlidestado=mysqli_query($conexion,"SELECT idestado FROM estados WHERE idestado=$idestado");
-    //$sqlidred=mysqli_query($conexion,"SELECT idred FROM redes WHERE idred=$idred");
+    $tipo_proyecto=$_POST['tipo_proyecto'];
+    $estado_proyecto=$_POST['estado_proyecto'];
+    $descripcion_proyecto=$_POST['descripcion_proyecto'];
+    $pagina_proyecto=$_POST['pagina_proyecto'];
+    $whitepaper_proyecto=$_POST['whitepaper_proyecto'];
+    $descripcion2_proyecto=$_POST['descripcion2_proyecto'];
+   
     $nombre_proyecto=$_POST['nombre_proyecto'];
     if (!is_null($imagen)) {
-        $update=mysqli_query($conexion,"UPDATE proyectos SET nombre_proyecto='$nombre_proyecto', moneda_proyecto='$moneda_proyecto', precio_proyecto='$precio_proyecto', imagen_proyecto='$imagen', idred='$idred', idestado='$idestado' WHERE idproyecto='$id_proyecto'");
+        $update=mysqli_query($conexion,"UPDATE proyectos SET nombre_proyecto='$nombre_proyecto', moneda_proyecto='$moneda_proyecto', precio_proyecto='$precio_proyecto', imagen_proyecto='$imagen', idred='$idred', idestado='$idestado',tipo_proyecto ='$tipo_proyecto',estado_proyecto ='$estado_proyecto',descripcion_proyecto ='$descripcion_proyecto',pagina_proyecto ='$pagina_proyecto',whitepaper_proyecto ='$whitepaper_proyecto',descripcion2_proyecto ='$descripcion2_proyecto' WHERE idproyecto='$id_proyecto'");
 
         header("location:proyectoslist.php");
     }else{
-        $update=mysqli_query($conexion,"UPDATE proyectos SET nombre_proyecto='$nombre_proyecto', moneda_proyecto='$moneda_proyecto', precio_proyecto='$precio_proyecto', idred='$idred', idestado='$idestado' WHERE idproyecto='$id_proyecto'");
+        $update=mysqli_query($conexion,"UPDATE proyectos SET nombre_proyecto='$nombre_proyecto', moneda_proyecto='$moneda_proyecto', precio_proyecto='$precio_proyecto', idred='$idred', idestado='$idestado',tipo_proyecto ='$tipo_proyecto',estado_proyecto ='$estado_proyecto',descripcion_proyecto ='$descripcion_proyecto',pagina_proyecto ='$pagina_proyecto',whitepaper_proyecto ='$whitepaper_proyecto',descripcion2_proyecto ='$descripcion2_proyecto' WHERE idproyecto='$id_proyecto'");
 
         header("location:proyectoslist.php");
     }

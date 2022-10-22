@@ -21,6 +21,12 @@ $imagen_proyecto=$rw['imagen_proyecto'];
 $moneda_proyecto=$rw['moneda_proyecto'];
 $precio_proyecto=$rw['precio_proyecto'];
 $idestado=$rw['idestado'];
+$tipo_proyecto=$rw['tipo_proyecto'];
+$estado_proyecto=$rw['estado_proyecto'];
+$descripcion_proyecto=$rw['descripcion_proyecto'];
+$pagina_proyecto=$rw['pagina_proyecto'];
+$whitepaper_proyecto=$rw['whitepaper_proyecto'];
+$descripcion2_proyecto=$rw['descripcion2_proyecto'];
 }
 $active_config="active";
 $active_banner="active";
@@ -117,6 +123,49 @@ $active_banner="active";
 				 </select>
 				</div>
 			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Tipo de Proyecto(Juego)</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="tipo_proyecto" name="tipo_proyecto" value = <?php echo $tipo_proyecto; ?> >
+				</div>
+			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Estado del Proyecto(Version, Finalizado)</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="estado_proyecto" name="estado_proyecto" value = <?php echo $estado_proyecto; ?>>
+				</div>
+			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Descripcion breve del proyecto</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="descripcion_proyecto" name="descripcion_proyecto" value = <?php echo $descripcion_proyecto; ?>>
+				</div>
+			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Link del proyecto</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="pagina_proyecto" name="pagina_proyecto" value = <?php echo $pagina_proyecto; ?> >
+				</div>
+			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Whitepaper</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="whitepaper_proyecto" name="whitepaper_proyecto" value = <?php echo $whitepaper_proyecto; ?>>
+				</div>
+			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Noticias</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="descripcion2_proyecto" name="descripcion2_proyecto" value = <?php echo $descripcion2_proyecto; ?>>
+				</div>
+			  </div>
+			  
 			  
 			
 			 

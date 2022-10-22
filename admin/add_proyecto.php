@@ -3,48 +3,36 @@ session_start();
 include ("../conexion.php");
 $SELECT=mysqli_query($conexion, "SELECT * FROM estados");
 $SELECT_red=mysqli_query($conexion, "SELECT * FROM redes");
-
-
-	
-	
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    
     <meta name="author" content="">
     <link rel="icon" href="../images/ico/favicon.ico">
     <title>Proyecto</title>
-    <!-- Bootstrap core CSS -->
-    <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!-- Custom styles for this template -->
     <link href="css/navbar-fixed-top.css" rel="stylesheet">
 	<link href="css/preview-image.css" rel="stylesheet">
   </head>
+
   <body>
 		<?php include("top_menu.php");?>
-
     <div class="container">
-		
-      <!-- Main component for a primary marketing message or call to action -->
       <div class="row">
- 
-	   <ol class="breadcrumb">
+	   	<ol class="breadcrumb">
 		  <li><a href="#">Inicio</a></li>
 		  <li><a href="redeslist.php">Proyectos</a></li>
 		  <li class="active">Agregar</li>
 		</ol>
-		 <div class="col-md-7">
-		 <h3 ><span class="glyphicon glyphicon-edit"></span> Agregar Proyectos</h3>
-			<form action="abm_proyectos.php" class="form-horizontal"  method="POST" enctype="multipart/form-data">
-				 
-			 
-			  
+				<div class="col-md-7">
+		 		<h3 ><span class="glyphicon glyphicon-edit"></span> Agregar Proyectos</h3>
+
+		<form action="abm_proyectos.php" class="form-horizontal"  method="POST" enctype="multipart/form-data">
+
 			  <div class="form-group">
 				<label for="nombre_red" class="col-sm-3 control-label">Nombre Proyecto</label>
 				<div class="col-sm-9">
@@ -87,7 +75,7 @@ $SELECT_red=mysqli_query($conexion, "SELECT * FROM redes");
 			  <div class="form-group">
 				<label for="estado" class="col-sm-3 control-label">Estado</label>
 				<div class="col-sm-9">
-				  <select class="form-control" id="estado_proyecto" required name="estado_proyecto">
+				  <select class="form-control" id="estado" required name="estado">
 					<?php
 					while($idestado=mysqli_fetch_array($SELECT)){
 					
@@ -100,6 +88,48 @@ $SELECT_red=mysqli_query($conexion, "SELECT * FROM redes");
 				 
 				</div>
 				
+			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Tipo de Proyecto(Juego)</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="tipo_proyecto" name="tipo_proyecto" >
+				</div>
+			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Estado del Proyecto(Version, Finalizado)</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="estado_proyecto" name="estado_proyecto" >
+				</div>
+			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Descripcion breve del proyecto</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="descripcion_proyecto" name="descripcion_proyecto" >
+				</div>
+			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Link del proyecto</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="pagina_proyecto" name="pagina_proyecto" >
+				</div>
+			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Whitepaper</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="whitepaper_proyecto" name="whitepaper_proyecto" >
+				</div>
+			  </div>
+
+			  <div class="form-group">
+				<label for="precio_proyecto" class="col-sm-3 control-label">Noticias</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="descripcion2_proyecto" name="descripcion2_proyecto" >
+				</div>
 			  </div>
 			  
 			
@@ -134,17 +164,12 @@ $SELECT_red=mysqli_query($conexion, "SELECT * FROM redes");
 			 
 			  
 			  
-		 </form>
-		</div>
-    </div> 
+				</form>
+			</div>
+    	</div> 
 	</div><!-- /container -->
-
-		
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<script src="js/jasny-bootstrap.min.js"></script>
 	
