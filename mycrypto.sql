@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-10-2022 a las 00:57:43
+-- Tiempo de generación: 22-10-2022 a las 03:08:36
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.9
 
@@ -51,7 +51,9 @@ INSERT INTO `comentario` (`comentario_id`, `idproyecto`, `parent_comentario_id`,
 (31, 2, 0, '  hola axie', 'Ave22', '2022-10-12 04:14:39'),
 (32, 2, 0, 'me gusta mucho axie ', 'juliana', '2022-10-12 04:14:55'),
 (33, 1, 0, '  dddd', 'juliana', '2022-10-12 04:17:07'),
-(39, 2, 0, '  asdd', 'Ave22asd', '2022-10-12 04:32:37');
+(39, 2, 0, '  asdd', 'Ave22asd', '2022-10-12 04:32:37'),
+(50, 1, 0, '  ASD', 'Zychsz ', '2022-10-22 05:24:44'),
+(51, 15, 0, '  asdasd', 'Zychsz ', '2022-10-22 05:37:58');
 
 -- --------------------------------------------------------
 
@@ -230,7 +232,8 @@ CREATE TABLE `proyectos` (
 
 INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `precio_proyecto`, `imagen_proyecto`, `idred`, `idestado`, `tipo_proyecto`, `estado_proyecto`, `descripcion_proyecto`, `pagina_proyecto`, `whitepaper_proyecto`, `descripcion2_proyecto`) VALUES
 (1, 'Alien Worlds', 'TLMs', '100', 'Alex_Dudley_The_Midjourney_Multiverse_movie_poster_epic_cosmic__8bbe1fde-c29c-4998-b53b-fee4590211ea.png', 59, 1, '', '', '', '', '', ''),
-(2, 'Axie Inifnity ', 'SLP, AXS', '0.023', 'descarga (1).png', 56, 1, '', '', '', '', '', '');
+(2, 'Axie Inifnity ', 'SLP, AXS', '21.023', 'descarga (1).png', 56, 1, '', '', '', '', '', ''),
+(15, 'Zoppi', 'ZOP', '100', 'IMG_20220331_194653935.jpg', 56, 1, 'Cartas', 'Finalizado', 'ASKJDNHAJKLDNKLAJSDASD', 'https://twitter.com/home', 'whitepaper', 'noticias');
 
 -- --------------------------------------------------------
 
@@ -478,7 +481,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `inventarios`
@@ -514,7 +517,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `redes`
