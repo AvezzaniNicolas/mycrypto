@@ -19457,6 +19457,7 @@ a.pswp__share--download:hover {
     opacity: 1;
   }
 }
+
 @keyframes customAnimationOut {
   from {
     transform-origin: center center;

@@ -27,6 +27,7 @@
 
 .u-section-1 .u-text-1 {
   margin: 18px auto 0;
+  color: whitesmoke;
 }
 
 .u-section-1 .u-layout-cell-3 {
@@ -38,20 +39,40 @@
 }
 
 .u-section-1 .u-text-2 {
-  margin: 0 0 0 46px;
+  margin: 23px 0 0 46px;
+  color: whitesmoke;
+
 }
 
 .u-section-1 .u-text-3 {
   margin: 23px 18px 0 28px;
+  color:whitesmoke;
+  
 }
 
 .u-section-1 .u-text-4 {
   margin: 37px 23px 0;
-}
+  color:whitesmoke;
+  position: relative;
+  top: 140px; left: -600px;
 
+}
+.nickname{
+
+  top: 20px;
+  font-size: 30px;
+  background: -webkit-linear-gradient(rgb(12, 206, 255), rgb(0, 0, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'oswald';
+    
+}
 .u-section-1 .u-btn-1 {
   background-image: none;
   margin: 49px auto 0;
+  position: absolute;
+  top: 250px;
+  left: 150px;
 }
 
 @media (max-width: 1199px) {

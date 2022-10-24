@@ -27,12 +27,14 @@ session_start();
     <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 4.19.3, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
+    <link href="css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Proyectos">
     <meta property="og:type" content="website">
-  </head>
-  <body style='background: #bdbdbd'data-home-page="proyecto.php" data-home-page-title="Proyectos" class="u-body u-overlap u-white u-xl-mode" data-lang="es"><header class="u-clearfix u-grey-80 u-header u-header" id="sec-b4e8"><div class="u-clearfix u-sheet u-sheet-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+  <body style='background: #090909'data-home-page="proyecto.php" data-home-page-title="Proyectos" class="u-body u-overlap u-white u-xl-mode" data-lang="es">
   <?php 
     require ('conexion.php');
 
@@ -53,57 +55,54 @@ session_start();
         $descripcion2_proyecto=$r['descripcion2_proyecto'];
     }
 
-    $idusuario =$_SESSION['logueado'];
-    $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE idusuario=$idusuario");
+      $idusuario =$_SESSION['logueado'];
+      $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE idusuario=$idusuario");
 
-    while($respuesta=mysqli_fetch_assoc($consulta)){
+      while($respuesta=mysqli_fetch_assoc($consulta)){
 
-      $nick = $respuesta['nickname'];
-      $email = $respuesta['email'];
-      $descripcion = $respuesta['descripcion']; 
-      $twitter = $respuesta['twitter'];
-      $instagram = $respuesta['instagram'];
-      $facebook = $respuesta['facebook'];
+        $nick = $respuesta['nickname'];
+        $email = $respuesta['email'];
+        $descripcion = $respuesta['descripcion']; 
+        $twitter = $respuesta['twitter'];
+        $instagram = $respuesta['instagram'];
+        $facebook = $respuesta['facebook'];
+        
+        
+      }
+
+      ?>
       
-      
-    }
-
-    ?>
-    <a href="https://nicepage.com" class="u-image u-logo u-image-1" data-image-width="715" data-image-height="122">
-          <img src="assets/img/sad.png" class="u-logo-image u-logo-image-1">
-        </a>
-        <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
-          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
-            <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
-              <svg class="u-svg-link" viewBox="0 0 24 24"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
-              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
-</g></svg>
-            </a>
-          </div>
-          <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-4-dark-1 u-text-grey-40 u-text-hover-palette-3-base" href="inicio.php" style="padding: 10px 20px;">Inicio</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-4-dark-1 u-text-grey-40 u-text-hover-palette-3-base" href="./admin/redeslist.php" style="padding: 10px 20px;">Redes</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-4-dark-1 u-text-grey-40 u-text-hover-palette-3-base" href="./admin/proyectoslist.php" style="padding: 10px 20px;">Proyectos</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-4-dark-1 u-text-grey-40 u-text-hover-palette-3-base" href="https://es.investing.com/news/cryptocurrency-news" target="_blank" style="padding: 10px 20px;">Noticias</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-4-dark-1 u-text-grey-40 u-text-hover-palette-3-base" href="perfil.php" style="padding: 10px 20px;"><?php echo 'Perfil activo de ';echo $nick; ?></a>
-</li></ul>
-          </div>
-          <div class="u-custom-menu u-nav-container-collapse">
-            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-              <div class="u-inner-container-layout u-sidenav-overflow">
-                <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Inicio.html">Inicio</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="#">Redes</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="#">Proyectos</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="#" target="_blank">Noticias</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/perfil.php">Perfil</a>
-</li></ul>
-              </div>
+          
+    
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                
+                <a class="navbar-brand"  href="inicio.php"> <img src=" assets/img/sad.png" alt="..." /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="../mycrypto/admin/redeslist.php">Redes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="admin/proyectoslist.php">Juegos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="tienda.php">Tienda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://es.cointelegraph.com/tags/games">Noticias</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="perfil.php" ><?php echo $nick; ?></a></li>
+                        <li class="nav-item"> <a class="nav-link" href="logout.php" >Cerrar Sesion</a></li>
+                        
+                        
+                    </ul>
+                </div>
             </div>
-            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-          </div>
         </nav>
-      </div></header>
+              
+           
+          
+        
+      </div>
+</header>
     <section class="u-clearfix u-section-1" id="sec-54a0">
       <div class="u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-1">
         <div class="u-gutter-0 u-layout">
@@ -121,15 +120,22 @@ session_start();
               <div class="u-layout-col">
                 <div class="u-container-style u-hidden-sm u-hidden-xs u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
                   <div class="u-container-layout">
-                    <h2  class="u-align-center u-text u-text-default u-title u-text-1">Proyecto de: <?php echo $tipo_proyecto; ?></h2>
+                  <h2 class="u-text u-text-3" align= 'center'><?php echo $nombre_proyecto;?></h2>
+                    
                   </div>
                 </div>
-                <div style='background: #bdbdbd' class="u-align-left u-container-style u-layout-cell u-right-cell u-size-30 u-white u-layout-cell-3">
+                <div style='background: #090909' class="u-align-left u-container-style u-layout-cell u-right-cell u-size-30 u-white u-layout-cell-3">
                   <div class="u-container-layout u-container-layout-3">
-                    <h3 class="u-text u-text-2"align= 'center'>Estado: <?php echo $estado_proyecto; ?></h3>
-                    <h3 class="u-text u-text-3" align= 'center'>Proyecto: <?php echo $nombre_proyecto;   ?></h3>
-                    <p class="u-text u-text-4"align= 'center'><?php echo $descripcion_proyecto; ?>.</p>
-                    <a href="<?php echo $pagina_proyecto; ?>" class="u-border-none u-btn u-button-style u-palette-3-light-2 u-btn-1">Pagina del proyecto</a>
+                    <h4 class="u-text u-text-2"align= 'left'>ESTADO:   <?php echo $estado_proyecto; ?></h4>
+                    
+                    <h4  class="u-text u-text-2"align= 'left'>JUEGO DE:   <?php echo $tipo_proyecto; ?></h4>
+
+                    <h4  class="u-text u-text-2"align= 'left'>MONEDA DEL JUEGO:   <?php echo $moneda_proyecto; ?></h4>
+
+                    <p class="u-text u-text-4"align= 'left'><?php echo $descripcion_proyecto; ?></p>
+
+                    <a href="<?php echo $pagina_proyecto; ?>" class="u-border-none u-btn u-button-style u-palette-3-light-2 u-btn-1">WEB OFICIAL DEL JUEGO</a>
+
                   </div>
                 </div>
               </div>
@@ -138,14 +144,14 @@ session_start();
         </div>
       </div>
     </section>
-    <section  style='background: #bdbdbd' class="u-align-center u-clearfix u-white u-section-2" id="sec-446b">
+    <section  style='background: #090909' class="u-align-center u-clearfix u-white u-section-2" id="sec-446b">
       <div  class="u-clearfix u-sheet u-sheet-1">
         <div id="carousel-5989" data-interval="5000" data-u-ride="carousel" class="u-carousel u-slider u-slider-1">
           <ol class="u-absolute-hcenter u-carousel-indicators u-carousel-indicators-1">
             <li data-u-target="#carousel-5989" class="u-active u-grey-30 u-shape-circle" data-u-slide-to="0" style="width: 10px; height: 10px;"></li>
             <li data-u-target="#carousel-5989" class="u-grey-30 u-shape-circle" data-u-slide-to="1" style="width: 10px; height: 10px;"></li>
           </ol>
-          <div style='background: #bdbdbd' class="u-carousel-inner" role="listbox">
+          <div style='background: #090909' class="u-carousel-inner" role="listbox">
             <div style='background: #9e9e9e' class="u-active u-align-center u-carousel-item u-container-style u-slide u-white u-carousel-item-1">
               <div class="u-container-layout u-container-layout-1">
                 <h4 class="u-text u-text-default u-text-1">Whitepaper </h4>
@@ -163,29 +169,29 @@ session_start();
           <a class="u-absolute-vcenter u-carousel-control u-carousel-control-prev u-gradient u-hidden-xs u-icon-circle u-spacing-10 u-carousel-control-1" href="#carousel-5989" role="button" data-u-slide="prev">
             <span aria-hidden="true">
               <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
-c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
-c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+                    c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+                    c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+                                </span>
+                                <span class="sr-only">
+                                  <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
+                    c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
+                    c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
+                                </span>
+                              </a>
+                              <a class="u-absolute-vcenter u-carousel-control u-carousel-control-next u-gradient u-hidden-xs u-icon-circle u-spacing-10 u-carousel-control-2" href="#carousel-5989" role="button" data-u-slide="next">
+                                <span aria-hidden="true">
+                                  <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+                    L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+                    c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
+                                </span>
+                                <span class="sr-only">
+                                  <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
+                    L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
+                    c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
             </span>
-            <span class="sr-only">
-              <svg viewBox="0 0 451.847 451.847"><path d="M97.141,225.92c0-8.095,3.091-16.192,9.259-22.366L300.689,9.27c12.359-12.359,32.397-12.359,44.751,0
-c12.354,12.354,12.354,32.388,0,44.748L173.525,225.92l171.903,171.909c12.354,12.354,12.354,32.391,0,44.744
-c-12.354,12.365-32.386,12.365-44.745,0l-194.29-194.281C100.226,242.115,97.141,234.018,97.141,225.92z"></path></svg>
-            </span>
-          </a>
-          <a class="u-absolute-vcenter u-carousel-control u-carousel-control-next u-gradient u-hidden-xs u-icon-circle u-spacing-10 u-carousel-control-2" href="#carousel-5989" role="button" data-u-slide="next">
-            <span aria-hidden="true">
-              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
-L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
-c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
-            </span>
-            <span class="sr-only">
-              <svg viewBox="0 0 451.846 451.847"><path d="M345.441,248.292L151.154,442.573c-12.359,12.365-32.397,12.365-44.75,0c-12.354-12.354-12.354-32.391,0-44.744
-L278.318,225.92L106.409,54.017c-12.354-12.359-12.354-32.394,0-44.748c12.354-12.359,32.391-12.359,44.75,0l194.287,194.284
-c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,248.292z"></path></svg>
-            </span>
-          </a>
-        </div>
-      </div>
+            </a>
+            </div>
+            </div>
      
 <div class="container">
         <div class="comment-form-container">
@@ -200,9 +206,10 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
                     <div class="comment-form-container">
                         
                         <form id="frm-comment">
-                            <div class="input-row">
-                                <input type="hidden" name="comentario_id" id="commentId" placeholder="Name" /> <input class="input-field" type="text" name="name" value = "<?php echo $nick;   ?> "id="name" placeholder= <?php echo $nick;   ?> readonly />
-                            </div>
+                            
+                            <h4 class="nickname"align= 'left'><?php echo $nick; ?></h4>
+                                
+                            
                             <div class="input-row">
                                 <textarea class="input-field" type="text" name="comment" id="comment" placeholder="Agregar comentario">  </textarea>
                             </div>
@@ -431,38 +438,39 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
 </g>
 </g></svg>
             
-            
+            <!-- ITEMS? FUTURA TIENDA O RELACIONADO AL JUEGO-->
+           <section>
           </span>
-                <h3 class="u-align-center u-text u-text-default u-text-1">Item 1</h3>
-                <p class="u-align-center u-text u-text-2">tipo_de_item</p>
-                <a href="" class="u-active-none u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-light-1 u-btn u-button-style u-hover-none u-none u-text-body-color u-btn-1"> Ir a la tienda</a>
+                <h3 class="u-align-center u-text u-text-default u-text-1"></h3>
+                <p class="u-align-center u-text u-text-2"></p>
+                
               </div>
             </div>
             <div class="u-align-center u-container-style u-list-item u-repeater-item">
               <div class="u-container-layout u-similar-container u-valign-top u-container-layout-2"><span class="u-icon u-icon-circle u-text-palette-3-base u-icon-2"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 511.846 511.846" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-2bb9"></use></svg><svg class="u-svg-content" viewBox="0 0 511.846 511.846" id="svg-2bb9"><g><path d="m225.336 258.021-163.44-88.824c-7.27-3.949-15.855-3.786-22.969.443-7.114 4.228-11.359 11.693-11.359 19.969v206.052c0 8.337 4.502 16.076 11.75 20.197l163.443 92.917c3.603 2.048 7.543 3.071 11.484 3.071 4.016 0 8.031-1.063 11.682-3.188 7.231-4.207 11.548-11.714 11.548-20.081v-210.143c0-8.521-4.65-16.343-12.139-20.413z"></path><path d="m454.621 115.6c-.011-8.7-4.817-16.591-12.54-20.594l-178.226-92.399c-6.748-3.5-14.791-3.474-21.514.065l-175.605 92.399c-7.646 4.025-12.402 11.892-12.413 20.533-.01 8.639 4.727 16.517 12.362 20.559l175.606 92.976c3.4 1.799 7.133 2.699 10.868 2.699 3.689 0 7.379-.878 10.745-2.635l178.23-92.974c7.714-4.024 12.499-11.929 12.487-20.629z"></path><path d="m472.919 169.64c-7.11-4.229-15.699-4.396-22.966-.444l-163.445 88.825c-7.487 4.07-12.137 11.891-12.137 20.412v210.143c0 8.367 4.317 15.874 11.548 20.081 3.651 2.125 7.665 3.187 11.682 3.187 3.94 0 7.882-1.023 11.484-3.07l163.444-92.917c7.248-4.121 11.749-11.86 11.749-20.197v-206.051c0-8.276-4.245-15.741-11.359-19.969z"></path>
-</g></svg>
+          </g></svg>
             
             
           </span>
-                <h3 class="u-align-center u-text u-text-default u-text-3"> Item&nbsp; 2</h3>
-                <p class="u-align-center u-text u-text-4">tipo_de_item</p>
-                <a href="" class="u-active-none u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-light-1 u-btn u-button-style u-hover-none u-none u-text-body-color u-btn-2"> Ir a la tienda</a>
+                <h3 class="u-align-center u-text u-text-default u-text-3"></h3>
+                <p class="u-align-center u-text u-text-4"></p>
+                
               </div>
             </div>
             <div class="u-container-style u-list-item u-repeater-item">
               <div class="u-container-layout u-similar-container u-valign-top u-container-layout-3"><span class="u-icon u-icon-circle u-text-palette-3-base u-icon-3"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 512 512" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-a5cb"></use></svg><svg class="u-svg-content" viewBox="0 0 512 512" x="0px" y="0px" id="svg-a5cb" style="enable-background:new 0 0 512 512;"><g><g><path d="M493.563,431.87l-58.716-125.913c-32.421,47.207-83.042,80.822-141.639,91.015l49.152,105.401    c6.284,13.487,25.732,12.587,30.793-1.341l25.193-69.204l5.192-2.421l69.205,25.193    C486.63,459.696,499.839,445.304,493.563,431.87z"></path>
-</g>
-</g><g><g><path d="M256.001,0C154.815,0,72.485,82.325,72.485,183.516s82.331,183.516,183.516,183.516    c101.186,0,183.516-82.325,183.516-183.516S357.188,0,256.001,0z M345.295,170.032l-32.541,31.722l7.69,44.804    c2.351,13.679-12.062,23.956-24.211,17.585l-40.231-21.148l-40.231,21.147c-12.219,6.416-26.549-3.982-24.211-17.585l7.69-44.804    l-32.541-31.722c-9.89-9.642-4.401-26.473,9.245-28.456l44.977-6.533l20.116-40.753c6.087-12.376,23.819-12.387,29.913,0    l20.116,40.753l44.977,6.533C349.697,143.557,355.185,160.389,345.295,170.032z"></path>
-</g>
-</g><g><g><path d="M77.156,305.957L18.44,431.87c-6.305,13.497,7.023,27.81,20.821,22.727l69.204-25.193l5.192,2.421l25.193,69.205    c5.051,13.899,24.496,14.857,30.793,1.342l49.152-105.401C160.198,386.779,109.578,353.165,77.156,305.957z"></path>
-</g>
-</g></svg>
+                </g>
+                </g><g><g><path d="M256.001,0C154.815,0,72.485,82.325,72.485,183.516s82.331,183.516,183.516,183.516    c101.186,0,183.516-82.325,183.516-183.516S357.188,0,256.001,0z M345.295,170.032l-32.541,31.722l7.69,44.804    c2.351,13.679-12.062,23.956-24.211,17.585l-40.231-21.148l-40.231,21.147c-12.219,6.416-26.549-3.982-24.211-17.585l7.69-44.804    l-32.541-31.722c-9.89-9.642-4.401-26.473,9.245-28.456l44.977-6.533l20.116-40.753c6.087-12.376,23.819-12.387,29.913,0    l20.116,40.753l44.977,6.533C349.697,143.557,355.185,160.389,345.295,170.032z"></path>
+                </g>
+                </g><g><g><path d="M77.156,305.957L18.44,431.87c-6.305,13.497,7.023,27.81,20.821,22.727l69.204-25.193l5.192,2.421l25.193,69.205    c5.051,13.899,24.496,14.857,30.793,1.342l49.152-105.401C160.198,386.779,109.578,353.165,77.156,305.957z"></path>
+                </g>
+                </g></svg>
             
             
           </span>
-                <h3 class="u-align-center u-text u-text-default u-text-5"> Item&nbsp; 3</h3>
-                <p class="u-align-center u-text u-text-6"> tipo_de_item</p>
-                <a href="" class="u-active-none u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-2-light-1 u-btn u-button-style u-hover-none u-none u-text-body-color u-btn-3">Ir a la tienda</a>
+                <h3 class="u-align-center u-text u-text-default u-text-5"></h3>
+                <p class="u-align-center u-text u-text-6"></p>
+                
               </div>
             </div>
           </div>
@@ -470,15 +478,26 @@ c6.177,6.18,9.262,14.271,9.262,22.366C354.708,234.018,351.617,242.115,345.441,24
       </div>
     </section>
     <style class="u-overlap-style">.u-overlap:not(.u-sticky-scroll) .u-header {
-background-color: #404040 !important
-}</style>
-
+    background-color: #404040 !important
+  }</style>
+</section> 
 </body>
 
-<footer class="u-align-center u-clearfix u-footer u-grey-75 u-footer" id="sec-c073">
-        <div>
-        <p >Texto de muestra. Haz click para seleccionar el elemento de Texto.</p>
-        </div>
+<footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-start">Copyright &copy; MyCrypto 2022</div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a class="link-dark text-decoration-none me-3" href="#!">Politica de Privacidad</a>
+                        <a class="link-dark text-decoration-none" href="#!">Terminos y Condiciones</a>
+                    </div>
+                </div>
+            </div>
 </footer>
 
 </html>

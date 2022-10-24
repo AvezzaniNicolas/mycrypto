@@ -1381,11 +1381,13 @@ progress {
   .col-lg-4 {
     flex: 0 0 auto;
     width: 33.33333333%;
+    color:whitesmoke;
   }
 
   .col-lg-5 {
     flex: 0 0 auto;
     width: 41.66666667%;
+    
   }
 
   .col-lg-6 {
@@ -2403,6 +2405,13 @@ textarea.form-control-lg {
 .form-control-color::-webkit-color-swatch {
   height: 1.5em;
   border-radius: 0.25rem;
+}
+.grupo-team{
+
+background-color: #090909;
+
+
+
 }
 
 .form-select {
@@ -6483,7 +6492,7 @@ textarea.form-control-lg {
 }
 
 .link-dark {
-  color: #212529;
+  color: whitesmoke;
 }
 .link-dark:hover, .link-dark:focus {
   color: #1a1e21;
@@ -7696,6 +7705,7 @@ textarea.form-control-lg {
 
 .text-uppercase {
   text-transform: uppercase !important;
+  color: whitesmoke;
 }
 
 .text-capitalize {
@@ -7775,6 +7785,7 @@ textarea.form-control-lg {
 .text-muted {
   --bs-text-opacity: 1;
   color: #6c757d !important;
+  
 }
 
 .text-black-50 {
@@ -11311,7 +11322,7 @@ color:#FFCC00
 .page-section {
   padding: 6rem 0;
   
-  background-color: #212529;
+  background-color: #090909;
   
 }
 .page-section h2.section-heading, .page-section .section-heading.h2 {
@@ -11388,7 +11399,7 @@ color:#FFCC00
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     border: none;
-    background-color: transparent;
+    background-color: #212529;
     transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
   }
   #mainNav .navbar-brand {
@@ -11423,11 +11434,12 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background-image: url("../assets/img/1.png");
+  background-image: url("../img/Juegosnf.gif");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
   background-size: cover;
+  
 }
 header.masthead .masthead-subheading {
   font-size: 1.5rem;
@@ -11716,6 +11728,7 @@ header.masthead .masthead-heading {
 .team-member {
   margin-bottom: 3rem;
   text-align: center;
+  
 }
 .team-member img {
   width: 14rem;
@@ -11725,6 +11738,7 @@ header.masthead .masthead-heading {
 .team-member h4, .team-member .h4 {
   margin-top: 1.5rem;
   margin-bottom: 0;
+  color: whitesmoke;
 }
 
 .img-brand {
@@ -11789,6 +11803,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   text-align: center;
   font-size: 0.9rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: #212529;
 }
 
 .comment-form-container {
@@ -11888,3 +11903,4 @@ span.posted-at {
     width: calc(100% + 20px);
     overflow-y: auto;
 }
+

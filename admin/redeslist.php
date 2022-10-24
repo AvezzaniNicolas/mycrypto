@@ -5,6 +5,7 @@ include ("../conexion.php");
 $active_config="active";
 $active_banner="active";
 
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,9 +25,7 @@ $active_banner="active";
     <!-- Custom styles for this template -->
     <link href="css/navbar-fixed-top.css" rel="stylesheet">
   </head>
-  <body style="
-    background: #212529;
-">
+  <body style="background: #212529;" >
 	
 	<?php include("top_menu.php");?>
 	
@@ -39,12 +38,34 @@ $active_banner="active";
 		  <li><a href="#">Inicio</a></li>
 		  <li class="active">Redes</li>
 		</ol>
-			<div class="row">
-			  <div class="col-xs-12 text-right">
-				  <a href='add_red.php' class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span> Agregar Red</a>
-			  </div>
-			  
-			</div>
+
+				<?php 
+				if(isset($_SESSION['logueado']) && $_SESSION['logueado']>0){
+
+				
+				$idrol=$_SESSION['rol'];
+				$permiso=mysqli_query($conexion,"SELECT p.descripcion,pr.idpermiso FROM permisos AS p, permiso_roles AS pr WHERE p.idpermiso = pr.idpermiso AND pr.idrol= $idrol;" );
+
+				while($r=mysqli_fetch_array($permiso)){
+
+					$nombre_permiso = $r['descripcion'];
+				
+				switch($nombre_permiso){
+
+				case 'alta red' : ?> 
+					<div class="row">
+			  		<div class="col-xs-12 text-right">
+						<a href='add_red.php' class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span> Agregar Red</a>
+					</div>
+			  		</div>		
+					<?php break; 
+				}
+				}
+				}
+				?>
+
+				  
+			 
 		  
 		  <br>
 		  <div id="loader" class="text-center"> <span><img src="./img/ajax-loader.gif"></span></div>

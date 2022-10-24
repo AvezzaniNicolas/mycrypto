@@ -21,8 +21,12 @@ if (isset($_POST['ingresar']) && !empty ($_POST['ingresar']) ){
 
         if ($respuesta['email']==$mail && $respuesta['contrasenia']==$contrasenia){
             
+            $selectrol=mysqli_query($conexion,"SELECT idrol FROM rol_usuarios WHERE idusuario='{$respuesta['idusuario']}'");              
+               while($r=mysqli_fetch_array($selectrol)){                  
+                   $idrol=$r['idrol'];              
 
-            
+                }
+            $_SESSION['rol'] = $idrol;
             $_SESSION['logueado'] = $respuesta['idusuario'];
                  
             header ("location: inicio.php");

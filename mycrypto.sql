@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-10-2022 a las 03:08:36
+-- Tiempo de generación: 25-10-2022 a las 01:02:49
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.9
 
@@ -52,8 +52,7 @@ INSERT INTO `comentario` (`comentario_id`, `idproyecto`, `parent_comentario_id`,
 (32, 2, 0, 'me gusta mucho axie ', 'juliana', '2022-10-12 04:14:55'),
 (33, 1, 0, '  dddd', 'juliana', '2022-10-12 04:17:07'),
 (39, 2, 0, '  asdd', 'Ave22asd', '2022-10-12 04:32:37'),
-(50, 1, 0, '  ASD', 'Zychsz ', '2022-10-22 05:24:44'),
-(51, 15, 0, '  asdasd', 'Zychsz ', '2022-10-22 05:37:58');
+(50, 3, 0, '  axie es genial', 'nico9244 ', '2022-10-22 07:26:10');
 
 -- --------------------------------------------------------
 
@@ -113,7 +112,8 @@ INSERT INTO `inventarios` (`idinventario`, `idusuario`, `imagen1`, `imagen2`, `i
 (3, 4, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (4, 16, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (5, 17, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(6, 18, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+(6, 18, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(7, 19, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -152,7 +152,8 @@ INSERT INTO `megusta_nomegusta` (`id`, `member_id`, `comentario_id`, `like_unlik
 (17, 1, 39, 0, '2022-10-11 23:32:59'),
 (18, 1, 46, 0, '2022-10-15 00:16:58'),
 (19, 1, 47, 1, '2022-10-15 00:17:08'),
-(20, 1, 43, 1, '2022-10-15 00:17:09');
+(20, 1, 43, 1, '2022-10-15 00:17:09'),
+(21, 1, 50, 0, '2022-10-23 01:13:22');
 
 -- --------------------------------------------------------
 
@@ -179,6 +180,18 @@ CREATE TABLE `permisos` (
   `descripcion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `permisos`
+--
+
+INSERT INTO `permisos` (`idpermiso`, `descripcion`) VALUES
+(1, 'alta red'),
+(2, 'modificar red'),
+(3, 'baja red'),
+(4, 'alta proyecto'),
+(5, 'modificar proyecto'),
+(6, 'baja proyecto');
+
 -- --------------------------------------------------------
 
 --
@@ -189,6 +202,18 @@ CREATE TABLE `permiso_roles` (
   `idpermiso` int(11) NOT NULL,
   `idrol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `permiso_roles`
+--
+
+INSERT INTO `permiso_roles` (`idpermiso`, `idrol`) VALUES
+(4, 1),
+(1, 1),
+(6, 1),
+(3, 1),
+(5, 1),
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -218,12 +243,12 @@ CREATE TABLE `proyectos` (
   `imagen_proyecto` varchar(255) DEFAULT NULL,
   `idred` int(11) NOT NULL,
   `idestado` int(11) NOT NULL,
-  `tipo_proyecto` varchar(16) NOT NULL,
-  `estado_proyecto` varchar(10) NOT NULL,
-  `descripcion_proyecto` varchar(99) NOT NULL,
-  `pagina_proyecto` varchar(99) NOT NULL,
-  `whitepaper_proyecto` varchar(999) NOT NULL,
-  `descripcion2_proyecto` varchar(999) NOT NULL
+  `tipo_proyecto` varchar(255) NOT NULL,
+  `estado_proyecto` varchar(255) NOT NULL,
+  `descripcion_proyecto` varchar(999) NOT NULL,
+  `pagina_proyecto` varchar(255) NOT NULL,
+  `whitepaper_proyecto` varchar(255) NOT NULL,
+  `descripcion2_proyecto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -231,9 +256,7 @@ CREATE TABLE `proyectos` (
 --
 
 INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `precio_proyecto`, `imagen_proyecto`, `idred`, `idestado`, `tipo_proyecto`, `estado_proyecto`, `descripcion_proyecto`, `pagina_proyecto`, `whitepaper_proyecto`, `descripcion2_proyecto`) VALUES
-(1, 'Alien Worlds', 'TLMs', '100', 'Alex_Dudley_The_Midjourney_Multiverse_movie_poster_epic_cosmic__8bbe1fde-c29c-4998-b53b-fee4590211ea.png', 59, 1, '', '', '', '', '', ''),
-(2, 'Axie Inifnity ', 'SLP, AXS', '21.023', 'descarga (1).png', 56, 1, '', '', '', '', '', ''),
-(15, 'Zoppi', 'ZOP', '100', 'IMG_20220331_194653935.jpg', 56, 1, 'Cartas', 'Finalizado', 'ASKJDNHAJKLDNKLAJSDASD', 'https://twitter.com/home', 'whitepaper', 'noticias');
+(3, 'Axie Inifnity Origin', 'SLP, AXS', '1', 'Axie-Origin-Guide.jpeg', 66, 1, 'Estrategia, Cartas', 'V3', 'Axie Infinity fue lanzado por Sky Mavis en marzo de 2018. Es un juego de batallas de cartas en tiempo real creado en Ronin Network, una cadena lateral vinculada a Ethereum. Todo el metaverso de Axie Infinity está construido alrededor de criaturas de fantasía llamadas Axies', 'https://axieinfinity.com/', '', 'Axie');
 
 -- --------------------------------------------------------
 
@@ -257,7 +280,15 @@ CREATE TABLE `redes` (
 
 INSERT INTO `redes` (`idred`, `nombre_red`, `moneda_red`, `precio_red`, `imagen_red`, `idestado`, `orden`) VALUES
 (56, 'WaxP', '', '', 'waxp.png', 1, 1),
-(59, 'Avalanche', '', '', 'avalanche-avax.png', 1, 2);
+(59, 'Avalanche', '', '', 'avalanche-avax.png', 1, 2),
+(65, 'Hive', '', '', 'hive.png', 1, 3),
+(66, 'Ronin Network', '', '', 'ronin.png', 1, 5),
+(67, 'Binance Smart Chain', '', '', 'Binance-Coin-icon.png', 1, 5),
+(68, 'Polygon Matic', '', '', 'polygon-matic22.png', 1, 6),
+(69, 'Tron', '', '', 'tron-trx.png', 1, 7),
+(70, 'Solana', '', '', 'solana.jpg', 1, 8),
+(71, 'EOS', '', '', 'eos.png', 1, 8),
+(72, 'Ethereum', '', '', 'Ethereum-icon.png', 1, 9);
 
 -- --------------------------------------------------------
 
@@ -322,8 +353,9 @@ INSERT INTO `rol_usuarios` (`idrol`, `idusuario`) VALUES
 (2, 14),
 (2, 15),
 (2, 16),
-(2, 17),
-(2, 18);
+(1, 17),
+(2, 18),
+(2, 19);
 
 -- --------------------------------------------------------
 
@@ -364,7 +396,8 @@ INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `imagen
 (15, 'brian22', 'brian@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1),
 (16, 'brian123', 'brian12@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es una descripcion para brian', 'https://www.facebook.com/brian/', '', '', 1),
 (17, 'nico9244', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es 9244', '', '', '', 1),
-(18, 'Zychsz', 'Zoppinicolas4@gmail.com', 'c60ebb3ba7101473428a20617c6092e144164065', NULL, NULL, NULL, NULL, NULL, 1);
+(18, 'Zychsz', 'Zoppinicolas4@gmail.com', 'c60ebb3ba7101473428a20617c6092e144164065', NULL, NULL, NULL, NULL, NULL, 1),
+(19, 'avenazzi', 'avenazzi@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -481,19 +514,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `inventarios`
 --
 ALTER TABLE `inventarios`
-  MODIFY `idinventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idinventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `megusta_nomegusta`
 --
 ALTER TABLE `megusta_nomegusta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `noticias`
@@ -505,7 +538,7 @@ ALTER TABLE `noticias`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -517,13 +550,13 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `redes`
 --
 ALTER TABLE `redes`
-  MODIFY `idred` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `idred` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `reporte_comentarios`
@@ -541,7 +574,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restricciones para tablas volcadas

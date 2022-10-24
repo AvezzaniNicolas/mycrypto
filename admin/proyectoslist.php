@@ -4,7 +4,7 @@ $title="Galería de imágenes";
 include ("../conexion.php");
 $active_config="active";
 $active_banner="active";
-
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,14 +35,33 @@ $active_banner="active";
 
 		 <ol class="breadcrumb">
 		  <li><a href="#">Inicio</a></li>
-		  <li class="active">Proyectos</li>
+		  <li class="active">Juegos</li>
 		</ol>
-			<div class="row">
-			  <div class="col-xs-12 text-right">
-				  <a href='add_proyecto.php' class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span> Agregar Proyectos</a>
-			  </div>
-			  
-			</div>
+			<?php 
+					if(isset($_SESSION['logueado']) && $_SESSION['logueado']>0){
+
+					
+					$idrol=$_SESSION['rol'];
+					$permiso=mysqli_query($conexion,"SELECT p.descripcion,pr.idpermiso FROM permisos AS p, permiso_roles AS pr WHERE p.idpermiso = pr.idpermiso AND pr.idrol= $idrol;" );
+
+					while($r=mysqli_fetch_array($permiso)){
+
+						$nombre_permiso = $r['descripcion'];
+					
+					switch($nombre_permiso){
+
+					case 'alta proyecto': ?> 
+						<div class="row">
+			  			<div class="col-xs-12 text-right">
+						<a href='add_proyecto.php' class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span> Agregar Juegos</a>
+						</div>
+						</div>
+						<?php break; 
+					}
+					}
+					}
+					?>
+			
 		  
 		  <br>
 		  <div id="loader" class="text-center"> <span><img src="./img/ajax-loader.gif"></span></div>

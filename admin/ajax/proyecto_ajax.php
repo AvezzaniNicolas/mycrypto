@@ -81,7 +81,34 @@ if($action == 'ajax'){
 						  <div class="caption">
 							<h3><?php echo $nombre_proyecto;?></h3>
 							
-							<p class='text-right'><a href="edit_proyectos.php?id=<?php echo intval($idproyecto);?>" class="btn btn-info" role="button"><i class='glyphicon glyphicon-edit'></i> Editar</a> <button type="button" class="btn btn-danger" onclick="eliminar_slide('<?php echo $idproyecto;?>');" role="button"><i class='glyphicon glyphicon-trash'></i> Eliminar</button></p>
+							<?php 
+							if(isset($_SESSION['logueado']) && $_SESSION['logueado']>0){
+
+							
+							$idrol=$_SESSION['rol'];
+							$permiso=mysqli_query($conexion,"SELECT p.descripcion,pr.idpermiso FROM permisos AS p, permiso_roles AS pr WHERE p.idpermiso = pr.idpermiso AND pr.idrol= $idrol;" );
+
+							while($r=mysqli_fetch_array($permiso)){
+
+								$nombre_permiso = $r['descripcion'];
+							
+							switch($nombre_permiso){
+
+							case 'modificar proyecto' : ?> 
+								
+								<a href="edit_proyectos.php?id=<?php echo intval($idproyecto);?>" class="btn btn-info" role="button"><i class='glyphicon glyphicon-edit'></i> Editar</a>
+									
+								<?php break; 
+							case 'baja proyecto': ?>	
+									
+									<button type="button" class="btn btn-danger" onclick="eliminar_slide('<?php echo $idproyecto;?>');" role="button"><i class='glyphicon glyphicon-trash'></i> Eliminar</button>
+										
+									<?php break;
+							}
+							}
+							}
+							?>
+
 						  </div>
 						</div>
 					  </div>
