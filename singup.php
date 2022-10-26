@@ -54,13 +54,15 @@ require ("conexion.php");
 				<div id="error" class="alert alert-danger ocultar" role="alert">
 					Las Contraseñas no coinciden, vuelve a intentar !
 				</div>
-				<div id="ok" class="alert alert-success ocultar" role="alert">
-					Las Contraseñas coinciden ! (Procesando formulario ... )
-				</div>
+				
 					<span class="login100-form-title p-b-49">
 						Bienvenido!
 					</span>
-
+					<?php 
+					if (isset($_GET['error'])&& $_GET['error']==3){
+						echo 'E-Mail ya existente, por favor use otro';
+					}
+					?>
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "mail is reauired">
 						<span class="label-input100">Nickname</span>
 						<input class="input100" type="text" name="nick" id="nick" placeholder="Ingrese su nickname">
@@ -146,8 +148,7 @@ require ("conexion.php");
 		// Si las contraseñas coinciden ocultamos el mensaje de error
 		document.getElementById("error").classList.remove("mostrar");
 
-		// Mostramos un mensaje mencionando que las Contraseñas coinciden
-		document.getElementById("ok").classList.remove("ocultar");
+		
 
 		// Desabilitamos el botón de login
 		document.getElementById("login").disabled = true;

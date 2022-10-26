@@ -154,8 +154,8 @@ session_start();
           <div style='background: #090909' class="u-carousel-inner" role="listbox">
             <div style='background: #9e9e9e' class="u-active u-align-center u-carousel-item u-container-style u-slide u-white u-carousel-item-1">
               <div class="u-container-layout u-container-layout-1">
-                <h4 class="u-text u-text-default u-text-1">Whitepaper </h4>
-                <p class="u-large-text u-text u-text-variant u-text-2"><?php echo $whitepaper_proyecto; ?></p>
+                <!-- <h4 class="u-text u-text-default u-text-1">Whitepaper </h4> -->
+                <a href="<?php echo $whitepaper_proyecto; ?>" class="u-large-text u-text u-text-variant u-text-2">WHITEPAPER</a>
               </div>
             </div>
             <div class="u-align-center u-carousel-item u-container-style u-slide">
@@ -193,10 +193,14 @@ session_start();
             </div>
             </div>
      
-<div class="container">
+        <div class="container">
         <div class="comment-form-container">
             <div class="container"> <h4><?php echo $nombre_proyecto;  echo ' le recuerda ser respestuoso con los otros usuarios' ?></h4></div>
+            
         </div>
+        
+
+
         <div class="container">
             <div class="container">
                 <div class="panel-body">
@@ -207,10 +211,12 @@ session_start();
                         
                         <form id="frm-comment">
                             
-                            <h4 class="nickname"align= 'left'><?php echo $nick; ?></h4>
+                            <h4 class="nickname"align= 'left' ><?php echo $nick; ?></h4>
                                 
                             
                             <div class="input-row">
+
+                                <input type="text" name="name" id="name" value="<?php echo $nick; ?>" hidden>                           
                                 <textarea class="input-field" type="text" name="comment" id="comment" placeholder="Agregar comentario">  </textarea>
                             </div>
                             <div>

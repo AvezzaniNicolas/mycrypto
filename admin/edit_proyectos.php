@@ -127,9 +127,10 @@ $active_banner="active";
 			  <div class="form-group">
 				<label for="precio_proyecto" class="col-sm-3 control-label">Tipo de Proyecto(Juego)</label>
 				<div class="col-sm-9">
-				  <input type="text" class="form-control" id="tipo_proyecto" name="tipo_proyecto" value = <?php echo $tipo_proyecto; ?> >
+				  <input type="text" class="form-control" id="tipo_proyecto" name="tipo_proyecto" value ="<?php echo $tipo_proyecto; ?>"required name="tipo_proyecto">
 				</div>
 			  </div>
+			 	
 
 			  <div class="form-group">
 				<label for="precio_proyecto" class="col-sm-3 control-label">Estado del Proyecto(Version, Finalizado)</label>
@@ -141,7 +142,7 @@ $active_banner="active";
 			  <div class="form-group">
 				<label for="precio_proyecto" class="col-sm-3 control-label">Descripcion breve del proyecto</label>
 				<div class="col-sm-9">
-				  <textarea type="text" class="input-field" id="descripcion_proyecto" name="descripcion_proyecto" value = <?php echo $descripcion_proyecto; ?>></textarea>
+				  <textarea type="text" class="form-control" id="descripcion_proyecto" name="descripcion_proyecto" ><?php echo $descripcion_proyecto; ?></textarea>
 				</div>
 			  </div>
 
