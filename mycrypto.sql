@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-10-2022 a las 01:02:49
+-- Tiempo de generación: 26-10-2022 a las 02:29:40
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.9
 
@@ -107,10 +107,6 @@ CREATE TABLE `inventarios` (
 --
 
 INSERT INTO `inventarios` (`idinventario`, `idusuario`, `imagen1`, `imagen2`, `imagen3`, `banner1`, `banner2`, `banner3`, `moneda`) VALUES
-(1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(2, 3, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(3, 4, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(4, 16, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (5, 17, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (6, 18, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (7, 19, NULL, NULL, NULL, NULL, NULL, NULL, 0);
@@ -339,20 +335,6 @@ CREATE TABLE `rol_usuarios` (
 --
 
 INSERT INTO `rol_usuarios` (`idrol`, `idusuario`) VALUES
-(2, 2),
-(2, 3),
-(2, 4),
-(2, 6),
-(2, 7),
-(2, 8),
-(2, 9),
-(2, 10),
-(2, 11),
-(2, 12),
-(2, 13),
-(2, 14),
-(2, 15),
-(2, 16),
 (1, 17),
 (2, 18),
 (2, 19);
@@ -381,22 +363,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `imagen`, `descripcion`, `twitter`, `instagram`, `facebook`, `idestado`) VALUES
-(2, 'FrancoDios95', 'francocolavella1@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '', '', '', '', '', 1),
-(3, 'Zoppi03', 'zoppinicolas7@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '', '', '', '', '', 1),
-(4, 'Zoppi034', 'zoppinicolas17@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '', '', '', '', '', 1),
-(6, 'asdasdasd', 'nicolas.avezzanirc@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', '', '', '', 0),
-(7, 'nico ave', 'nicolas@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', '', '', '', 0),
-(8, 'asdasd', 'nicolas11@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', '', '', '', 0),
-(9, '', '', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', '', '', '', 0),
-(10, '', 'asduiasd2m@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', '', '', '', 0),
-(11, '', '123456@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', '', '', '', 1),
-(12, 'pepesss33', 'pepesss@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', '', '', '', 1),
-(13, 'asdasd', 'asdassd2@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', '', '', '', 1),
-(14, 'ttrte', 'asdasdww2@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', '', '', '', '', '', 1),
-(15, 'brian22', 'brian@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1),
-(16, 'brian123', 'brian12@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es una descripcion para brian', 'https://www.facebook.com/brian/', '', '', 1),
-(17, 'nico9244', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es 9244', '', '', '', 1),
-(18, 'Zychsz', 'Zoppinicolas4@gmail.com', 'c60ebb3ba7101473428a20617c6092e144164065', NULL, NULL, NULL, NULL, NULL, 1),
+(17, 'nico9244', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es 9244', 'l', '', '', 1),
+(18, 'Zychsz', 'Zoppinicolas4@gmail.com', 'c60ebb3ba7101473428a20617c6092e144164065', NULL, '...', 'https://twitter.com/Zoppi03', 'https://www.instagram.com/zoppi.nicolas/', 'No', 1),
 (19, 'avenazzi', 'avenazzi@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1);
 
 --
@@ -520,7 +488,7 @@ ALTER TABLE `comentario`
 -- AUTO_INCREMENT de la tabla `inventarios`
 --
 ALTER TABLE `inventarios`
-  MODIFY `idinventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idinventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `megusta_nomegusta`
@@ -574,7 +542,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas
