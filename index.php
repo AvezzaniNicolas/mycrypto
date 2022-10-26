@@ -40,16 +40,21 @@ session_start();
 					<span class="login100-form-title p-b-49">
 						Inicio de sesion
 					</span>
-
-					<div class="wrap-input100 validate-input m-b-23" data-validate = "mail is reauired">
+					<?php 
+					if (isset($_GET['error'])&& $_GET['error']==1){
+						echo 'Usuario o Contraseña incorrecta';
+					}
+					?>
+					<p>
+					<div class="wrap-input100 validate-input m-b-23" data-validate = "mail is required">
 						<span class="label-input100">eMail</span>
-						<input class="input100" type="text" name="mail" id="mail" placeholder="Ingrese su email">
+						<input class="input100" type="text" name="mail" id="mail" placeholder="Ingrese su email" require>
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Contraseña is required">
 						<span class="label-input100">Contraseña</span>
-						<input class="input100" type="password" name="contrasenia" id="contrasenia" placeholder="Ingrese su contraseña">
+						<input class="input100" type="password" name="contrasenia" id="contrasenia" placeholder="Ingrese su contraseña" require>
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 					
@@ -106,54 +111,14 @@ session_start();
 
      <div id="dropDownSelect1"></div>
 	
-<!--===============================================================================================-->
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
 	<script src="vendor/select2/select2.min.js"></script>
-<!--===============================================================================================-->
 	<script src="vendor/daterangepicker/moment.min.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
 	<script src="vendor/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
 
-
-<!--<form action="registrar.php" method="POST">
-               <div class="form-group" id="user-group">
-                    <label for="user">Usuario</label>
-                    <input type="text" class="form-control" name="usuario" id="usuario" onkeypress="return check(event)" placeholder="Ingrese su usuario" require>
-               </div>
-               <div class="form-group" id="password-group">
-                   <label for="contra">Contraseña</label>
-                   <input type="password" class="form-control" name="contrasenia" id="contrasenia" onkeypress="return check(event)" placeholder="Ingrese su contraseña" require>
-               </div>
-               <div align="center"><a style="color:black;text-decoration:none" data-toggle="modal" href="#" data-target="#">¿Olvidaste tu contraseña?</a></div>
-              <div align="center" class="form-group">
-                   <button style="margin-top:7%;width:50%" name="registrar" value="registrar" type="submit" class="btn btn-light">Registrar</button>
-              </div>
-</form>  
--->
-
-<!--
-<form action="login.php" method="POST">
-               <div class="form-group" id="user-group">
-                    <label for="user">Usuario</label>
-                    <input type="text" class="form-control" name="mail" id="mail" onkeypress="return check(event)" placeholder="Ingrese su usuario" require>
-               </div>
-               <div class="form-group" id="password-group">
-                   <label for="contra">Contraseña</label>
-                   <input type="password" class="form-control" name="contrasenia" id="contrasenia" onkeypress="return check(event)" placeholder="Ingrese su contraseña" require>
-               </div>
-               
-              <div align="center" class="form-group">
-                   <button style="margin-top:7%;width:50%" name="ingresar" value="ingresar" type="submit" class="btn btn-light">Ingresar</button>
-              </div>
-</form>
--->
 </body>
 </html>
