@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2022 a las 08:52:37
+-- Tiempo de generación: 28-10-2022 a las 21:43:32
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.9
 
@@ -41,19 +41,10 @@ CREATE TABLE `comentario` (
 --
 
 INSERT INTO `comentario` (`comentario_id`, `idproyecto`, `parent_comentario_id`, `comment`, `comment_sender_name`, `date`) VALUES
-(8, 0, 0, '  qwdqwd', 'Ave22', '2022-10-01 04:11:26'),
-(9, 0, 4, '3333', 'asdasd', '2022-10-01 04:12:15'),
-(10, 0, 0, '  hola', 'juliana', '2022-10-01 04:30:40'),
-(11, 0, 10, 'hola', 'juliana2', '2022-10-01 04:30:58'),
-(12, 0, 0, 'nashe', 'Avenazi', '2022-10-01 04:32:32'),
-(13, 0, 12, 'nasheeeeeeeeee', 'Ave22', '2022-10-01 04:32:40'),
-(15, 0, 0, '  sdsd', 'juliana', '2022-10-01 04:41:25'),
-(31, 2, 0, '  hola axie', 'Ave22', '2022-10-12 04:14:39'),
-(32, 2, 0, 'me gusta mucho axie ', 'juliana', '2022-10-12 04:14:55'),
-(33, 1, 0, '  dddd', 'juliana', '2022-10-12 04:17:07'),
-(39, 2, 0, '  asdd', 'Ave22asd', '2022-10-12 04:32:37'),
-(50, 3, 0, '  axie es genial', 'nico9244 ', '2022-10-22 07:26:10'),
-(51, 3, 0, '  j', 'nico9244', '2022-10-26 09:55:52');
+(65, 3, 0, '  Axie Infinity: en qué consiste el juego con el que mucha gente se ha hecho rica y por qué su estilo lo tiene complicado para mantenerte enganchado', 'nico9244', '2022-10-29 00:17:00'),
+(66, 3, 0, '  Cuando entro en Axie Infinity por primera vez, me siento como si hubiera caído en una máquina del tiempo y hubiera viajado a los primeros años de la década de los 2000, una época en la que me sentab', 'Zychsz', '2022-10-29 00:17:34'),
+(67, 3, 0, '  Axie Infinity es un universo digital en el que los jugadores pueden criar, combatir e intercambiar estas coloridas criaturas conocidas como Axies.', 'SS', '2022-10-29 00:18:17'),
+(68, 3, 0, '  Las batallas suelen tener lugar en la arena, una zona en la que dos jugadores se emparejan entre sí, cada uno de los cuales roba cartas por turnos mientras intenta destruir el equipo del otro jugado', '12345', '2022-10-29 00:31:49');
 
 -- --------------------------------------------------------
 
@@ -150,7 +141,12 @@ INSERT INTO `megusta_nomegusta` (`id`, `member_id`, `comentario_id`, `like_unlik
 (18, 1, 46, 0, '2022-10-15 00:16:58'),
 (19, 1, 47, 1, '2022-10-15 00:17:08'),
 (20, 1, 43, 1, '2022-10-15 00:17:09'),
-(21, 1, 50, 0, '2022-10-23 01:13:22');
+(21, 1, 50, 0, '2022-10-23 01:13:22'),
+(22, 1, 52, 0, '2022-10-26 20:08:50'),
+(23, 1, 51, 1, '2022-10-26 20:08:21'),
+(24, 1, 54, 0, '2022-10-26 20:08:50'),
+(25, 1, 58, 0, '2022-10-26 20:22:57'),
+(26, 1, 63, 1, '2022-10-28 19:05:11');
 
 -- --------------------------------------------------------
 
@@ -369,7 +365,8 @@ INSERT INTO `rol_usuarios` (`idrol`, `idusuario`) VALUES
 (1, 17),
 (2, 18),
 (2, 19),
-(2, 22);
+(2, 23),
+(2, 24);
 
 -- --------------------------------------------------------
 
@@ -396,9 +393,10 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `imagen`, `descripcion`, `twitter`, `instagram`, `facebook`, `idestado`) VALUES
 (17, 'nico9244', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es 9244', 'l', '', '', 1),
-(18, 'Zychsz', 'Zoppinicolas4@gmail.com', 'c60ebb3ba7101473428a20617c6092e144164065', NULL, '...', 'https://twitter.com/Zoppi03', 'https://www.instagram.com/zoppi.nicolas/', 'No', 1),
+(18, 'Zychsz', 'Zoppinicolas4@gmail.com', 'c60ebb3ba7101473428a20617c6092e144164065', NULL, 'adasdasd', 'https://twitter.com/Zoppi03', 'https://www.instagram.com/zoppi.nicolas/', 'No', 1),
 (19, 'avenazzi', 'avenazzi@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1),
-(22, '', '', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', NULL, NULL, NULL, NULL, NULL, 1);
+(23, 'SS', 'SS@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1),
+(24, '12345', '123456@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -515,7 +513,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de la tabla `inventarios`
@@ -527,7 +525,7 @@ ALTER TABLE `inventarios`
 -- AUTO_INCREMENT de la tabla `megusta_nomegusta`
 --
 ALTER TABLE `megusta_nomegusta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `noticias`
@@ -575,7 +573,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Restricciones para tablas volcadas
