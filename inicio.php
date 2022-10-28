@@ -1,9 +1,6 @@
 <?php
 session_start();
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -29,38 +26,17 @@ session_start();
         
     </head>
     <body id="page-top">
-
     <?php 
-
         require ('conexion.php');
-
-
         $idusuario =$_SESSION['logueado'];
         $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE idusuario=$idusuario");
-
         while($respuesta=mysqli_fetch_assoc($consulta)){
-
         $nick = $respuesta['nickname'];
-        
-            
-  
         }
-        
-        /*$consulta = mysqli_query($conexion, "SELECT * FROM roles WHERE idrol=$idrol");
-        while($respuesta=mysqli_fetch_assoc($consulta)){
-
-            $idrol = $respuesta['idrol'];
-            
-                
-      
-            }*/
-
-
     ?>
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                
                 <a class="navbar-brand"  href=""> <img src=" assets/img/sad.png" alt="..." /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu

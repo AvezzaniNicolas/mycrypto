@@ -1,38 +1,23 @@
-<?php
-session_start();
-?>
+<?php session_start();?>
+
 <!DOCTYPE html>
+
 <html>
   <head>
-  <title>Perfil de Proyecto</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <title>Proyecto Cyrpto</title>
     <meta charset="utf-8">
-    <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="Proyecto, Estado : (proyecto_estado)., Proyecto : (nombre_proyecto)., Caja de comentarios aca, Objetos relacionados">
-    <meta name="description" content="">
-    <title>Proyectos</title>
+
+    <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="dist/js/bootstrap.min.js"></script> 
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/nicepage.css" media="screen">
     <link rel="stylesheet" href="css/Proyectos.css" media="screen">
     <link href="css/styles.css" rel="stylesheet" />
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-    <meta name="generator" content="Nicepage 4.19.3, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    <link href="css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Proyectos">
-    <meta property="og:type" content="website">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
 </head>
   <body style='background: #090909'data-home-page="proyecto.php" data-home-page-title="Proyectos" class="u-body u-overlap u-white u-xl-mode" data-lang="es">
   <?php 
@@ -67,13 +52,10 @@ session_start();
         $instagram = $respuesta['instagram'];
         $facebook = $respuesta['facebook'];
         
-        
       }
 
       ?>
       
-          
-    
       <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
                 
@@ -215,7 +197,7 @@ session_start();
                                 
                             
                             <div class="input-row">
-
+                              
                                 <input type="text" name="name" id="name" value="<?php echo $nick; ?>" hidden>                           
                                 <textarea class="input-field" type="text" name="comment" id="comment" placeholder="Agregar comentario">  </textarea>
                             </div>
@@ -245,6 +227,7 @@ session_start();
                             var str = $("#frm-comment").serialize();
 
                             $.ajax({
+              
                                 url: "AgregarComentario.php?id=<?php echo $idproyecto; ?>",
                                 data: str,
                                 type: 'post',
@@ -252,7 +235,6 @@ session_start();
                                     var result = eval('(' + response + ')');
                                     if (response) {
                                         $("#comment-message").css('display', 'inline-block');
-                                        $("#name").val("");
                                         $("#comment").val("");
                                         $("#commentId").val("");
                                         listComment();
@@ -262,6 +244,7 @@ session_start();
                                     }
                                 }
                             });
+                                                   
                         });
 
                         $(document).ready(function() {
@@ -505,5 +488,13 @@ session_start();
                 </div>
             </div>
 </footer>
-
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </html>
