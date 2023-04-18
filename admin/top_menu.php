@@ -14,7 +14,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-           <li class="active"><a href="redeslist.php"><i class='glyphicon glyphicon-film'></i> Galería</a></li>
+           <li class="active"><a href="redeslist.php"><i class='glyphicon glyphicon-film'></i>Elementos</a></li>
 		        <li><a href="../inicio.php"><i class='glyphicon glyphicon-blackboard'></i> Volver a Inicio</a></li>
           </ul>
         </li>
