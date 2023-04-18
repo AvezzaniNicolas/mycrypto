@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2022 a las 21:43:32
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.9
+-- Tiempo de generación: 18-04-2023 a las 03:04:17
+-- Versión del servidor: 10.3.15-MariaDB
+-- Versión de PHP: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -45,6 +46,23 @@ INSERT INTO `comentario` (`comentario_id`, `idproyecto`, `parent_comentario_id`,
 (66, 3, 0, '  Cuando entro en Axie Infinity por primera vez, me siento como si hubiera caído en una máquina del tiempo y hubiera viajado a los primeros años de la década de los 2000, una época en la que me sentab', 'Zychsz', '2022-10-29 00:17:34'),
 (67, 3, 0, '  Axie Infinity es un universo digital en el que los jugadores pueden criar, combatir e intercambiar estas coloridas criaturas conocidas como Axies.', 'SS', '2022-10-29 00:18:17'),
 (68, 3, 0, '  Las batallas suelen tener lugar en la arena, una zona en la que dos jugadores se emparejan entre sí, cada uno de los cuales roba cartas por turnos mientras intenta destruir el equipo del otro jugado', '12345', '2022-10-29 00:31:49');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `elementos`
+--
+
+CREATE TABLE `elementos` (
+  `idelemento` int(11) NOT NULL,
+  `nombre_elemento` varchar(255) DEFAULT NULL,
+  `precio_elemento` varchar(255) DEFAULT NULL,
+  `imagen_elemento` varchar(255) DEFAULT NULL,
+  `idtienda` int(11) NOT NULL,
+  `idestado` int(11) NOT NULL,
+  `tier` varchar(255) NOT NULL,
+  `estado_elemento` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -250,7 +268,7 @@ CREATE TABLE `proyectos` (
 
 INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `precio_proyecto`, `imagen_proyecto`, `idred`, `idestado`, `tipo_proyecto`, `estado_proyecto`, `descripcion_proyecto`, `pagina_proyecto`, `whitepaper_proyecto`, `descripcion2_proyecto`) VALUES
 (3, 'Axie Inifnity Origin', 'SLP, AXS', '1', 'Axie-Origin-Guide.jpeg', 66, 1, 'Estrategia, Cartas', 'V3', 'Axie Infinity fue lanzado por Sky Mavis en marzo de 2018. Es un juego de batallas de cartas en tiempo real creado en Ronin Network, una cadena lateral vinculada a Ethereum. Todo el metaverso de Axie Infinity está construido alrededor de criaturas de fantasía llamadas Axies', 'https://axieinfinity.com/', '', 'Axie'),
-(4, 'AlienWorlds', 'TLM', '0.15', 'mqdefault.jpg', 56, 1, 'Cartas/Farm', '7.2.4', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://alienworlds.io/', 'RARITY', 'Seek'),
+(4, 'AlienWorlds', 'TLM', '0.15', 'mqdefault.jpg', 56, 1, 'Cartas/Farm', '7.2.3', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://alienworlds.io/', 'RARITY', 'Seek'),
 (5, 'Avegotchi', 'GHST', '0.54', 'ave.PNG', 56, 1, 'Aventura', 'Finalizado', 'Aavegotchi is a DeFi-enabled crypto collectibles game developed by Singapore-based Pixelcraft Studios that allows players to stake Non-fungible tokens (NFTs) avatars with interest-generating tokens and interact with the Aavegotchi metaverse. It is a unique combination of Decentralized Finance (DeFi) and NFTs.', 'https://www.aavegotchi.com/', 'To level up their Aavegotchis, players can participate in a variety of activities including mini-games, governance, and meetups. Aavegotchis can also increase their rarity level by equipping in-game wearables and leveling up.', 'noticias'),
 (6, 'Crypto Cars', 'CARS', '1', 'cryptocars1.png', 67, 1, 'Simulador', 'Finalizado', 'Proyecto Cerrado: La economía de todo el metaverso Cryto City quebró por mala administración del equipo desarrollador. Se habla de un “rugpull” sigiloso o una quiebra planificada, según testimonios de algunos moderadores.  Crypto Cars es un juego NFT del género de racing con ciertas características del RPG que presenta al jugador la modalidad de juego de simulación de carreras y eventualmente lanzarán una forma de PVP para competir contra otros jugadores. Este título junto a Crypto Planes y Crypto Guards forman parte del metaverso Crypto City creado por los mismos desarrolladores.', 'https://www.nftgamearena.com/play-to-earn/racing/crypto-cars/', 'whitepaper', 'noticias'),
 (7, 'Crypto Cars Worlds', 'CARS', '0.03', 'cryptocars.png', 67, 1, 'Carreras', 'Abandonado', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'Proyecto Caido', 'whitepaper', 'noticias'),
@@ -367,6 +385,28 @@ INSERT INTO `rol_usuarios` (`idrol`, `idusuario`) VALUES
 (2, 19),
 (2, 23),
 (2, 24);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tienda`
+--
+
+CREATE TABLE `tienda` (
+  `idtienda` int(11) NOT NULL,
+  `nombre_tienda` varchar(255) NOT NULL,
+  `imagen_tienda` varchar(255) NOT NULL,
+  `idestado` int(99) NOT NULL,
+  `orden` int(99) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tienda`
+--
+
+INSERT INTO `tienda` (`idtienda`, `nombre_tienda`, `imagen_tienda`, `idestado`, `orden`) VALUES
+(1, 'items', '', 1, 1),
+(2, 'banners', '', 1, 2);
 
 -- --------------------------------------------------------
 
