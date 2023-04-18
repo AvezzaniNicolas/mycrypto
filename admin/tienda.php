@@ -51,10 +51,10 @@ session_start();
 				
 				switch($nombre_permiso){
 
-				case 'alta red' : ?> 
+				case 'alta tienda' : ?> 
 					<div class="row">
 			  		<div class="col-xs-12 text-right">
-						<a href='add_red.php' class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span> Agregar Red</a>
+						<a href='add_tienda.php' class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span> Agregar Tienda</a>
 					</div>
 			  		</div>		
 					<?php break; 
@@ -89,7 +89,7 @@ session_start();
 	function load(page){
 		var parametros = {"action":"ajax","page":page};
 		$.ajax({
-			url:'./ajax/red_ajax.php',
+			url:'./ajax/tienda_ajax.php',
 			data: parametros,
 			 beforeSend: function(objeto){
 			$("#loader").html("<img src='../img/ajax-loader.gif'>");
@@ -100,12 +100,12 @@ session_start();
 			}
 		})
 	}
-	function eliminar_slide(idred){
+	function eliminar_slide(idtienda){
 		page=1;
-		var parametros = {"action":"ajax","page":page,"idred":idred};
+		var parametros = {"action":"ajax","page":page,"idtienda":idtienda};
 		if(confirm('Esta acción  eliminará de forma permanente el elemento \n\n Desea continuar?')){
 		$.ajax({
-			url:'./ajax/red_ajax.php',
+			url:'./ajax/tienda_ajax.php',
 			data: parametros,
 			 beforeSend: function(objeto){
 			$("#loader").html("<img src='../images/ajax-loader.gif'>");
