@@ -52,7 +52,7 @@ session_start();
 					case 'alta proyecto': ?> 
 						<div class="row">
 			  			<div class="col-xs-12 text-right">
-						<a href='add_proyecto.php' class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span> Agregar items</a>
+						<a href='add_item.php' class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span> Agregar items</a>
 						</div>
 						</div>
 						<?php break; 
