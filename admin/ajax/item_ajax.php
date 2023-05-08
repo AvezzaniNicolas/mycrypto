@@ -71,7 +71,7 @@ if($action == 'ajax'){
 					$imagen_item=$row['imagen_item'];
 					$nombre_item=$row['nombre_item'];
 					$iditem=$row['iditem'];
-					$idtienda=$row['idteinda'];
+					$idtienda=$row['idtienda'];
 					
 					?>
 					

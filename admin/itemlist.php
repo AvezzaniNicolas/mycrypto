@@ -34,8 +34,7 @@ session_start();
       <div class="row">
 
 		 <ol class="breadcrumb">
-		  <li><a href="#">Inicio</a></li>
-		  <li><a href="./itemlist.php">items</a></li>
+		  <li><a href="./itemlist.php">Cargar items</a></li>
 		</ol>
 			<?php 
 					if(isset($_SESSION['logueado']) && $_SESSION['logueado']>0){
