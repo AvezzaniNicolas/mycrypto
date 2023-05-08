@@ -35,7 +35,7 @@ session_start();
 
 		 <ol class="breadcrumb">
 		  <li><a href="#">Inicio</a></li>
-		  <li class="active">Items</li>
+		  <li><a href="./itemlist.php">items</a></li>
 		</ol>
 			<?php 
 					if(isset($_SESSION['logueado']) && $_SESSION['logueado']>0){
@@ -53,7 +53,7 @@ session_start();
 					case 'alta proyecto': ?> 
 						<div class="row">
 			  			<div class="col-xs-12 text-right">
-						<a href='add_proyecto.php' class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span> Agregar Juegos</a>
+						<a href='add_proyecto.php' class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span> Agregar items</a>
 						</div>
 						</div>
 						<?php break; 
