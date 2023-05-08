@@ -5,9 +5,9 @@ include ("../../conexion.php");
 $action = (isset($_REQUEST['action'])&& $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
 if($action == 'ajax'){
 	//Elimino producto
-	if (isset($_REQUEST['idtienda'])){
-		$idtienda=intval($_REQUEST['idtienda']);
-		if ($delete=mysqli_query($conexion,"DELETE FROM redes WHERE idtienda='$idtienda'")){
+	if (isset($_REQUEST['iditem'])){
+		$id_item=intval($_REQUEST['iditem']);
+		if ($delete=mysqli_query($conexion,"DELETE FROM items WHERE iditem='$id_item'")){
 			$message= "Datos eliminados satisfactoriamente";
 		} else {
 			$error= "No se pudo eliminar los datos";
@@ -15,12 +15,8 @@ if($action == 'ajax'){
 	}
 	
 	
-	$tables="tienda";
-	$sWhere=" ";
-	$sWhere.=" ";
+	$tables="items";
 	
-	
-	$sWhere.=" ORDER BY orden";
 	include 'pagination.php'; //include pagination file
 	//pagination variables
 	$page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;
@@ -29,7 +25,9 @@ if($action == 'ajax'){
 	$offset = ($page - 1) * $per_page;
 	
 	//Count the total number of row in your table*/
-	$count_query   = mysqli_query($conexion,"SELECT count(*) AS numrows FROM $tables  $sWhere  ");
+	
+
+	$count_query   = mysqli_query($conexion,"SELECT count(*) AS numrows FROM $tables ");
 	if ($row= mysqli_fetch_array($count_query))
 	{
 	$numrows = $row['numrows'];
@@ -38,7 +36,12 @@ if($action == 'ajax'){
 	$total_pages = ceil($numrows/$per_page);
 	$reload = './productslist.php';
 	//main query to fetch the data
-	$query = mysqli_query($conexion,"SELECT * FROM  $tables  $sWhere LIMIT $offset,$per_page");
+	if(isset($_GET['id'] ) && !empty($_GET['id'])){
+	$idred=$_GET['id'];
+	$query = mysqli_query($conexion,"SELECT * FROM  $tables WHERE idtienda=$idtienda LIMIT $offset,$per_page ");
+	}else{
+	$query = mysqli_query($conexion,"SELECT * FROM  $tables LIMIT $offset,$per_page ");
+	}
 	
 	if (isset($message)){
 		?>
@@ -65,19 +68,18 @@ if($action == 'ajax'){
 		 <div class="row">
 			<?php
 				while($row = mysqli_fetch_array($query)){
-					$imagen_tienda=$row['imagen_tienda'];
-					$nombre_tienda=$row['nombre_tienda'];
-					$idtienda=$row['idtienda'];
-					
+					$imagen_item=$row['imagen_item'];
+					$nombre_item=$row['nombre_item'];
+					$iditem=$row['iditem'];
+					$idtienda=$row['idteinda'];
 					
 					?>
 					
 					  <div class="col-sm-6 col-md-3">
 						<div class="thumbnail">
-						  
-						  <a href="../admin/itemlist.php?id=<?php echo $idtienda;?>" ><img src="../img/tienda/<?php echo $imagen_tienda;?>" alt="no se cargo imagen"></a>
+						   <a href="../item.php?id=<?php echo $iditem;?>" ><img src="../img/item/<?php echo $imagen_item;?>" alt="..." ></a>
 						  <div class="caption">
-							<h3><?php echo $nombre_tienda;?></h3>
+							<h3><?php echo $nombre_item;?></h3>
 							
 							<?php 
 							if(isset($_SESSION['logueado']) && $_SESSION['logueado']>0){
@@ -92,14 +94,14 @@ if($action == 'ajax'){
 							
 							switch($nombre_permiso){
 
-							case 'modificar tienda' : ?> 
+							case 'modificar item' : ?> 
 								
-								<a href="edit_tienda.php?id=<?php echo intval($idtienda);?>" class="btn btn-info" role="button"><i class='glyphicon glyphicon-edit'></i> Editar</a>
+								<a href="edit_item.php?id=<?php echo intval($idproyecto);?>" class="btn btn-info" role="button"><i class='glyphicon glyphicon-edit'></i> Editar</a>
 									
 								<?php break; 
-							case 'baja tienda': ?>	
+							case 'baja item': ?>	
 									
-									<button type="button" class="btn btn-danger" onclick="eliminar_slide('<?php echo $idtienda;?>');" role="button"><i class='glyphicon glyphicon-trash'></i> Eliminar</button>
+									<button type="button" class="btn btn-danger" onclick="eliminar_slide('<?php echo $iditem;?>');" role="button"><i class='glyphicon glyphicon-trash'></i> Eliminar</button>
 										
 									<?php break;
 							}
@@ -107,8 +109,6 @@ if($action == 'ajax'){
 							}
 							?>
 
-							
-							
 						  </div>
 						</div>
 					  </div>

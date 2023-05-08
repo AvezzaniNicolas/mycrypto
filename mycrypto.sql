@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-04-2023 a las 03:04:17
+-- Tiempo de generación: 08-05-2023 a las 22:42:30
 -- Versión del servidor: 10.3.15-MariaDB
 -- Versión de PHP: 7.2.19
 
@@ -120,6 +120,28 @@ INSERT INTO `inventarios` (`idinventario`, `idusuario`, `imagen1`, `imagen2`, `i
 (5, 17, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (6, 18, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (7, 19, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `items`
+--
+
+CREATE TABLE `items` (
+  `iditem` int(11) NOT NULL,
+  `nombre_item` varchar(255) NOT NULL,
+  `rareza_item` int(11) NOT NULL,
+  `idestado` int(11) NOT NULL,
+  `precio` int(11) NOT NULL,
+  `imagen_item` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `items`
+--
+
+INSERT INTO `items` (`iditem`, `nombre_item`, `rareza_item`, `idestado`, `precio`, `imagen_item`) VALUES
+(1, 'A', 1, 1, 2, '');
 
 -- --------------------------------------------------------
 
@@ -302,6 +324,25 @@ INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `pr
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `rarezaitem`
+--
+
+CREATE TABLE `rarezaitem` (
+  `rareza_item` int(11) NOT NULL,
+  `nombre_rareza` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `rarezaitem`
+--
+
+INSERT INTO `rarezaitem` (`rareza_item`, `nombre_rareza`) VALUES
+(1, 'Diamante'),
+(2, 'Platino');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `redes`
 --
 
@@ -469,6 +510,14 @@ ALTER TABLE `inventarios`
   ADD KEY `idusuario` (`idusuario`);
 
 --
+-- Indices de la tabla `items`
+--
+ALTER TABLE `items`
+  ADD PRIMARY KEY (`iditem`),
+  ADD KEY `rareza_item` (`rareza_item`),
+  ADD KEY `idestado` (`idestado`);
+
+--
 -- Indices de la tabla `megusta_nomegusta`
 --
 ALTER TABLE `megusta_nomegusta`
@@ -509,6 +558,12 @@ ALTER TABLE `proyectos`
   ADD PRIMARY KEY (`idproyecto`),
   ADD KEY `idred` (`idred`),
   ADD KEY `idestado` (`idestado`);
+
+--
+-- Indices de la tabla `rarezaitem`
+--
+ALTER TABLE `rarezaitem`
+  ADD PRIMARY KEY (`rareza_item`);
 
 --
 -- Indices de la tabla `redes`
@@ -562,6 +617,12 @@ ALTER TABLE `inventarios`
   MODIFY `idinventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT de la tabla `items`
+--
+ALTER TABLE `items`
+  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `megusta_nomegusta`
 --
 ALTER TABLE `megusta_nomegusta`
@@ -590,6 +651,12 @@ ALTER TABLE `productos`
 --
 ALTER TABLE `proyectos`
   MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT de la tabla `rarezaitem`
+--
+ALTER TABLE `rarezaitem`
+  MODIFY `rareza_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `redes`
@@ -632,6 +699,12 @@ ALTER TABLE `favoritos`
 --
 ALTER TABLE `inventarios`
   ADD CONSTRAINT `inventarios_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`);
+
+--
+-- Filtros para la tabla `items`
+--
+ALTER TABLE `items`
+  ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`rareza_item`) REFERENCES `rarezaitem` (`rareza_item`);
 
 --
 -- Filtros para la tabla `noticias`
