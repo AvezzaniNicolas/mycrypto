@@ -34,7 +34,7 @@ if($action == 'ajax'){
 	}
 	else {echo mysqli_error($conexion);}
 	$total_pages = ceil($numrows/$per_page);
-	$reload = './productslist.php';
+	$reload = './itemslist.php';
 	//main query to fetch the data
 	if(isset($_GET['id'] ) && !empty($_GET['id'])){
 	$idred=$_GET['id'];

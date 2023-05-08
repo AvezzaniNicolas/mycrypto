@@ -49,7 +49,7 @@ session_start();
 					
 					switch($nombre_permiso){
 
-					case 'alta proyecto': ?> 
+					case 'alta item': ?> 
 						<div class="row">
 			  			<div class="col-xs-12 text-right">
 						<a href='add_item.php' class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span> Agregar items</a>
@@ -89,7 +89,7 @@ session_start();
 			if(isset($_GET['id'] ) && !empty($_GET['id'])){
 			$idred=$_GET['id'];
 			?>
-			url:'./ajax/item_ajax.php?id=<?php echo $rareza_item;?>',
+			url:'./ajax/item_ajax.php?id=<?php echo $idtienda;?>',
 			<?php }else{ ?>
 			url:'./ajax/item_ajax.php',
 			 <?php } ?>
@@ -103,12 +103,12 @@ session_start();
 			}
 		})
 	}
-	function eliminar_slide(rareza_item){
+	function eliminar_slide(idtienda){
 		page=1;
-		var parametros = {"action":"ajax","page":page,"idproyecto":iditem};
+		var parametros = {"action":"ajax","page":page,"iditem":iditem};
 		if(confirm('Esta acción  eliminará de forma permanente el banner \n\n Desea continuar?')){
 		$.ajax({
-			url:'./ajax/proyecto_ajax.php',
+			url:'./ajax/item_ajax.php',
 			data: parametros,
 			 beforeSend: function(objeto){
 			$("#loader").html("<img src='../images/ajax-loader.gif'>");

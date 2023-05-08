@@ -1,17 +1,14 @@
 <?php
 session_start();
 
-if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["nombre_proyecto"])){
-	/* Llamar la Cadena de Conexion*/ 
+if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["nombre_item"])){
 	include ("../../conexion.php");
-	// escaping, additionally removing everything that could be (html/javascript-) code
-     $nombre_proyecto = mysqli_real_escape_string($conexion,(strip_tags($_POST['nombre_proyecto'], ENT_QUOTES)));	 
-	 $moneda_proyecto = intval($_POST['moneda_proyecto']);
-     $precio_proyecto = intval($_POST['precio_proyecto']);
+     $nombre_item = mysqli_real_escape_string($conexion,(strip_tags($_POST['nombre_item'], ENT_QUOTES)));	 
+     $precio = intval($_POST['precio']);
 	 $idestado = intval($_POST['idestado']);
-	 $sql="UPDATE proyectos SET nombre_proyecto='$nombre_proyecto', moneda_proyecto='$moneda_proyecto', precio_proyecto='$precio_proyecto' , idestado='$idestado' WHERE idproyecto='$idproyecto'";
+	 $sql="UPDATE items SET nombre_item='$nombre_item', precio='$precio' , idestado='$idestado' WHERE iditem='$iditem'";
 	 $query = mysqli_query($conexion,$sql);
-	// if user has been added successfully
+	
 	if ($query) {
 		$messages[] = "Datos  han sido actualizados satisfactoriamente.";
 	} else {
