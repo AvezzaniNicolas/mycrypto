@@ -34,7 +34,7 @@ if($action == 'ajax'){
 	}
 	else {echo mysqli_error($conexion);}
 	$total_pages = ceil($numrows/$per_page);
-	$reload = './itemslist.php';
+	$reload = './itemlist.php';
 	//main query to fetch the data
 	if(isset($_GET['id'] ) && !empty($_GET['id'])){
 	$idred=$_GET['id'];
@@ -96,7 +96,7 @@ if($action == 'ajax'){
 
 							case 'modificar item' : ?> 
 								
-								<a href="edit_item.php?id=<?php echo intval($idproyecto);?>" class="btn btn-info" role="button"><i class='glyphicon glyphicon-edit'></i> Editar</a>
+								<a href="editar_item.php?id=<?php echo intval($iditem);?>" class="btn btn-info" role="button"><i class='glyphicon glyphicon-edit'></i> Editar</a>
 									
 								<?php break; 
 							case 'baja item': ?>	

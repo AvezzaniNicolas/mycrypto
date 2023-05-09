@@ -25,7 +25,7 @@ $SELECT_tienda=mysqli_query($conexion, "SELECT * FROM tienda");
       <div class="row">
 	   	<ol class="breadcrumb">
 		  <li><a href="#">Inicio</a></li>
-		  <li><a href="redeslist.php">Proyectos</a></li>
+		  <li><a href="itemlist.php">Items</a></li>
 		  <li class="active">Agregar</li>
 		</ol>
 				<div class="col-md-7">
@@ -109,7 +109,7 @@ $SELECT_tienda=mysqli_query($conexion, "SELECT * FROM tienda");
 				</form>
 			</div>
     	</div> 
-	</div><!-- /container -->
+	</div>
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

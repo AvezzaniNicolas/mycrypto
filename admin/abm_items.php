@@ -1,7 +1,7 @@
 <?php
 
 
-$title="Modificar item";
+$title="modificar item";
 /* Llamar la Cadena de Conexion*/ 
 require "../conexion.php";
 require "../vendor/autoload.php";
@@ -123,11 +123,11 @@ if(isset($_POST['insert']) && !empty ($_POST['insert'])){
 //Insert un nuevo producto
 $imagen=imagen();
 
-$nombre_proyecto=$_POST['nombre_item'];
-$idred=$_POST['nombre_tienda'];
-$idestado=$_POST['estado'];
-$precio_proyecto=$_POST['precio'];
-$imagen_proyecto=$_POST['imagen_item'];
+$nombre_item=$_POST['nombre_item'];
+$idestado=$_POST['idestado'];
+$precio=$_POST['precio'];
+$imagen_item=$_POST['imagen_item'];
+$idtienda=$_POST['idtienda'];
 
 $insert=mysqli_query($conexion,"INSERT INTO items (nombre_item, precio, imagen_item, idtienda, idestado) values ('$nombre_item','$precio','$imagen','$idtienda','$idestado')");
 
@@ -138,19 +138,21 @@ header("location:itemlist.php");
 if(isset($_POST['update']) && !empty ($_POST['update'])){
 
     $imagen=imagen();
-    $idtienda=$_POST['idtienda'];
+    
     $id_item=$_POST['iditem'];
+    $nombre_item=$_POST['nombre_item'];
+    $idestado=$_POST['idestado'];
     $precio=$_POST['precio'];
     $imagen_item=$_POST['imagen_item'];
-    $idestado=$_POST['estado'];
+    $idtienda=$_POST['idtienda'];
    
-    $nombre_item=$_POST['nombre_item'];
+ 
     if (!is_null($imagen)) {
-        $update=mysqli_query($conexion,"UPDATE items SET nombre_item='$nombre_item', precio='$precio', imagen_item='$imagen', idtienda='$idtienda', idestado='$idestado'");
+        $update=mysqli_query($conexion,"UPDATE items SET nombre_item='$nombre_item', idestado='$idestado, precio='$precio', imagen_item='$imagen', idtienda='$idtienda''");
 
         header("location:itemlist.php");
     }else{
-        $update=mysqli_query($conexion,"UPDATE items SET nombre_item='$nombre_item', precio='$precio', imagen_item='$imagen', idtienda='$idtienda', idestado='$idestado'");
+        $update=mysqli_query($conexion,"UPDATE items SET nombre_item='$nombre_item', idestado='$idestado, precio='$precio', imagen_item='$imagen', idtienda='$idtienda''");
 
         header("location:itemlist.php");
     }

@@ -87,7 +87,7 @@ session_start();
 		$.ajax({
 			<?php 
 			if(isset($_GET['id'] ) && !empty($_GET['id'])){
-			$idred=$_GET['id'];
+			$idtienda=$_GET['id'];
 			?>
 			url:'./ajax/item_ajax.php?id=<?php echo $idtienda;?>',
 			<?php }else{ ?>
@@ -103,7 +103,7 @@ session_start();
 			}
 		})
 	}
-	function eliminar_slide(idtienda){
+	function eliminar_slide(iditem){
 		page=1;
 		var parametros = {"action":"ajax","page":page,"iditem":iditem};
 		if(confirm('Esta acción  eliminará de forma permanente el banner \n\n Desea continuar?')){
