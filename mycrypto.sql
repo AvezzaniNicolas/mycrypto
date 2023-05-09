@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2023 a las 22:42:30
+-- Tiempo de generación: 09-05-2023 a las 02:41:10
 -- Versión del servidor: 10.3.15-MariaDB
 -- Versión de PHP: 7.2.19
 
@@ -130,18 +130,20 @@ INSERT INTO `inventarios` (`idinventario`, `idusuario`, `imagen1`, `imagen2`, `i
 CREATE TABLE `items` (
   `iditem` int(11) NOT NULL,
   `nombre_item` varchar(255) NOT NULL,
-  `rareza_item` int(11) NOT NULL,
   `idestado` int(11) NOT NULL,
   `precio` int(11) NOT NULL,
-  `imagen_item` varchar(255) NOT NULL
+  `imagen_item` varchar(255) NOT NULL,
+  `idtienda` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `items`
 --
 
-INSERT INTO `items` (`iditem`, `nombre_item`, `rareza_item`, `idestado`, `precio`, `imagen_item`) VALUES
-(1, 'A', 1, 1, 2, '');
+INSERT INTO `items` (`iditem`, `nombre_item`, `idestado`, `precio`, `imagen_item`, `idtienda`) VALUES
+(1, 'A', 1, 2, '', 1),
+(13, 'C', 1, 4, '955bd8bd-4b0c-4ada-8abd-c2ca166439d0.png', 0),
+(14, 'B', 1, 2, 'asdasd.png', 0);
 
 -- --------------------------------------------------------
 
@@ -223,7 +225,10 @@ INSERT INTO `permisos` (`idpermiso`, `descripcion`) VALUES
 (3, 'baja red'),
 (4, 'alta proyecto'),
 (5, 'modificar proyecto'),
-(6, 'baja proyecto');
+(6, 'baja proyecto'),
+(7, 'alta item'),
+(8, 'baja item'),
+(9, 'modificar item');
 
 -- --------------------------------------------------------
 
@@ -246,7 +251,10 @@ INSERT INTO `permiso_roles` (`idpermiso`, `idrol`) VALUES
 (6, 1),
 (3, 1),
 (5, 1),
-(2, 1);
+(2, 1),
+(7, 1),
+(8, 1),
+(9, 1);
 
 -- --------------------------------------------------------
 
@@ -514,8 +522,8 @@ ALTER TABLE `inventarios`
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`iditem`),
-  ADD KEY `rareza_item` (`rareza_item`),
-  ADD KEY `idestado` (`idestado`);
+  ADD KEY `idestado` (`idestado`),
+  ADD KEY `idtienda` (`idtienda`);
 
 --
 -- Indices de la tabla `megusta_nomegusta`
@@ -620,7 +628,7 @@ ALTER TABLE `inventarios`
 -- AUTO_INCREMENT de la tabla `items`
 --
 ALTER TABLE `items`
-  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `megusta_nomegusta`
@@ -638,7 +646,7 @@ ALTER TABLE `noticias`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -650,7 +658,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `rarezaitem`
@@ -699,12 +707,6 @@ ALTER TABLE `favoritos`
 --
 ALTER TABLE `inventarios`
   ADD CONSTRAINT `inventarios_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`);
-
---
--- Filtros para la tabla `items`
---
-ALTER TABLE `items`
-  ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`rareza_item`) REFERENCES `rarezaitem` (`rareza_item`);
 
 --
 -- Filtros para la tabla `noticias`
