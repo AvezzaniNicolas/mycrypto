@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-05-2023 a las 02:41:10
--- Versión del servidor: 10.3.15-MariaDB
--- Versión de PHP: 7.2.19
+-- Tiempo de generación: 10-07-2023 a las 23:52:59
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -45,7 +44,11 @@ INSERT INTO `comentario` (`comentario_id`, `idproyecto`, `parent_comentario_id`,
 (65, 3, 0, '  Axie Infinity: en qué consiste el juego con el que mucha gente se ha hecho rica y por qué su estilo lo tiene complicado para mantenerte enganchado', 'nico9244', '2022-10-29 00:17:00'),
 (66, 3, 0, '  Cuando entro en Axie Infinity por primera vez, me siento como si hubiera caído en una máquina del tiempo y hubiera viajado a los primeros años de la década de los 2000, una época en la que me sentab', 'Zychsz', '2022-10-29 00:17:34'),
 (67, 3, 0, '  Axie Infinity es un universo digital en el que los jugadores pueden criar, combatir e intercambiar estas coloridas criaturas conocidas como Axies.', 'SS', '2022-10-29 00:18:17'),
-(68, 3, 0, '  Las batallas suelen tener lugar en la arena, una zona en la que dos jugadores se emparejan entre sí, cada uno de los cuales roba cartas por turnos mientras intenta destruir el equipo del otro jugado', '12345', '2022-10-29 00:31:49');
+(68, 3, 0, '  Las batallas suelen tener lugar en la arena, una zona en la que dos jugadores se emparejan entre sí, cada uno de los cuales roba cartas por turnos mientras intenta destruir el equipo del otro jugado', '12345', '2022-10-29 00:31:49'),
+(69, 4, 0, '  ol', 'nico_ave', '2023-07-11 01:31:30'),
+(70, 4, 0, '  ol', 'nico_ave', '2023-07-11 01:31:30'),
+(71, 4, 0, '2', 'nico_ave', '2023-07-11 01:31:38'),
+(72, 4, 0, '2', 'nico_ave', '2023-07-11 01:31:38');
 
 -- --------------------------------------------------------
 
@@ -103,23 +106,25 @@ CREATE TABLE `favoritos` (
 CREATE TABLE `inventarios` (
   `idinventario` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
   `imagen1` varchar(255) DEFAULT NULL,
   `imagen2` varchar(255) DEFAULT NULL,
   `imagen3` varchar(255) DEFAULT NULL,
   `banner1` varchar(255) DEFAULT NULL,
   `banner2` varchar(255) DEFAULT NULL,
   `banner3` varchar(255) DEFAULT NULL,
-  `moneda` int(11) NOT NULL
+  `moneda` int(11) NOT NULL,
+  `ultima_asignacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `inventarios`
 --
 
-INSERT INTO `inventarios` (`idinventario`, `idusuario`, `imagen1`, `imagen2`, `imagen3`, `banner1`, `banner2`, `banner3`, `moneda`) VALUES
-(5, 17, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(6, 18, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(7, 19, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `inventarios` (`idinventario`, `idusuario`, `imagen`, `imagen1`, `imagen2`, `imagen3`, `banner1`, `banner2`, `banner3`, `moneda`, `ultima_asignacion`) VALUES
+(5, 17, '', NULL, NULL, NULL, NULL, NULL, NULL, 600, '2023-07-10'),
+(6, 18, '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(7, 19, '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -141,9 +146,9 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`iditem`, `nombre_item`, `idestado`, `precio`, `imagen_item`, `idtienda`) VALUES
-(1, 'A', 1, 2, '', 1),
-(13, 'C', 1, 4, '955bd8bd-4b0c-4ada-8abd-c2ca166439d0.png', 0),
-(14, 'B', 1, 2, 'asdasd.png', 0);
+(20, 'Banner_1', 0, 500, 'Banner 1.png', 2),
+(21, 'Banner_2', 0, 500, 'Banner 2.png', 2),
+(30, ' un marco de perfil', 0, 60, 'perfil.png', 1);
 
 -- --------------------------------------------------------
 
@@ -228,7 +233,10 @@ INSERT INTO `permisos` (`idpermiso`, `descripcion`) VALUES
 (6, 'baja proyecto'),
 (7, 'alta item'),
 (8, 'baja item'),
-(9, 'modificar item');
+(9, 'modificar item'),
+(10, 'alta tienda'),
+(11, 'baja tienda'),
+(12, 'modificar tienda');
 
 -- --------------------------------------------------------
 
@@ -254,7 +262,10 @@ INSERT INTO `permiso_roles` (`idpermiso`, `idrol`) VALUES
 (2, 1),
 (7, 1),
 (8, 1),
-(9, 1);
+(9, 1),
+(10, 1),
+(11, 1),
+(12, 1);
 
 -- --------------------------------------------------------
 
@@ -454,8 +465,8 @@ CREATE TABLE `tienda` (
 --
 
 INSERT INTO `tienda` (`idtienda`, `nombre_tienda`, `imagen_tienda`, `idestado`, `orden`) VALUES
-(1, 'items', '', 1, 1),
-(2, 'banners', '', 1, 2);
+(1, 'Marco Foto de Perfil', 'marco_perfil.png', 1, 1),
+(2, 'banners', 'banners_tienda.png', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -481,7 +492,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `imagen`, `descripcion`, `twitter`, `instagram`, `facebook`, `idestado`) VALUES
-(17, 'nico9244', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es 9244', 'l', '', '', 1),
+(17, 'nico_ave', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es 9244', 'l', '', '', 1),
 (18, 'Zychsz', 'Zoppinicolas4@gmail.com', 'c60ebb3ba7101473428a20617c6092e144164065', NULL, 'adasdasd', 'https://twitter.com/Zoppi03', 'https://www.instagram.com/zoppi.nicolas/', 'No', 1),
 (19, 'avenazzi', 'avenazzi@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1),
 (23, 'SS', 'SS@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1),
@@ -603,6 +614,12 @@ ALTER TABLE `rol_usuarios`
   ADD KEY `FK_usuario` (`idusuario`);
 
 --
+-- Indices de la tabla `tienda`
+--
+ALTER TABLE `tienda`
+  ADD PRIMARY KEY (`idtienda`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -616,7 +633,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `inventarios`
@@ -628,7 +645,7 @@ ALTER TABLE `inventarios`
 -- AUTO_INCREMENT de la tabla `items`
 --
 ALTER TABLE `items`
-  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `iditem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `megusta_nomegusta`
@@ -646,7 +663,7 @@ ALTER TABLE `noticias`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
