@@ -14,7 +14,7 @@ $SELECT=mysqli_query($conexion, "SELECT * FROM estados");
     
     <meta name="author" content="">
     <link rel="icon" href="../images/ico/favicon.ico">
-    <title>Red</title>
+    <title>Tienda</title>
     <!-- Bootstrap core CSS -->
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -32,7 +32,7 @@ $SELECT=mysqli_query($conexion, "SELECT * FROM estados");
  
 	   <ol class="breadcrumb">
 		  <li><a href="#">Inicio</a></li>
-		  <li><a href="tienda.php">Tienda</a></li>
+		  <li><a href="tiendalist.php">Tienda</a></li>
 		  <li class="active">Agregar</li>
 		</ol>
 		 <div class="col-md-7">

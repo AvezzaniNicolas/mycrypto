@@ -129,7 +129,7 @@ $nombre_red=$_POST['nombre_tienda'];
 $insert=mysqli_query($conexion,"INSERT INTO tienda (nombre_tienda,imagen_tienda, idestado,orden) values ('$nombre_tienda','$imagen','$idestado','$orden')");
 
 
-header("location:tienda.php");
+header("location:tiendalist.php");
 
 }
 
@@ -143,11 +143,11 @@ if(isset($_POST['update']) && !empty ($_POST['update'])){
     if (!is_null($imagen)) {
         $update=mysqli_query($conexion,"UPDATE tienda SET nombre_tienda='$nombre_tienda', imagen_tienda='$imagen', idestado='$idestado', orden='$orden' WHERE idtienda='$idtienda'");
 
-        header("location:tienda.php");
+        header("location:tiendalist.php");
     }else{
         $update=mysqli_query($conexion,"UPDATE tienda SET nombre_tienda='$nombre_tienda',  idestado='$idestado', orden='$orden' WHERE idtienda='$idtienda'");
 
-        header("location:tienda.php");
+        header("location:tiendalist.php");
     }
 }
 

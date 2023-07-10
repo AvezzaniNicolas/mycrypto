@@ -11,7 +11,7 @@ function imagen(){
     require "../conexion.php";
 
     if (isset($_POST['update'])) {
-        $iditem=$_POST['id_item'];
+        $iditem=$_POST['iditem'];
         $consulta= "SELECT imagen_item from items where iditem='$iditem'";
         $query=mysqli_query($conexion,$consulta);
        //     $imgBD=$query->fetch_array(MYSQL_ASSOC);
@@ -127,7 +127,7 @@ $nombre_item=$_POST['nombre_item'];
 $idestado=$_POST['idestado'];
 $precio=$_POST['precio'];
 $imagen_item=$_POST['imagen_item'];
-$idtienda=$_POST['idtienda'];
+$idtienda=$_POST['nombre_tienda'];
 
 $insert=mysqli_query($conexion,"INSERT INTO items (nombre_item, precio, imagen_item, idtienda, idestado) values ('$nombre_item','$precio','$imagen','$idtienda','$idestado')");
 
@@ -139,7 +139,7 @@ if(isset($_POST['update']) && !empty ($_POST['update'])){
 
     $imagen=imagen();
     
-    $id_item=$_POST['iditem'];
+    $iditem=$_POST['iditem'];
     $nombre_item=$_POST['nombre_item'];
     $idestado=$_POST['idestado'];
     $precio=$_POST['precio'];
@@ -148,11 +148,11 @@ if(isset($_POST['update']) && !empty ($_POST['update'])){
    
  
     if (!is_null($imagen)) {
-        $update=mysqli_query($conexion,"UPDATE items SET nombre_item='$nombre_item', idestado='$idestado, precio='$precio', imagen_item='$imagen', idtienda='$idtienda''");
+        $update = mysqli_query($conexion, "UPDATE items SET nombre_item='$nombre_item', idestado='$idestado', precio='$precio', imagen_item='$imagen', idtienda='$idtienda' WHERE iditem='$iditem'");
 
         header("location:itemlist.php");
-    }else{
-        $update=mysqli_query($conexion,"UPDATE items SET nombre_item='$nombre_item', idestado='$idestado, precio='$precio', imagen_item='$imagen', idtienda='$idtienda''");
+    } else {
+        $update = mysqli_query($conexion, "UPDATE items SET nombre_item='$nombre_item', idestado='$idestado', precio='$precio', idtienda='$idtienda' WHERE iditem='$iditem'");
 
         header("location:itemlist.php");
     }

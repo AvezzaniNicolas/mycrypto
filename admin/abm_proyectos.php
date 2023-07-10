@@ -43,7 +43,8 @@ function imagen(){
                 $image->contain(300);
 
                 $image->output("../img/Proyectos");
-                $image2->output("../img/Proyectos2"); // Asegurate que la carpeta donde lo vas a guardar permita lectura y escritura, tambien verifica sus carpetas padres
+                $image2->output("../img/Proyectos2"); 
+                // Asegurate que la carpeta donde lo vas a guardar permita lectura y escritura, tambien verifica sus carpetas padres
 
                 # Renombrar la imagen genereda por el metodo output
 

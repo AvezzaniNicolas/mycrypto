@@ -1,6 +1,6 @@
 <?php
 session_start();
-$title="Editar Red";
+$title="Editar Tienda";
 /* Llamar la Cadena de Conexion*/ 
 include ("../conexion.php");
 $SELECT=mysqli_query($conexion, "SELECT * FROM estados");

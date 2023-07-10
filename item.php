@@ -62,7 +62,7 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="../mycrypto/admin/redeslist.php">Redes</a></li>
                         <li class="nav-item"><a class="nav-link" href="admin/proyectoslist.php">Juegos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="tienda.php">Tienda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="tiendalist.php">Tienda</a></li>
                         <li class="nav-item"><a class="nav-link" href="https://es.cointelegraph.com/tags/games">Noticias</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
                         <li class="nav-item"><a class="nav-link" href="perfil.php" ><?php echo $nick; ?></a></li>
@@ -553,7 +553,7 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="../mycrypto/admin/redeslist.php">Redes</a></li>
                         <li class="nav-item"><a class="nav-link" href="admin/proyectoslist.php">Juegos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="tienda.php">Tienda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="tiendalist.php">Tienda</a></li>
                         <li class="nav-item"><a class="nav-link" href="https://es.cointelegraph.com/tags/games">Noticias</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
                         <li class="nav-item"><a class="nav-link" href="perfil.php" ><?php echo $nick; ?></a></li>

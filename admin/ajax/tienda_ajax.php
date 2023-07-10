@@ -36,7 +36,7 @@ if($action == 'ajax'){
 	}
 	else {echo mysqli_error($conexion);}
 	$total_pages = ceil($numrows/$per_page);
-	$reload = './productslist.php';
+	$reload = './itemlist.php';
 	//main query to fetch the data
 	$query = mysqli_query($conexion,"SELECT * FROM  $tables  $sWhere LIMIT $offset,$per_page");
 	

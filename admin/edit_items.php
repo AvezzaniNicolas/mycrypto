@@ -1,10 +1,9 @@
 <?php
 session_start();
-$title="Editar items";
+$title="Editar Item";
 /* Llamar la Cadena de Conexion*/ 
 include ("../conexion.php");
 $SELECT=mysqli_query($conexion, "SELECT * FROM estados");
-$SELECT_red=mysqli_query($conexion, "SELECT * FROM tienda");
 
 
 $iditem=$_GET['id'];
@@ -15,11 +14,11 @@ if ($count==0){
 }
 while($rw=mysqli_fetch_array($sql)){
 
-$idred=$rw['idred'];
+
 $nombre_item=$rw['nombre_item'];
 $imagen_item=$rw['imagen_item'];
-$precio=$rw['precio'];
 $idestado=$rw['idestado'];
+$precio=$rw['precio'];
 }
 $active_config="active";
 $active_banner="active";
@@ -34,7 +33,7 @@ $active_banner="active";
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../images/ico/favicon.ico">
-    <title>Editar item</title>
+    <title>Editar Item</title>
     <!-- Bootstrap core CSS -->
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -52,11 +51,11 @@ $active_banner="active";
 	  
 	   <ol class="breadcrumb">
 		  <li><a href="../inicio.php">Inicio</a></li>
-		  <li><a href="itemlist.php">items</a></li>
+		  <li><a href="itemlist.php">Item</a></li>
 		  <li class="active">Editar</li>
 		</ol>
 		 <div class="col-md-7">
-		 <h3 ><span class="glyphicon glyphicon-edit"></span> Editar item</h3>
+		 <h3 ><span class="glyphicon glyphicon-edit"></span> Editar Item</h3>
 
 		 	
 		 <form action="abm_items.php" class="form-horizontal"  method="POST" enctype="multipart/form-data">
@@ -64,24 +63,14 @@ $active_banner="active";
 			 
 			  
 			  <div class="form-group">
-				<label for="nombre_item" class="col-sm-3 control-label">Nombre item</label>
+				<label for="nombre_item" class="col-sm-3 control-label">Nombre Item</label>
 				<div class="col-sm-9">
 				  <input type="text" class="form-control" id="nombre_item" value="<?php echo $nombre_item;?>" required name="nombre_item">
+				  
 				</div>
 			  </div>
-
-             
-              <div class="form-group">
-				<label for="precio" class="col-sm-3 control-label">Precio</label>
-				<div class="col-sm-9">
-				  <input type="number" class="form-control" id="precio"  value="<?php echo $precio;?>" required name="precio" >
-				</div>
-			  </div>
-
-             
-				 </select>
-				</div>
-			  </div>
+			  					  
+			  
 			  
 			  
 			  <div class="form-group">
@@ -99,7 +88,17 @@ $active_banner="active";
 				 </select>
 				</div>
 			  </div>
-
+			  
+			  <div class="form-group">
+				<label for="precio" class="col-sm-3 control-label">Precio Item</label>
+				<div class="col-sm-9">
+				  <input type="text" class="form-control" id="precio" value="<?php echo $precio;?>" required name="precio">
+				  
+				</div>
+			  </div>
+			 
+			  
+			  
 			  <div class="form-group">
 			  <div id='loader'></div>
 			  <div class='outer_div'></div>
@@ -125,7 +124,7 @@ $active_banner="active";
 				 
 				 <div class="fileinput fileinput-new" data-provides="fileinput">
 								  <div class="fileinput-new thumbnail" style="max-width: 100%;" >
-									  <img class="img-rounded" src="../img/items/<?php echo $imagen_item;?>" />
+									  <img class="img-rounded" src="../img/item/<?php echo $imagen_item;?>" />
 								  </div>
 								  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 250px; max-height: 250px;"></div>
 								  <div>
@@ -235,3 +234,5 @@ $active_banner="active";
 			 e.preventDefault();
 		});
 	</script>
+
+	

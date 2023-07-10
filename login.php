@@ -3,7 +3,7 @@
 require ("conexion.php");
 
 session_start();
-
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 
 if (isset($_POST['ingresar']) && !empty ($_POST['ingresar']) ){
@@ -20,33 +20,42 @@ if (isset($_POST['ingresar']) && !empty ($_POST['ingresar']) ){
                    $idrol=$r['idrol'];              
 
                 }
-                // Asignar monedas al usuario que inició sesión
-            $idusuario = $respuesta['idusuario'];
+            // Asignar monedas al usuario que inició sesión
+            $usuarioID = $respuesta['idusuario'];
 
-            // Obtener la cantidad de monedas actual del usuario desde la base de datos
-            $sql = "SELECT moneda FROM inventarios WHERE idusuario = '$idusuario'";
+            // Obtener la cantidad de monedas actual del usuario y la última fecha de asignación desde la base de datos
+            $sql = "SELECT moneda, ultima_asignacion FROM inventarios WHERE idusuario = '$usuarioID'";
             $result = mysqli_query($conexion, $sql);
 
             if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_assoc($result);
                 $cantidadMonedas = $row['moneda'];
+                $ultimaAsignacion = $row['ultima_asignacion'];
             } else {
                 // Si el usuario no tiene un registro en la tabla de inventarios, asignar un valor predeterminado
                 $cantidadMonedas = 0;
+                $ultimaAsignacion = null;
             }
 
-            // Verificar si la cantidad de monedas es 0 y agregar 100 monedas al usuario
-            if ($cantidadMonedas == 0) {
+            // Obtener la fecha actual
+            $fechaActual = date('Y-m-d');
+
+            // Verificar si la última asignación es distinta a la fecha actual
+            if ($ultimaAsignacion != $fechaActual) {
                 $cantidadMonedas += 100;
 
-                // Actualizar la cantidad de monedas en la base de datos
-                $updateSQL = "UPDATE inventarios SET moneda = '$cantidadMonedas' WHERE idusuario = '$idusuario'";
+                // Actualizar la cantidad de monedas y la última fecha de asignación en la base de datos
+                $updateSQL = "UPDATE inventarios SET moneda = '$cantidadMonedas', ultima_asignacion = '$fechaActual' WHERE idusuario = '$usuarioID'";
                 if (mysqli_query($conexion, $updateSQL)) {
-                    echo "Se agregaron $cantidadMonedas monedas al usuario con ID $idusuario<br>";
+                    echo "Se agregaron 100 monedas al usuario con ID $usuarioID<br>";
                 } else {
-                    echo "Error al actualizar las monedas del usuario con ID $idusuario: " . mysqli_error($conexion);
+                    echo "Error al actualizar las monedas del usuario con ID $usuarioID: " . mysqli_error($conexion);
                 }
+            } else {
+                echo "Ya se han asignado monedas hoy<br>";
             }
+
+
             $_SESSION['rol'] = $idrol;
             $_SESSION['logueado'] = $respuesta['idusuario'];       
             header ("location: inicio.php");

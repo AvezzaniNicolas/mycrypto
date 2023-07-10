@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST["nombre_red"])){
 	if ($query) {
 		$messages[] = "Datos  han sido actualizados satisfactoriamente.";
 	} else {
-		$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($con);
+		$errors []= "Lo siento algo ha salido mal intenta nuevamente.".mysqli_error($conexion);
 	}
 	
 	if (isset($errors)){

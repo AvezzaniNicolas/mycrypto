@@ -18,6 +18,20 @@
       
     }
 
+    // Consulta para obtener la cantidad de monedas del usuario actual
+    $sql = "SELECT moneda FROM inventarios WHERE idusuario = '$idusuario'";
+    $resultado = mysqli_query($conexion, $sql);
+    
+    $cantidadMonedas = 0; // Valor predeterminado en caso de que no se encuentre un registro
+    
+    // Verificar si se encontró un registro
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        // Obtener el valor de las monedas
+        $fila = mysqli_fetch_assoc($resultado);
+        $cantidadMonedas = $fila['moneda'];
+    }
+
+    
     ?>
 
 <!DOCTYPE html>
@@ -35,7 +49,16 @@
     
     
 </head>
-<body>
+<body>  
+  <div class="banner-container">
+        <?php
+        $bannerURL = 'ruta/a/tu/imagen/banner.jpg'; // Ruta de la imagen del banner, puedes cambiarla según tus necesidades
+
+        if (file_exists($bannerURL)) {
+            echo '<img src="' . $bannerURL . '" class="banner-image" alt="Banner">';
+        }
+        ?>
+  </div>
 <div class="container">
 
     <div class="main-body">
@@ -48,8 +71,9 @@
               
             </ol>
           </nav>
+  
           <!-- /Breadcrumb -->
-    
+          
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card">
@@ -114,6 +138,15 @@
                     </div>
                     <div class="col-sm-9 text-secondary">
                       <?php echo $email;?>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Monedas</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <?php echo $cantidadMonedas;?>
                     </div>
                   </div>
                   <hr>
@@ -225,6 +258,27 @@
 
 <script type="text/javascript">
 
+</script>
+<script>
+    $(document).ready(function() {
+        // Evento de clic del botón "Agregar al inventario"
+        $("#agregarBtn").click(function() {
+            // Realizar una solicitud AJAX al servidor para agregar la imagen al inventario
+            $.ajax({
+                url: "agregar_al_inventario.php",
+                type: "POST",
+                data: { imagen: "ruta_de_la_imagen.jpg" }, // Puedes enviar la ruta de la imagen como parámetro
+                success: function(response) {
+                    // Mostrar un mensaje de éxito o realizar cualquier otra acción necesaria
+                    alert("Imagen agregada al inventario correctamente");
+                },
+                error: function(xhr, status, error) {
+                    // Manejar los errores de la solicitud AJAX
+                    alert("Error al agregar la imagen al inventario: " + error);
+                }
+            });
+        });
+    });
 </script>
 </body>
 </html>

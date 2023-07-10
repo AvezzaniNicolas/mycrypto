@@ -1,5 +1,6 @@
 <?php
 $title="Galería de imágenes";
+/* Llamar la Cadena de Conexion*/ 
 include ("../conexion.php");
 $active_config="active";
 $active_banner="active";
@@ -12,19 +13,17 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../images/ico/favicon.ico">
-	
-    <title><?php echo $title;?></title>
+    <title><?php echo $title; ?></title>
     <!-- Bootstrap core CSS -->
     <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Custom styles for this template -->
     <link href="css/navbar-fixed-top.css" rel="stylesheet">
-  </head>
-  <body style="background: #212529;" >
+    </head>
+    <body style="background: #212529;" >
 	
 	<?php include("top_menu.php");?>
 	
@@ -54,9 +53,10 @@ session_start();
 				case 'alta tienda' : ?> 
 					<div class="row">
 			  		<div class="col-xs-12 text-right">
-						<a href='add_tienda.php' class="btn btn-success" ><span class="glyphicon glyphicon-plus"></span> Agregar Tienda</a>
+						<a href='add_tienda.php' class="btn btn-default" ><span class="glyphicon glyphicon-plus"></span> Agregar Tienda</a>
 					</div>
 			  		</div>		
+                    
 					<?php break; 
 				}
 				}
@@ -83,38 +83,51 @@ session_start();
   </body>
 </html>
 <script>
-	$(document).ready(function(){
-		load(1);
-	});
-	function load(page){
-		var parametros = {"action":"ajax","page":page};
-		$.ajax({
-			url:'./ajax/tienda_ajax.php',
-			data: parametros,
-			 beforeSend: function(objeto){
-			$("#loader").html("<img src='../img/ajax-loader.gif'>");
-		  },
-			success:function(data){
-				$(".outer_div").html(data).fadeIn('slow');
-				$("#loader").html("");
-			}
-		})
-	}
-	function eliminar_slide(idtienda){
-		page=1;
-		var parametros = {"action":"ajax","page":page,"idtienda":idtienda};
-		if(confirm('Esta acción  eliminará de forma permanente el elemento \n\n Desea continuar?')){
-		$.ajax({
-			url:'./ajax/tienda_ajax.php',
-			data: parametros,
-			 beforeSend: function(objeto){
-			$("#loader").html("<img src='../images/ajax-loader.gif'>");
-		  },
-			success:function(data){
-				$(".outer_div").html(data).fadeIn('slow');
-				$("#loader").html("");
-			}
-		})
-	}
-	}
+	$(document).ready(function () {
+        load(1);
+    });
+
+    function load(page) {
+        var parametros = {"action": "ajax", "page": page};
+        $.ajax({
+            <?php
+            if (isset($_GET['id']) && !empty($_GET['id'])) {
+                $idtienda = $_GET['id'];
+                ?>
+                url: './ajax/tienda_ajax.php?id=<?php echo $idtienda;?>',
+                <?php
+            } else {
+                ?>
+                url: './ajax/tienda_ajax.php',
+                <?php
+            }
+            ?>
+            data: parametros,
+            beforeSend: function (objeto) {
+                $("#loader").html("<img src='../img/ajax-loader.gif'>");
+            },
+            success: function (data) {
+                $(".outer_div").html(data).fadeIn('slow');
+                $("#loader").html("");
+            }
+        })
+    }
+    
+    function eliminar_slide(idtienda) {
+        page = 1;
+        var parametros = {"action": "ajax", "page": page, "idtienda": idtienda};
+        if (confirm('Esta acción eliminará de forma permanente el banner \n\n Desea continuar?')) {
+            $.ajax({
+                url: './ajax/tienda_ajax.php',
+                data: parametros,
+                beforeSend: function (objeto) {
+                    $("#loader").html("<img src='../images/ajax-loader.gif'>");
+                },
+                success: function (data) {
+                    $(".outer_div").html(data).fadeIn('slow');
+                    $("#loader").html("");
+                }
+            })
+        }
+    }
 </script>
