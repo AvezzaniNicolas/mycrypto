@@ -18,29 +18,16 @@
       
     }
 
-    // Consulta para obtener la cantidad de monedas del usuario actual
-    $sql = "SELECT moneda FROM inventarios WHERE idusuario = '$idusuario'";
-    $resultado = mysqli_query($conexion, $sql);
-    
-    $cantidadMonedas = 0; // Valor predeterminado en caso de que no se encuentre un registro
-    
-    // Verificar si se encontró un registro
-    if ($resultado && mysqli_num_rows($resultado) > 0) {
-        // Obtener el valor de las monedas
-        $fila = mysqli_fetch_assoc($resultado);
-        $cantidadMonedas = $fila['moneda'];
-    }
+    $sql = "SELECT * FROM inventarios WHERE idusuario = ".$idusuario;
+    $result = mysqli_query($conexion, $sql);
+    $inventario = mysqli_fetch_assoc($result);
 
-    
     ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!--  This file has been downloaded from bootdey.com @bootdey on twitter -->
-    <!--  All snippets are MIT license http://bootdey.com/license -->
-    
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -49,16 +36,7 @@
     
     
 </head>
-<body>  
-  <div class="banner-container">
-        <?php
-        $bannerURL = 'ruta/a/tu/imagen/banner.jpg'; // Ruta de la imagen del banner, puedes cambiarla según tus necesidades
-
-        if (file_exists($bannerURL)) {
-            echo '<img src="' . $bannerURL . '" class="banner-image" alt="Banner">';
-        }
-        ?>
-  </div>
+<body>
 <div class="container">
 
     <div class="main-body">
@@ -71,15 +49,29 @@
               
             </ol>
           </nav>
-  
           <!-- /Breadcrumb -->
-          
+    
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                  <img src="<?php 
+                  if(isset($inventario['imagen3'])){
+                      echo "img/".$inventario['imagen3'];
+                  }else if(isset($inventario['imagen2'])){
+                      echo "img/".$inventario['imagen2'];
+                  }else if(isset($inventario['imagen1'])){
+                      echo "img/".$inventario['imagen1'];
+                  }else{
+                      echo "https://bootdey.com/img/Content/avatar/avatar6.png";
+                  }
+                      
+                    ?>" alt="Admin" class="rounded-circle" width="150">
+
+
+                    
+                    
                     
                     <div class="mt-3">
                       <div class="mt-3">
@@ -138,15 +130,6 @@
                     </div>
                     <div class="col-sm-9 text-secondary">
                       <?php echo $email;?>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <h6 class="mb-0">Monedas</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                      <?php echo $cantidadMonedas;?>
                     </div>
                   </div>
                   <hr>
@@ -258,27 +241,6 @@
 
 <script type="text/javascript">
 
-</script>
-<script>
-    $(document).ready(function() {
-        // Evento de clic del botón "Agregar al inventario"
-        $("#agregarBtn").click(function() {
-            // Realizar una solicitud AJAX al servidor para agregar la imagen al inventario
-            $.ajax({
-                url: "agregar_al_inventario.php",
-                type: "POST",
-                data: { imagen: "ruta_de_la_imagen.jpg" }, // Puedes enviar la ruta de la imagen como parámetro
-                success: function(response) {
-                    // Mostrar un mensaje de éxito o realizar cualquier otra acción necesaria
-                    alert("Imagen agregada al inventario correctamente");
-                },
-                error: function(xhr, status, error) {
-                    // Manejar los errores de la solicitud AJAX
-                    alert("Error al agregar la imagen al inventario: " + error);
-                }
-            });
-        });
-    });
 </script>
 </body>
 </html>

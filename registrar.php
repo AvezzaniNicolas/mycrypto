@@ -24,7 +24,7 @@ if (isset($_POST['registrar']) && !empty ($_POST['registrar']) ){
     $idusuario = mysqli_insert_id($conexion);
 
     $insert_rol_usuarios = mysqli_query ($conexion, "INSERT INTO rol_usuarios (idrol, idusuario) VALUES (2, $idusuario)");
-    //$insert_inventario =mysqli_query ($conexion, "INSERT INTO inventarios (idinventario, idusuario, moneda) VALUES (00, $idusuario, 0)");
+    $insert_inventario =mysqli_query ($conexion, "INSERT INTO inventarios (idinventario, idusuario, moneda) VALUES (00, $idusuario, 0)");
 
         header ("location: index.php");
         
