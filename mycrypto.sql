@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-07-2023 a las 23:52:59
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.9
+-- Tiempo de generación: 15-03-2025 a las 02:50:53
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,10 +31,10 @@ CREATE TABLE `comentario` (
   `comentario_id` int(11) NOT NULL,
   `idproyecto` int(11) NOT NULL,
   `parent_comentario_id` int(11) DEFAULT NULL,
-  `comment` varchar(200) CHARACTER SET latin1 NOT NULL,
-  `comment_sender_name` varchar(40) CHARACTER SET latin1 NOT NULL,
+  `comment` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `comment_sender_name` varchar(40) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Tabla Comentarios';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='Tabla Comentarios';
 
 --
 -- Volcado de datos para la tabla `comentario`
@@ -65,7 +65,7 @@ CREATE TABLE `elementos` (
   `idestado` int(11) NOT NULL,
   `tier` varchar(255) NOT NULL,
   `estado_elemento` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE `elementos` (
 CREATE TABLE `estados` (
   `idestado` int(11) NOT NULL,
   `descripcion` varchar(99) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `estados`
@@ -95,7 +95,7 @@ INSERT INTO `estados` (`idestado`, `descripcion`) VALUES
 CREATE TABLE `favoritos` (
   `idusuario` int(11) NOT NULL,
   `idred` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -106,25 +106,31 @@ CREATE TABLE `favoritos` (
 CREATE TABLE `inventarios` (
   `idinventario` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
-  `imagen` varchar(255) DEFAULT NULL,
   `imagen1` varchar(255) DEFAULT NULL,
   `imagen2` varchar(255) DEFAULT NULL,
   `imagen3` varchar(255) DEFAULT NULL,
   `banner1` varchar(255) DEFAULT NULL,
   `banner2` varchar(255) DEFAULT NULL,
   `banner3` varchar(255) DEFAULT NULL,
-  `moneda` int(11) NOT NULL,
-  `ultima_asignacion` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `moneda` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `inventarios`
 --
 
-INSERT INTO `inventarios` (`idinventario`, `idusuario`, `imagen`, `imagen1`, `imagen2`, `imagen3`, `banner1`, `banner2`, `banner3`, `moneda`, `ultima_asignacion`) VALUES
-(5, 17, '', NULL, NULL, NULL, NULL, NULL, NULL, 600, '2023-07-10'),
-(6, 18, '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
-(7, 19, '', NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL);
+INSERT INTO `inventarios` (`idinventario`, `idusuario`, `imagen1`, `imagen2`, `imagen3`, `banner1`, `banner2`, `banner3`, `moneda`) VALUES
+(1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(2, 3, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(3, 4, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(4, 16, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(5, 17, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(6, 18, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(7, 19, NULL, NULL, NULL, NULL, NULL, NULL, 20),
+(8, 20, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(9, 21, 'logos/1.png', 'logos/2.png', NULL, NULL, NULL, NULL, 153),
+(10, 22, 'logos/1.png', NULL, NULL, NULL, NULL, NULL, 178),
+(0, 27, NULL, NULL, NULL, NULL, NULL, NULL, 188);
 
 -- --------------------------------------------------------
 
@@ -139,7 +145,7 @@ CREATE TABLE `items` (
   `precio` int(11) NOT NULL,
   `imagen_item` varchar(255) NOT NULL,
   `idtienda` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `items`
@@ -162,7 +168,7 @@ CREATE TABLE `megusta_nomegusta` (
   `comentario_id` int(11) NOT NULL,
   `like_unlike` int(2) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `megusta_nomegusta`
@@ -207,7 +213,7 @@ CREATE TABLE `noticias` (
   `descripcion` varchar(255) DEFAULT NULL,
   `idproyecto` int(11) NOT NULL,
   `idestado` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -218,7 +224,7 @@ CREATE TABLE `noticias` (
 CREATE TABLE `permisos` (
   `idpermiso` int(11) NOT NULL,
   `descripcion` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `permisos`
@@ -247,7 +253,7 @@ INSERT INTO `permisos` (`idpermiso`, `descripcion`) VALUES
 CREATE TABLE `permiso_roles` (
   `idpermiso` int(11) NOT NULL,
   `idrol` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `permiso_roles`
@@ -278,8 +284,46 @@ CREATE TABLE `productos` (
   `nombre_producto` varchar(255) NOT NULL,
   `imagen` varchar(255) NOT NULL,
   `precio` int(11) NOT NULL,
-  `idestado` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `idestado` int(11) NOT NULL,
+  `idcategoria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`idproducto`, `nombre_producto`, `imagen`, `precio`, `idestado`, `idcategoria`) VALUES
+(1, 'Logo 1', 'logos/1.png', 10, 1, 1),
+(2, 'Logo 2', 'logos/2.png', 25, 1, 1),
+(3, 'Logo 3', 'logos/3.png', 30, 1, 1),
+(4, 'Marco 1', 'marcos/1.jpg', 12, 1, 2),
+(5, 'Marco 2', 'marcos/2.png', 22, 1, 2),
+(6, 'Banner 1', 'banners/1.jpg', 23, 1, 3),
+(7, 'Banner 2', 'banners/2.jpg', 17, 1, 3),
+(8, 'Marco 3', 'marcos/3.png', 20, 1, 3),
+(9, 'Logo 4', 'logos/4.png', 32, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productos_categoria`
+--
+
+CREATE TABLE `productos_categoria` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `url` varchar(100) NOT NULL,
+  `activo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos_categoria`
+--
+
+INSERT INTO `productos_categoria` (`id`, `nombre`, `url`, `activo`) VALUES
+(1, 'Logos', './tienda/img/category_img_01.jpg', 1),
+(2, 'Marcos', './tienda/img/category_img_02.jpg', 1),
+(3, 'Banners', './tienda/img/category_img_03.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -301,7 +345,7 @@ CREATE TABLE `proyectos` (
   `pagina_proyecto` varchar(255) NOT NULL,
   `whitepaper_proyecto` varchar(255) NOT NULL,
   `descripcion2_proyecto` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `proyectos`
@@ -349,7 +393,7 @@ INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `pr
 CREATE TABLE `rarezaitem` (
   `rareza_item` int(11) NOT NULL,
   `nombre_rareza` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Volcado de datos para la tabla `rarezaitem`
@@ -373,7 +417,7 @@ CREATE TABLE `redes` (
   `imagen_red` varchar(255) NOT NULL,
   `idestado` int(99) NOT NULL,
   `orden` int(99) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `redes`
@@ -403,7 +447,7 @@ CREATE TABLE `reporte_comentarios` (
   `idusuario` int(11) NOT NULL,
   `motivo` varchar(255) NOT NULL,
   `idestado` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -414,7 +458,7 @@ CREATE TABLE `reporte_comentarios` (
 CREATE TABLE `roles` (
   `idrol` int(11) NOT NULL,
   `descripcion` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `roles`
@@ -433,7 +477,7 @@ INSERT INTO `roles` (`idrol`, `descripcion`) VALUES
 CREATE TABLE `rol_usuarios` (
   `idrol` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `rol_usuarios`
@@ -444,7 +488,10 @@ INSERT INTO `rol_usuarios` (`idrol`, `idusuario`) VALUES
 (2, 18),
 (2, 19),
 (2, 23),
-(2, 24);
+(2, 24),
+(2, 25),
+(2, 26),
+(2, 27);
 
 -- --------------------------------------------------------
 
@@ -458,7 +505,7 @@ CREATE TABLE `tienda` (
   `imagen_tienda` varchar(255) NOT NULL,
   `idestado` int(99) NOT NULL,
   `orden` int(99) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tienda`
@@ -485,7 +532,7 @@ CREATE TABLE `usuarios` (
   `instagram` varchar(255) DEFAULT NULL,
   `facebook` varchar(255) DEFAULT NULL,
   `idestado` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -496,7 +543,10 @@ INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `imagen
 (18, 'Zychsz', 'Zoppinicolas4@gmail.com', 'c60ebb3ba7101473428a20617c6092e144164065', NULL, 'adasdasd', 'https://twitter.com/Zoppi03', 'https://www.instagram.com/zoppi.nicolas/', 'No', 1),
 (19, 'avenazzi', 'avenazzi@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1),
 (23, 'SS', 'SS@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1),
-(24, '12345', '123456@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1);
+(24, '12345', '123456@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, NULL, NULL, NULL, 1),
+(25, 'Zoppi', 'zoppi@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, NULL, NULL, NULL, NULL, 1),
+(26, 'Nico', 'Nico@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, NULL, NULL, NULL, NULL, 1),
+(27, 'ASDZZZZZ', 'asd@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, NULL, NULL, NULL, NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -520,13 +570,6 @@ ALTER TABLE `estados`
 ALTER TABLE `favoritos`
   ADD PRIMARY KEY (`idusuario`,`idred`),
   ADD KEY `idred` (`idred`);
-
---
--- Indices de la tabla `inventarios`
---
-ALTER TABLE `inventarios`
-  ADD PRIMARY KEY (`idinventario`),
-  ADD KEY `idusuario` (`idusuario`);
 
 --
 -- Indices de la tabla `items`
@@ -562,13 +605,6 @@ ALTER TABLE `permisos`
 ALTER TABLE `permiso_roles`
   ADD KEY `idpermiso` (`idpermiso`),
   ADD KEY `idrol` (`idrol`);
-
---
--- Indices de la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD PRIMARY KEY (`idproducto`),
-  ADD KEY `idestado` (`idestado`);
 
 --
 -- Indices de la tabla `proyectos`
@@ -636,12 +672,6 @@ ALTER TABLE `comentario`
   MODIFY `comentario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
--- AUTO_INCREMENT de la tabla `inventarios`
---
-ALTER TABLE `inventarios`
-  MODIFY `idinventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
 -- AUTO_INCREMENT de la tabla `items`
 --
 ALTER TABLE `items`
@@ -664,12 +694,6 @@ ALTER TABLE `noticias`
 --
 ALTER TABLE `permisos`
   MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT de la tabla `productos`
---
-ALTER TABLE `productos`
-  MODIFY `idproducto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `proyectos`
@@ -705,7 +729,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Restricciones para tablas volcadas
@@ -720,12 +744,6 @@ ALTER TABLE `favoritos`
   ADD CONSTRAINT `favoritos_ibfk_2` FOREIGN KEY (`idred`) REFERENCES `redes` (`idred`);
 
 --
--- Filtros para la tabla `inventarios`
---
-ALTER TABLE `inventarios`
-  ADD CONSTRAINT `inventarios_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`);
-
---
 -- Filtros para la tabla `noticias`
 --
 ALTER TABLE `noticias`
@@ -737,12 +755,6 @@ ALTER TABLE `noticias`
 ALTER TABLE `permiso_roles`
   ADD CONSTRAINT `permiso_roles_ibfk_1` FOREIGN KEY (`idpermiso`) REFERENCES `permisos` (`idpermiso`),
   ADD CONSTRAINT `permiso_roles_ibfk_2` FOREIGN KEY (`idrol`) REFERENCES `roles` (`idrol`);
-
---
--- Filtros para la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`idestado`) REFERENCES `estados` (`idestado`);
 
 --
 -- Filtros para la tabla `proyectos`
