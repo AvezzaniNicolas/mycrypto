@@ -16,8 +16,20 @@
     <link rel="stylesheet" href="css/nicepage.css" media="screen">
     <link rel="stylesheet" href="css/Proyectos.css" media="screen">
     <link href="css/styles.css" rel="stylesheet" />
-    
 
+    <!-- Facebook SDK -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : 'YOUR_APP_ID', // Reemplaza 'YOUR_APP_ID' con tu App ID de Facebook
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v12.0'
+        });
+        FB.AppEvents.logPageView();   
+      };
+    </script>
 </head>
   <body style='background: #090909'data-home-page="proyecto.php" data-home-page-title="Proyectos" class="u-body u-overlap u-white u-xl-mode" data-lang="es">
   <?php 
