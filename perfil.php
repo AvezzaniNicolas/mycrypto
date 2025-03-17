@@ -45,7 +45,7 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="inicio.php">Home</a></li>
+              <li class="breadcrumb-item"><a href="inicio.php">Inicio</a></li>
               
             </ol>
           </nav>
@@ -78,12 +78,16 @@
                         <h4><?php echo $nick;?></h4>
                         
                         <p class="text-muted font-size-sm"><?php echo $descripcion;?></p>
-                        <button class="btn btn-primary">Proyectos Favoritos</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#proyectosFavoritosModal">
+                          Proyectos Favoritos
+                        </button>
                         <button  onclick="location.href='logout.php'" class="btn btn-primary">Cerrar Sesion</button>
                         <br>
                         <br>
                         <a href="#addEmployeeModal" class="btn btn-primary" data-toggle="modal"><span>Editar Perfil</span></a>
-                        <button class="btn btn-primary">Inventario</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inventarioModal">
+                          Inventario
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -237,7 +241,46 @@
         </div>
     </div>
 
+<!-- Modal -->
+<div class="modal fade" id="proyectosFavoritosModal" tabindex="-1" role="dialog" aria-labelledby="proyectosFavoritosModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="proyectosFavoritosModalLabel">Proyectos Favoritos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Aquí puedes añadir el contenido de la ventana modal -->
+        <p>Contenido de los proyectos favoritos...</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="inventarioModal" tabindex="-1" role="dialog" aria-labelledby="inventarioModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="inventarioModalLabel">Inventario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Aquí puedes añadir el contenido de la ventana modal -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
 
