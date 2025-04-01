@@ -14,14 +14,33 @@
       $twitter = $respuesta['twitter'];
       $instagram = $respuesta['instagram'];
       $facebook = $respuesta['facebook'];
-      
+      $imagen = $respuesta['imagen'];
       
     }
 
     $sql = "SELECT * FROM inventarios WHERE idusuario = ".$idusuario;
     $result = mysqli_query($conexion, $sql);
     $inventario = mysqli_fetch_assoc($result);
-
+    $banner = '';
+    if (!empty($inventario['banner3'])) {
+        $banner = $inventario['banner3'];
+    } elseif (!empty($inventario['banner2'])) {
+        $banner = $inventario['banner2'];
+    } elseif (!empty($inventario['banner1'])) {
+        $banner = $inventario['banner1'];
+    }
+    $estiloFondo = "margin-top: 120px;";
+    if (!empty($banner)) {
+        $estiloFondo .= " background-image: url('img/$banner'); background-size: cover; background-position: center;";
+    }
+    $marco = '';
+    if (!empty($inventario['imagen3'])) {
+        $marco = $inventario['imagen3'];
+    } elseif (!empty($inventario['imagen2'])) {
+        $marco = $inventario['imagen2'];
+    } elseif (!empty($inventario['imagen1'])) {
+        $marco = $inventario['imagen1'];
+    }
     ?>
 
 <!DOCTYPE html>
@@ -33,46 +52,33 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
     <link href="css/perfil.css" rel="stylesheet">
-    
+    <link href="css/styles.css" rel="stylesheet" />
     
 </head>
 <body>
-<div class="container" style="margin-top: 20px;">
-
-    <div class="main-body">
-    
-    
-          <!-- Breadcrumb -->
-          <nav aria-label="breadcrumb" class="main-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="inicio.php">Inicio</a></li>
-              
-            </ol>
-          </nav>
-          <!-- /Breadcrumb -->
-    
+<?php include 'header.php' ?>
+<div class="container" style="<?php echo $estiloFondo; ?>">
+    <div class="main-body">    
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
+                  <div style="width: 160px; height: 160px; 
+                  <?php if (!empty($marco)): ?>
+                      background-image: url('img/<?php echo $marco; ?>');
+                  <?php endif; ?>
+                  background-size: cover; background-position: center; 
+                  display: flex; align-items: center; justify-content: center;">
+                    
                   <img src="<?php 
-                  if(isset($inventario['imagen3'])){
-                      echo "img/".$inventario['imagen3'];
-                  }else if(isset($inventario['imagen2'])){
-                      echo "img/".$inventario['imagen2'];
-                  }else if(isset($inventario['imagen1'])){
-                      echo "img/".$inventario['imagen1'];
-                  }else{
-                      echo "https://bootdey.com/img/Content/avatar/avatar6.png";
-                  }
-                      
-                    ?>" alt="Admin" class="rounded-circle" width="150">
-
-
-                    
-                    
-                    
+                    if (isset($imagen) && $imagen != '') {
+                        echo 'img/logos/' . $imagen;
+                    } else {
+                        echo 'https://bootdey.com/img/Content/avatar/avatar6.png';
+                    }
+                  ?>" alt="Admin" class="rounded-circle" width="100">
+                </div>
                     <div class="mt-3">
                       <div class="mt-3">
                         <h4><?php echo $nick;?></h4>
@@ -87,6 +93,10 @@
                         <a href="#addEmployeeModal" class="btn btn-primary" data-toggle="modal"><span>Editar Perfil</span></a>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inventarioModal">
                           Inventario
+                        </button><br>
+                        <br>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadImageModal">
+                          Subir Imagen de Perfil
                         </button>
                       </div>
                     </div>
@@ -279,6 +289,27 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
+  </div>
+</div>
+<div class="modal fade" id="uploadImageModal" tabindex="-1" role="dialog" aria-labelledby="uploadImageModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form action="subir_imagen.php" method="POST" enctype="multipart/form-data">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="uploadImageModalLabel">Subir Imagen de Perfil</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="file" name="imagen_perfil" accept="image/*" required class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Subir</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 
