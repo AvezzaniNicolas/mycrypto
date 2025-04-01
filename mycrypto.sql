@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-03-2025 a las 06:43:01
+-- Tiempo de generación: 02-04-2025 a las 01:42:46
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -101,8 +101,9 @@ INSERT INTO `inventarios` (`idinventario`, `idusuario`, `imagen1`, `imagen2`, `i
 (8, 20, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (9, 21, 'logos/1.png', 'logos/2.png', NULL, NULL, NULL, NULL, 153),
 (10, 22, 'logos/1.png', NULL, NULL, NULL, NULL, NULL, 178),
-(0, 27, NULL, NULL, NULL, NULL, NULL, NULL, 188),
-(0, 28, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+(11, 29, 'logos/1.png', NULL, NULL, NULL, NULL, NULL, 190),
+(12, 30, NULL, NULL, NULL, NULL, NULL, NULL, 1500),
+(13, 31, 'marcos/1.jpg', 'marcos/2.png', NULL, NULL, NULL, NULL, 1466);
 
 -- --------------------------------------------------------
 
@@ -227,7 +228,6 @@ INSERT INTO `productos` (`idproducto`, `nombre_producto`, `imagen`, `precio`, `i
 (5, 'Marco 2', 'marcos/2.png', 22, 1, 2),
 (6, 'Banner 1', 'banners/1.jpg', 23, 1, 3),
 (7, 'Banner 2', 'banners/2.jpg', 17, 1, 3),
-(8, 'Marco 3', 'marcos/3.png', 20, 1, 3),
 (9, 'Logo 4', 'logos/4.png', 32, 1, 1);
 
 -- --------------------------------------------------------
@@ -248,7 +248,6 @@ CREATE TABLE `productos_categoria` (
 --
 
 INSERT INTO `productos_categoria` (`id`, `nombre`, `url`, `activo`) VALUES
-(1, 'Logos', './tienda/img/category_img_01.jpg', 1),
 (2, 'Marcos', './tienda/img/category_img_02.jpg', 1),
 (3, 'Banners', './tienda/img/category_img_03.jpg', 1);
 
@@ -279,8 +278,8 @@ CREATE TABLE `proyectos` (
 --
 
 INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `precio_proyecto`, `imagen_proyecto`, `idred`, `idestado`, `tipo_proyecto`, `estado_proyecto`, `descripcion_proyecto`, `pagina_proyecto`, `whitepaper_proyecto`, `descripcion2_proyecto`) VALUES
-(3, 'Axie Inifnity Origin', 'SLP, AXS', '1', 'Axie-Origin-Guide.jpeg', 66, 1, 'Estrategia, Cartas', 'V3', 'Axie Infinity fue lanzado por Sky Mavis en marzo de 2018. Es un juego de batallas de cartas en tiempo real creado en Ronin Network, una cadena lateral vinculada a Ethereum. Todo el metaverso de Axie Infinity está construido alrededor de criaturas de fantasía llamadas Axies', 'https://axieinfinity.com/', 'https://whitepaper.axieinfinity.com/', 'https://es.cointelegraph.com/tags/axie-infinity'),
-(4, 'AlienWorlds', 'TLM', '0.15', 'mqdefault.jpg', 56, 1, 'Cartas/Farm', '7.2.3', 'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever un', 'https://alienworlds.io/', '1914 translation by H. Rackham\r\n\"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by des', 'value =  \"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deseru'),
+(3, 'Axie Inifnity Origin', 'SLP, AXS', '1', 'Axie-Origin-Guide.jpeg', 66, 1, 'Estrategia, Cartas', 'V3', 'Axie Infinity fue lanzado por Sky Mavis en marzo de 2018. Es un juego de batallas de cartas en tiempo real creado en Ronin Network, una cadena lateral vinculada a Ethereum. Todo el metaverso de Axie Infinity está construido alrededor de criaturas de fantasía llamadas Axies', 'https://axieinfinity.com/', '', 'Axie'),
+(4, 'AlienWorlds', 'TLM', '0.15', 'mqdefault.jpg', 56, 1, 'Cartas/Farm', '7.2.3', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://alienworlds.io/', 'RARITY', 'Seek'),
 (5, 'Avegotchi', 'GHST', '0.54', 'ave.PNG', 56, 1, 'Aventura', 'Finalizado', 'Aavegotchi is a DeFi-enabled crypto collectibles game developed by Singapore-based Pixelcraft Studios that allows players to stake Non-fungible tokens (NFTs) avatars with interest-generating tokens and interact with the Aavegotchi metaverse. It is a unique combination of Decentralized Finance (DeFi) and NFTs.', 'https://www.aavegotchi.com/', 'To level up their Aavegotchis, players can participate in a variety of activities including mini-games, governance, and meetups. Aavegotchis can also increase their rarity level by equipping in-game wearables and leveling up.', 'noticias'),
 (6, 'Crypto Cars', 'CARS', '1', 'cryptocars1.png', 67, 1, 'Simulador', 'Finalizado', 'Proyecto Cerrado: La economía de todo el metaverso Cryto City quebró por mala administración del equipo desarrollador. Se habla de un “rugpull” sigiloso o una quiebra planificada, según testimonios de algunos moderadores.  Crypto Cars es un juego NFT del género de racing con ciertas características del RPG que presenta al jugador la modalidad de juego de simulación de carreras y eventualmente lanzarán una forma de PVP para competir contra otros jugadores. Este título junto a Crypto Planes y Crypto Guards forman parte del metaverso Crypto City creado por los mismos desarrolladores.', 'https://www.nftgamearena.com/play-to-earn/racing/crypto-cars/', 'whitepaper', 'noticias'),
 (7, 'Crypto Cars Worlds', 'CARS', '0.03', 'cryptocars.png', 67, 1, 'Carreras', 'Abandonado', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'Proyecto Caido', 'whitepaper', 'noticias'),
@@ -309,8 +308,7 @@ INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `pr
 (30, 'Crypto Legions', 'BLV3', '0.5', 'cryptolegions.PNG', 56, 1, 'Simulador', '7.2.4', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'cryptolegions.app/', 'whitepaper', 'noticias'),
 (31, 'Mining Network', 'ASIC', '1', 'minings.PNG', 56, 1, 'Farming', 'Finalizado', 'Mining network is a game on WAX blockchain. It combines FreeToPlay and PlayToEarn models. Every new user gets a free NFT to play and earn immediately after registering in the game.', 'https://miningnetwork.io/?ref=2rdaw.wam', 'whitepaper', 'noticias'),
 (32, 'Poly Island', 'POL', '0', 'poly.png', 68, 1, 'Farming', 'SCAM', 'asdoiahdnkjadbnjkasdnajsldkasd', 'https://twitter.com/home', 'whitepaper', 'noticias'),
-(33, 'Pinup warlords', 'PNIUP', '1', 'pinu.PNG', 56, 1, 'Cartas', 'Finalizado', 'Factions are made of Soldiers with different classes and officers', 'https://pinupwarlords.com/', 'whitepaper', 'noticias'),
-(35, 'EL LEON ALEGRE', 'LIBRA', '0.05', '', 70, 1, 'Con la billetera de la gente', 'Ongoing', '', 'https://coinmarketcap.com/currencies/libra-protocol/', '', 'https://www.coinbase.com/es-ar/price/solana-libra');
+(33, 'Pinup warlords', 'PNIUP', '1', 'pinu.PNG', 56, 1, 'Cartas', 'Finalizado', 'Factions are made of Soldiers with different classes and officers', 'https://pinupwarlords.com/', 'whitepaper', 'noticias');
 
 -- --------------------------------------------------------
 
@@ -400,7 +398,10 @@ CREATE TABLE `rol_usuarios` (
 INSERT INTO `rol_usuarios` (`idrol`, `idusuario`) VALUES
 (1, 17),
 (1, 27),
-(2, 28);
+(2, 28),
+(2, 29),
+(2, 30),
+(2, 31);
 
 -- --------------------------------------------------------
 
@@ -449,8 +450,11 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `imagen`, `descripcion`, `twitter`, `instagram`, `facebook`, `idestado`) VALUES
 (17, 'nico_ave', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es 9244', 'l', '', '', 1),
-(27, 'GeGe', 'asd@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, '1234', 'ssss', 'asdasdas', 'asdasdasd', 1),
-(28, 'Zoppi', 'zoppinicolas@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, NULL, NULL, NULL, NULL, 1);
+(27, 'ASDZZZZZ', 'asd@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, '1234', NULL, NULL, NULL, 1),
+(28, 'lolo', 'lolo@lolo.gov', '8aa40001b9b39cb257fe646a561a80840c806c55', NULL, NULL, NULL, NULL, NULL, 1),
+(29, 'kilo', 'kilo@kilo.com', '8ff8800a239d91c648520ad5aea2d30e76e2850f', NULL, NULL, NULL, NULL, NULL, 1),
+(30, 'pepe', 'pepe@gmail.com', '265392dc2782778664cc9d56c8e3cd9956661bb0', NULL, NULL, NULL, NULL, NULL, 1),
+(31, 'pepe', 'pe@gmail.com', '265392dc2782778664cc9d56c8e3cd9956661bb0', 'img_67ec543b4f567.jpg', NULL, NULL, NULL, NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -468,6 +472,12 @@ ALTER TABLE `estados`
 ALTER TABLE `favoritos`
   ADD PRIMARY KEY (`idusuario`,`idred`),
   ADD KEY `idred` (`idred`);
+
+--
+-- Indices de la tabla `inventarios`
+--
+ALTER TABLE `inventarios`
+  ADD PRIMARY KEY (`idinventario`);
 
 --
 -- Indices de la tabla `items`
@@ -497,6 +507,12 @@ ALTER TABLE `permisos`
 ALTER TABLE `permiso_roles`
   ADD KEY `idpermiso` (`idpermiso`),
   ADD KEY `idrol` (`idrol`);
+
+--
+-- Indices de la tabla `productos_categoria`
+--
+ALTER TABLE `productos_categoria`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `proyectos`
@@ -549,6 +565,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `inventarios`
+--
+ALTER TABLE `inventarios`
+  MODIFY `idinventario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT de la tabla `items`
 --
 ALTER TABLE `items`
@@ -570,7 +592,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `rarezaitem`
@@ -594,7 +616,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Restricciones para tablas volcadas
