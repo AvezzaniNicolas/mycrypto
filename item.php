@@ -4,7 +4,7 @@
 
 <html>
   <head>
-    <title>Item Cyrpto</title>
+    <title>Item Crypto</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 

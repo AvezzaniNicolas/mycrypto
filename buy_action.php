@@ -19,7 +19,7 @@
     }else{
         $compraexito = 1;
         switch(intval($producto['idcategoria'])){
-            case 1:
+            case 2:
                 if(!isset($inventario['imagen1'])){
                     $sql = "UPDATE inventarios SET imagen1 = '".$producto['imagen']."' WHERE idusuario = ".$idusuario;
                     $result = mysqli_query($conexion, $sql);                                
@@ -56,6 +56,6 @@
             $result = mysqli_query($conexion, $sql);                                
         }
 
-        echo "OK";
+        header ("location: perfil.php");
     }
 ?>

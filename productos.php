@@ -2,8 +2,8 @@
     require ("conexion.php");
     session_start();
 
-    $categoria = $_REQUEST['categoria'];
-    $sql = "SELECT * FROM productos WHERE idestado = 1 and idcategoria = ".$categoria;
+    $estado = isset($_REQUEST['estado']) ? $_REQUEST['estado'] : 1;
+    $sql = "SELECT * FROM productos WHERE idestado = ".$estado;
 
     $result = mysqli_query($conexion, $sql);
     $productos = array();
@@ -18,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="tienda/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="images/icons/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="tienda/img/favicon.ico">
 
     <link rel="stylesheet" href="tienda/css/bootstrap.min.css">
     <link rel="stylesheet" href="tienda/css/templatemo.css">
@@ -61,31 +61,12 @@ https://templatemo.com/tm-559-zay-shop
 
 
     <!-- Start Content -->
-    <div class="container py-5">
+    <div class="container py-5 mt-5">
         <div class="row">
-
-            <div class="col-lg-3">
-                <h1 class="h2 pb-4">Categories</h1>
-                <ul class="list-unstyled templatemo-accordion">
-                   
-                    <li class="pb-3">
-                        <a class="collapsed d-flex justify-content-between h3 text-decoration-none" href="#">
-                      </a>
-                       
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-lg-9">
-                <div class="row">
-                    <div class="col-md-6">
-                        
-                    </div>
-                    <div class="col-md-6 pb-4">
-                        <div class="d-flex">
-                        </div>
-                    </div>
-                </div>
+            <button  onclick="location.href='producto_edit.php'" class="btn btn-primary">Nuevo Producto</button>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="row">
                 <?php
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -98,6 +79,8 @@ https://templatemo.com/tm-559-zay-shop
                                 <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
                                     <ul class="list-unstyled">
                                         <li><a class="btn btn-success text-white mt-2" href="buy.php?producto=<?php echo $row['idproducto']; ?>"><i class="fas fa-cart-plus"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="producto_edit.php?id=<?php echo $row['idproducto']; ?>"><i class="far fa-eye"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -127,55 +110,12 @@ https://templatemo.com/tm-559-zay-shop
                     </div>
                 <?php } ?>
                 </div>
-                <div div="row">
-                    <ul class="pagination pagination-lg justify-content-end">
-                        <li class="page-item disabled">
-                            <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
 
         </div>
     </div>
     <!-- End Content -->
-
-    <!-- Start Brands -->
-    <section class="bg-light py-5">
-        <div class="container my-4">
-            <div class="row text-center py-3">
-                <div class="col-lg-6 m-auto">
-                </div>
-                <div class="col-lg-9 m-auto tempaltemo-carousel">
-                    <div class="row d-flex flex-row">
-                        <!--Controls-->
-                        <div class="col-1 align-self-center">
-                            <a class="h1" href="#multi-item-example" role="button" data-bs-slide="prev">
-                                <i class="text-light fas fa-chevron-left"></i>
-                            </a>
-                        </div>
-                        <!--End Controls-->
-
-                        
-                        <!--Controls-->
-                        <div class="col-1 align-self-center">
-                            <a class="h1" href="#multi-item-example" role="button" data-bs-slide="next">
-                                <i class="text-light fas fa-chevron-right"></i>
-                            </a>
-                        </div>
-                        <!--End Controls-->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--End Brands-->
 
     <?php include 'footer.php' ?>
 
