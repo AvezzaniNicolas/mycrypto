@@ -13,7 +13,7 @@
 
 .dark-mode {
     --bg-color: #1d1d24;
-    --text-color: #f5f6fa;
+    --text-color: rgb(212, 175, 55);
     --card-bg: #121216;
     --dark: #e0e0e0;
 }
