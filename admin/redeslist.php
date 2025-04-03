@@ -64,7 +64,7 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
 
   <!-- Barra de navegación -->
 <div class="navbar">
-    <a href="inicio.php" class="active">Inicio</a>
+    <a href="../inicio.php" class="active">Inicio</a>
     <a href="https://es.cointelegraph.com/tags/games">NOTICIAS</a>
     <a href="proyectoslist.php">PROYECTOS</a>
     <a href="tienda.php">TIENDA</a>
