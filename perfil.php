@@ -316,11 +316,6 @@ while ($red = mysqli_fetch_assoc($query_redes)) {
         <div class="toggle-container">
             <button id="favorites-btn" class="favorites-btn">Mis Favoritos</button>
             <button id="compare-btn" class="favorites-btn">Comparar</button>
-            <label class="toggle-switch">
-                <input type="checkbox" id="dark-mode-toggle">
-                <span class="slider"></span>
-            </label>
-            <span>Modo Oscuro</span>
         </div>
     </div>
 
