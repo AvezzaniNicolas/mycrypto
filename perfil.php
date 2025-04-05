@@ -205,6 +205,7 @@ while ($red = mysqli_fetch_assoc($query_redes)) {
 
 <!-- Barra de navegación -->
 <div class="navbar">
+
     <a href="inicio.php" class="active">Inicio</a>
     <a href="https://es.cointelegraph.com/tags/games">NOTICIAS</a>
     <a href="admin/proyectoslist.php">PROYECTOS</a>
@@ -215,7 +216,13 @@ while ($red = mysqli_fetch_assoc($query_redes)) {
         <span>Bienvenido, <?php echo $nick; ?></span>
         <span>(ID ROL:<?php echo $rol; ?>)</span>
         <a href="logout.php" style="color:rgb(0, 0, 0);">Cerrar Sesión</a>
+        <label class="toggle-switch">
+                <input type="checkbox" id="dark-mode-toggle">
+                <span class="slider"></span>
+                </label>
+                <span>Luces</span>
     </div>
+   
 </div>
 
 <div class="container">
@@ -289,6 +296,8 @@ while ($red = mysqli_fetch_assoc($query_redes)) {
         
         <button id="addSocialBtn" class="btn">Agregar Red Social</button>
     </div>
+
+
     
     <!-- Resto del contenido (criptomonedas) -->
     <header>
