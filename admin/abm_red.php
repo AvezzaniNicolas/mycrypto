@@ -1,161 +1,59 @@
 <?php
+session_start();
+include("../conexion.php");
 
+if(isset($_POST['insert'])) {
+    // Configuración para subir imágenes
+    $target_dir = "../img/redes/";
+    if(!is_dir($target_dir)) {
+        mkdir($target_dir, 0755, true);
+    }
 
-$title="Modificar Red";
-/* Llamar la Cadena de Conexion*/ 
-require "../conexion.php";
-require "../vendor/autoload.php";
-use BenMajor\ImageResize\Image;
+    // Validar y procesar la imagen
+    $imageFileType = strtolower(pathinfo($_FILES["imagen"]["name"], PATHINFO_EXTENSION));
+    $new_filename = uniqid().'.'.$imageFileType;
+    $target_file = $target_dir.$new_filename;
+    
+    // Verificar si es una imagen real
+    $check = getimagesize($_FILES["imagen"]["tmp_name"]);
+    if($check === false) {
+        die("El archivo no es una imagen válida.");
+    }
 
-function imagen(){
-    require "../conexion.php";
+    // Verificar tamaño del archivo (2MB máximo)
+    if ($_FILES["imagen"]["size"] > 2000000) {
+        die("El archivo es demasiado grande. Máximo 2MB permitidos.");
+    }
 
-    if (isset($_POST['update'])) {
-        $idred=$_POST['id'];
-        $consulta= "SELECT imagen_red from redes where idred='$idred'";
-        $query=mysqli_query($conexion,$consulta);
-       //     $imgBD=$query->fetch_array(MYSQL_ASSOC);
+    // Permitir ciertos formatos
+    $allowed_types = ['jpg', 'png', 'jpeg', 'gif'];
+    if(!in_array($imageFileType, $allowed_types)) {
+        die("Solo se permiten archivos JPG, JPEG, PNG & GIF.");
+    }
 
-        if (empty($_FILES['imagen'])) {
-            return $imgBD['imagen'];
-        }else{
-            if (isset($_FILES['imagen']) && !empty($_FILES['imagen']['name'])) {
-
-                $errores=0;
-
-                $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-                $name = pathinfo($_FILES['imagen']['name'], PATHINFO_FILENAME).".".$extension;
-                $mimeType = $_FILES['imagen']['type'];
-
-                $extension2 = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-                $name2 = pathinfo($_FILES['imagen']['name'], PATHINFO_FILENAME).".".$extension;
-                $mimeType2 = $_FILES['imagen']['type'];
-
-                # Generate a new image resize object using a upload image:
-                $image = new Image($_FILES['imagen']['tmp_name']);
-                $image2 = new Image($_FILES['imagen']['tmp_name']);
-
-                
-                # Set the background to white:
-                $image->setBackgroundColor('#212121');
-
-                # Contain the image:
-                $image->contain(300);
-
-                $image->output("../img/Redes");
-                $image2->output("../img/Redes2"); // Asegurate que la carpeta donde lo vas a guardar permita lectura y escritura, tambien verifica sus carpetas padres
-
-                # Renombrar la imagen genereda por el metodo output
-
-                rename($image->getOutputFilename(), "../img/Redes/".$name);
-                rename($image2->getOutputFilename(), "../img/Redes2/".$name2);
-                }
-
-                if (empty($errores)==true) {
-                    move_uploaded_file($image, "../img/Redes/".$name);
-                    move_uploaded_file($image2, "../img/Redes2/".$name2);
-                    return $name;
-                }
-                else{
-
-                    print_r($errores);
-
-                }
+    // Mover el archivo subido
+    if (move_uploaded_file($_FILES["imagen"]["tmp_name"], $target_file)) {
+        // Recoger y sanitizar datos del formulario
+        $nombre_red = mysqli_real_escape_string($conexion, $_POST['nombre_red']);
+        $orden = intval($_POST['orden']);
+        $estado = intval($_POST['estado']);
+        
+        // Insertar en la base de datos
+        $sql = "INSERT INTO redes (nombre_red, orden, idestado, imagen_red) 
+                VALUES ('$nombre_red', $orden, $estado, '$new_filename')";
+        
+        if(mysqli_query($conexion, $sql)) {
+            header("Location: redeslist.php?success=1");
+            exit();
+        } else {
+            // Eliminar la imagen si falla la inserción
+            if(file_exists($target_file)) {
+                unlink($target_file);
             }
-
-
-    }   
-
-
-
-if (isset($_FILES['imagen']) && !empty($_FILES['imagen']['name'])) {
-
-
-    $errores=0;
-
-    $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-    $name = pathinfo($_FILES['imagen']['name'], PATHINFO_FILENAME).".".$extension;
-    $mimeType = $_FILES['imagen']['type'];
-
-    $extension2 = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
-    $name2 = pathinfo($_FILES['imagen']['name'], PATHINFO_FILENAME).".".$extension;
-    $mimeType2 = $_FILES['imagen']['type'];
-
-    # Generate a new image resize object using a upload image:
-    $image = new Image($_FILES['imagen']['tmp_name']);
-    $image2 = new Image($_FILES['imagen']['tmp_name']);
-
-    
-    
-
-
-    # Set the background to white:
-    $image->setBackgroundColor('#212121');
-
-    # Contain the image:
-    $image->contain(300);
-
-    $image->output("../img/Redes");
-    $image2->output("../img/Redes2"); // Asegurate que la carpeta donde lo vas a guardar permita lectura y escritura, tambien verifica sus carpetas padres
-
-    # Renombrar la imagen genereda por el metodo output
-
-    rename($image->getOutputFilename(), '../img/Redes/'.$name);
-    rename($image2->getOutputFilename(), '../img/Redes2/'.$name2);
-    }
-
-    if (empty($errores)==true) {
-        move_uploaded_file($image, "../img/Redes/".$name);
-        move_uploaded_file($image2, "../img/Redes2/".$name2);
-        return $name;
-    }
-    else{
-
-        print_r($errores);
-
-    }
-
-
-}
-
-
-if(isset($_POST['insert']) && !empty ($_POST['insert'])){
-//Insert un nuevo producto
-$imagen=imagen();
-
-$orden=$_POST['orden'];
-$idestado=$_POST['estado'];
-$nombre_red=$_POST['nombre_red'];
-$insert=mysqli_query($conexion,"INSERT INTO redes (nombre_red,imagen_red, idestado,orden) values ('$nombre_red','$imagen','$idestado','$orden')");
-
-
-header("location:redeslist.php");
-
-}
-
-if(isset($_POST['update']) && !empty ($_POST['update'])){
-
-    $imagen=imagen();
-    $idred=$_POST['idred'];
-    $orden=$_POST['orden'];
-    $idestado=$_POST['estado'];
-    $nombre_red=$_POST['nombre_red'];
-    if (!is_null($imagen)) {
-        $update=mysqli_query($conexion,"UPDATE redes SET nombre_red='$nombre_red', imagen_red='$imagen', idestado='$idestado', orden='$orden' WHERE idred='$idred'");
-
-        header("location:redeslist.php");
-    }else{
-        $update=mysqli_query($conexion,"UPDATE redes SET nombre_red='$nombre_red',  idestado='$idestado', orden='$orden' WHERE idred='$idred'");
-
-        header("location:redeslist.php");
+            die("Error al guardar: ".mysqli_error($conexion));
+        }
+    } else {
+        die("Hubo un error al subir la imagen. Verifica los permisos del directorio.");
     }
 }
-
-
-
-
-
-
-
-
 ?>
