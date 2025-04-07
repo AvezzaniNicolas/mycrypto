@@ -33,6 +33,7 @@ session_start();
         $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE idusuario=$idusuario");
         while($respuesta=mysqli_fetch_assoc($consulta)){
         $nick = $respuesta['nickname'];
+        $rol = $_SESSION['rol'];
         }
     ?>
         <!-- Navigation-->
@@ -46,7 +47,14 @@ session_start();
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="../mycrypto/admin/redeslist.php">Redes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="admin/proyectoslist.php">Juegos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="admin/proyectoslist.php">Proyectos</a></li>
+                        <?php 
+                            if($rol == 1){
+                        ?>
+                            <li class="nav-item"><a class="nav-link" href="../mycrypto/productos.php">Productos</a></li>    
+                        <?php 
+                            }
+                        ?>
                         <li class="nav-item"><a class="nav-link" href="../mycrypto/tienda.php">Tienda</a></li>
                         <li class="nav-item"><a class="nav-link" href="https://es.cointelegraph.com/tags/games">Noticias</a></li>
                         <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
