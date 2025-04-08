@@ -32,24 +32,19 @@ $active_banner = "active";
     <link rel="icon" href="../images/icons/favicon.ico">
     <title>Editar Red</title>
 </head>
+
 <body>
+    <!-- Interruptor de modo oscuro -->
+    <div class="toggle-container">
+        <span class="toggle-label">Luces</span>
+        <label class="toggle-switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+
     <?php include("header_admin.php"); ?>
 
-    <style>
-        /* Estilos adicionales */
-        .btn {
-            background: rgb(212, 175, 55);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background: rgb(0, 0, 0);
-        }
-    </style>
 
     <div class="container">
         <div class="row">
@@ -129,6 +124,57 @@ $active_banner = "active";
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="js/jasny-bootstrap.min.js"></script>
     
+    <script>
+    // Modo oscuro mejorado
+    document.addEventListener('DOMContentLoaded', function() {
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+        
+        // Verificar preferencias del sistema
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Función para aplicar modo oscuro
+        function applyDarkMode(enable) {
+            if (enable) {
+                body.classList.add('dark-mode');
+                if(darkModeToggle) darkModeToggle.checked = true;
+            } else {
+                body.classList.remove('dark-mode');
+                if(darkModeToggle) darkModeToggle.checked = false;
+            }
+        }
+        
+        // Cargar estado guardado o preferencia del sistema
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode === 'enabled' || (savedMode === null && prefersDarkScheme.matches)) {
+            applyDarkMode(true);
+        }
+        
+        // Escuchar cambios en el toggle
+        if(darkModeToggle) {
+            darkModeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('darkMode', 'enabled');
+                    applyDarkMode(true);
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                    applyDarkMode(false);
+                }
+            });
+        }
+        
+        // Escuchar cambios en las preferencias del sistema
+        prefersDarkScheme.addEventListener('change', e => {
+            if (localStorage.getItem('darkMode') === null) {
+                applyDarkMode(e.matches);
+            }
+        });
+    });
+
+    </script>                               
+
+
+
    
     <script>
         function upload_image() {

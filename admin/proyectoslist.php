@@ -30,26 +30,19 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
     <link href="css/proyectlist.css" rel="stylesheet">   
     <link href="css/perfil.css" rel="stylesheet">
+    
 </head>
-<body style="background: #212529;">
+<body>
+    <!-- Interruptor de modo oscuro -->
+    <div class="toggle-container">
+        <span class="toggle-label">Luces</span>
+        <label class="toggle-switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="slider"></span>
+        </label>
+    </div>
 
     <?php include("header_admin.php"); ?>
-
-    <style>
-        /* Estilos adicionales */
-        .btn {
-            background: rgb(212, 175, 55);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background: rgb(0, 0, 0);
-        }
-    </style>
 
     <?php 
     if(isset($_SESSION['logueado']) && $_SESSION['logueado'] > 0) {
@@ -82,17 +75,61 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
     <div class="outer_div"></div><!-- Datos ajax Final -->
     
     <!-- Bootstrap core JavaScript -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     
     <?php include("footer_admin.php"); ?>
 
-</body>
-</html>
+    
 
-<script>
+    <script>
+    // Modo oscuro mejorado
+    document.addEventListener('DOMContentLoaded', function() {
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+        
+        // Verificar preferencias del sistema
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Función para aplicar modo oscuro
+        function applyDarkMode(enable) {
+            if (enable) {
+                body.classList.add('dark-mode');
+                if(darkModeToggle) darkModeToggle.checked = true;
+            } else {
+                body.classList.remove('dark-mode');
+                if(darkModeToggle) darkModeToggle.checked = false;
+            }
+        }
+        
+        // Cargar estado guardado o preferencia del sistema
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode === 'enabled' || (savedMode === null && prefersDarkScheme.matches)) {
+            applyDarkMode(true);
+        }
+        
+        // Escuchar cambios en el toggle
+        if(darkModeToggle) {
+            darkModeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('darkMode', 'enabled');
+                    applyDarkMode(true);
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                    applyDarkMode(false);
+                }
+            });
+        }
+        
+        // Escuchar cambios en las preferencias del sistema
+        prefersDarkScheme.addEventListener('change', e => {
+            if (localStorage.getItem('darkMode') === null) {
+                applyDarkMode(e.matches);
+            }
+        });
+    });
+
+    // Tu código AJAX existente
     $(document).ready(function() {
         load(1);
     });
@@ -145,4 +182,6 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
             });
         }
     }
-</script>
+    </script>
+</body>
+</html>

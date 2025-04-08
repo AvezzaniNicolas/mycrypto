@@ -17,9 +17,11 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
 }
 ?>
 
+
 <link href="css/perfil.css" rel="stylesheet">
-<link href="css/proyectlist.css" rel="stylesheet"> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
+<link href="css/proyectlist.css" rel="stylesheet"> 
+<link href="css/dark-mode.css" rel="stylesheet">
 
 <div class="navbar">
     <a href="../inicio.php" class="active">Inicio</a>
@@ -33,13 +35,5 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
         <span>Bienvenido, <?php echo $nick; ?></span>
         <span>(ID ROL:<?php echo $rol; ?>)</span>
         <a href="../logout.php" style="color:rgb(0, 0, 0);">Cerrar Sesión</a>
-        <label class="toggle-switch">
-                <input type="checkbox" id="dark-mode-toggle">
-                <span class="slider"></span>
-                </label>
-                <span>Luces</span>
     </div>
-   
 </div>
-
-<body style="background: #212529;">
