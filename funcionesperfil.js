@@ -17,45 +17,26 @@ darkModeToggle.addEventListener('change', () => {
     }
 });
 
-// Favoritos
-const favoriteBtns = document.querySelectorAll('.favorite-btn');
-const favoritesBtn = document.getElementById('favorites-btn');
-
-function updateFavorites() {
-    const favorites = JSON.parse(localStorage.getItem('cryptoFavorites')) || [];
-    favoriteBtns.forEach(btn => {
-        const cryptoId = btn.getAttribute('data-id');
-        if (favorites.includes(cryptoId)) {
-            btn.classList.add('active');
-        } else {
-            btn.classList.remove('active');
-        }
+// Favoritos - Ahora se manejan principalmente desde el servidor
+// Esta función solo para feedback visual
+function updateFavoriteButtons() {
+    document.querySelectorAll('.favorite-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            // Feedback visual inmediato
+            this.classList.toggle('active');
+            
+            // El formulario se enviará automáticamente al servidor
+        });
     });
 }
 
-favoriteBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const cryptoId = btn.getAttribute('data-id');
-        let favorites = JSON.parse(localStorage.getItem('cryptoFavorites')) || [];
-        
-        if (favorites.includes(cryptoId)) {
-            favorites = favorites.filter(id => id !== cryptoId);
-        } else {
-            favorites.push(cryptoId);
-        }
-        
-        localStorage.setItem('cryptoFavorites', JSON.stringify(favorites));
-        updateFavorites();
-    });
-});
-
+// Botón de favoritos para mostrar la lista
+const favoritesBtn = document.getElementById('favorites-btn');
 favoritesBtn.addEventListener('click', () => {
-    const favorites = JSON.parse(localStorage.getItem('cryptoFavorites')) || [];
-    if (favorites.length > 0) {
-        window.location.href = `?moneda=${favorites[0]}`;
-    } else {
-        alert('No tienes criptomonedas en favoritos');
-    }
+    // Desplazarse a la sección de favoritos
+    document.querySelector('.profile-section:nth-of-type(3)').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
 });
 
 // Gráficos
@@ -115,7 +96,8 @@ let selectedForComparison = [];
 
 document.querySelectorAll('.crypto-card').forEach(card => {
     card.addEventListener('click', (e) => {
-        if (e.target.classList.contains('favorite-btn')) return;
+        // No hacer nada si se hace clic en el botón de favoritos o en un enlace
+        if (e.target.closest('.favorite-btn') || e.target.tagName === 'A') return;
         
         const cryptoId = card.getAttribute('data-id');
         const cryptoName = card.querySelector('h2').textContent;
@@ -165,5 +147,5 @@ function compareCoins() {
     comparisonContainer.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Inicializar favoritos al cargar
-updateFavorites();
+// Inicializar botones de favoritos al cargar
+updateFavoriteButtons();

@@ -124,6 +124,24 @@ session_start();
             font-weight: bold;
             cursor: pointer;
         }
+        
+        /* Estilos para favoritos */
+        .favorite-btn.active {
+            color: gold;
+        }
+        
+        .favorites-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .favorites-list li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -187,6 +205,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Actualizar variables de sesión si es necesario
         $_SESSION['nombre'] = $nombre;
     }
+    
+    // Manejar favoritos (nuevo)
+    if (isset($_POST['agregar_favorito'])) {
+        $crypto_id = mysqli_real_escape_string($conexion, $_POST['crypto_id']);
+        $crypto_nombre = mysqli_real_escape_string($conexion, $_POST['crypto_nombre']);
+        
+        // Verificar si ya existe
+        $check = mysqli_query($conexion, "SELECT * FROM usuario_favoritos WHERE idusuario=$idusuario AND crypto_id='$crypto_id'");
+        if (mysqli_num_rows($check) == 0) {
+            $query = "INSERT INTO usuario_favoritos (idusuario, crypto_id, crypto_nombre) VALUES ($idusuario, '$crypto_id', '$crypto_nombre')";
+            mysqli_query($conexion, $query);
+        }
+    }
+    
+    if (isset($_POST['eliminar_favorito'])) {
+        $crypto_id = mysqli_real_escape_string($conexion, $_POST['crypto_id']);
+        $query = "DELETE FROM usuario_favoritos WHERE idusuario=$idusuario AND crypto_id='$crypto_id'";
+        mysqli_query($conexion, $query);
+    }
 }
 
 // Obtener redes sociales del usuario
@@ -199,7 +236,14 @@ while ($red = mysqli_fetch_assoc($query_redes)) {
     $redes_sociales[] = $red;
 }
 
-
+// Obtener favoritos del usuario (nuevo)
+$favoritos = [];
+$query_favoritos = mysqli_query($conexion, "SELECT * FROM usuario_favoritos WHERE idusuario=$idusuario");
+if ($query_favoritos) {
+    while ($fav = mysqli_fetch_assoc($query_favoritos)) {
+        $favoritos[] = $fav;
+    }
+}
 
 ?>
 
@@ -245,10 +289,6 @@ while ($red = mysqli_fetch_assoc($query_redes)) {
     <div class="profile-section">
         <h2>Mis Redes Sociales</h2>
 
-
-
-        
-
         <ul class="social-media-list">
     <?php if (empty($redes_sociales)): ?>
         <li>No has agregado ninguna red social aún.</li>
@@ -290,14 +330,31 @@ while ($red = mysqli_fetch_assoc($query_redes)) {
         <?php endforeach; ?>
     <?php endif; ?>
 </ul>
-
-
-
         
         <button id="addSocialBtn" class="btn">Agregar Red Social</button>
     </div>
-
-
+    
+    <!-- Nueva sección de favoritos -->
+    <div class="profile-section">
+        <h2>Mis Criptomonedas Favoritas</h2>
+        <ul class="favorites-list">
+            <?php if (empty($favoritos)): ?>
+                <li>No tienes criptomonedas favoritas aún.</li>
+            <?php else: ?>
+                <?php foreach ($favoritos as $fav): ?>
+                    <li>
+                        <span><?php echo htmlspecialchars($fav['crypto_nombre']); ?></span>
+                        <form method="POST" style="display: inline;">
+                            <input type="hidden" name="crypto_id" value="<?php echo htmlspecialchars($fav['crypto_id']); ?>">
+                            <button type="submit" name="eliminar_favorito" style="background: none; border: none; color: #cc0000; cursor: pointer;">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </li>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </ul>
+    </div>
     
     <!-- Resto del contenido (criptomonedas) -->
     <header>
@@ -347,6 +404,8 @@ while ($red = mysqli_fetch_assoc($query_redes)) {
         }
         
         function mostrarPerfilCripto($data) {
+            global $conexion, $idusuario, $favoritos;
+            
             $id = $data['id'];
             $nombre = $data['name'];
             $simbolo = strtoupper($data['symbol']);
@@ -360,10 +419,31 @@ while ($red = mysqli_fetch_assoc($query_redes)) {
             $change_class = ($change_24h >= 0) ? 'price-up' : 'price-down';
             $change_24h = number_format($change_24h, 2);
             
+            // Verificar si es favorito
+            $esFavorito = false;
+            foreach ($favoritos as $fav) {
+                if ($fav['crypto_id'] == $id) {
+                    $esFavorito = true;
+                    break;
+                }
+            }
+            
             echo "
             <div class='crypto-card' data-id='{$id}'>
                 <div class='crypto-actions'>
-                    <button class='favorite-btn' data-id='{$id}'>&#9733;</button>
+                    <form method='POST' style='display: inline;'>
+                        <input type='hidden' name='crypto_id' value='{$id}'>
+                        <input type='hidden' name='crypto_nombre' value='{$nombre}'>
+                        ";
+            
+            if ($esFavorito) {
+                echo "<button type='submit' name='eliminar_favorito' class='favorite-btn active'>&#9733;</button>";
+            } else {
+                echo "<button type='submit' name='agregar_favorito' class='favorite-btn'>&#9733;</button>";
+            }
+            
+            echo "
+                    </form>
                 </div>
                 
                 <div class='crypto-header'>
