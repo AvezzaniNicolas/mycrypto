@@ -335,6 +335,7 @@ if ($query_favoritos) {
     </div>
     
     <!-- Nueva sección de favoritos -->
+     
     <div class="profile-section">
         <h2>Mis Criptomonedas Favoritas</h2>
         <ul class="favorites-list">
@@ -371,7 +372,6 @@ if ($query_favoritos) {
         </div>
         
         <div class="toggle-container">
-            <button id="favorites-btn" class="favorites-btn">Mis Favoritos</button>
             <button id="compare-btn" class="favorites-btn">Comparar</button>
         </div>
     </div>

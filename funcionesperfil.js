@@ -17,32 +17,22 @@ darkModeToggle.addEventListener('change', () => {
     }
 });
 
-// Favoritos - Ahora se manejan principalmente desde el servidor
-// Esta función solo para feedback visual
-function updateFavoriteButtons() {
-    document.querySelectorAll('.favorite-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            // Feedback visual inmediato
-            this.classList.toggle('active');
-            
-            // El formulario se enviará automáticamente al servidor
-        });
-    });
-}
-
-// Botón de favoritos para mostrar la lista
-const favoritesBtn = document.getElementById('favorites-btn');
-favoritesBtn.addEventListener('click', () => {
-    // Desplazarse a la sección de favoritos
-    document.querySelector('.profile-section:nth-of-type(3)').scrollIntoView({ 
-        behavior: 'smooth' 
-    });
-});
-
-// Gráficos
+// Función para renderizar gráficos
 function renderChart(canvasId, cryptoId, cryptoName) {
+    const canvasElement = document.getElementById(canvasId);
+    
+    if (!canvasElement) {
+        console.error(`No se encontró el canvas con ID: ${canvasId}`);
+        return;
+    }
+
     fetch(`https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart?vs_currency=usd&days=7`)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la API: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             const prices = data.prices.map(price => price[1]);
             const dates = data.prices.map(price => {
@@ -50,7 +40,7 @@ function renderChart(canvasId, cryptoId, cryptoName) {
                 return date.toLocaleDateString('es-ES', { weekday: 'short' });
             });
             
-            const ctx = document.getElementById(canvasId).getContext('2d');
+            const ctx = canvasElement.getContext('2d');
             new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -78,15 +68,36 @@ function renderChart(canvasId, cryptoId, cryptoName) {
                     }
                 }
             });
+        })
+        .catch(error => {
+            console.error('Error al obtener datos del gráfico:', error);
+            canvasElement.parentElement.innerHTML = `<p class="chart-error">No se pudo cargar el gráfico</p>`;
         });
 }
 
 // Inicializar gráficos
-document.querySelectorAll('.crypto-card').forEach(card => {
-    const cryptoId = card.getAttribute('data-id');
-    const cryptoName = card.querySelector('h2').textContent;
-    renderChart(`chart-${cryptoId}`, cryptoId, cryptoName);
-});
+function initializeCharts() {
+    document.querySelectorAll('.crypto-card').forEach(card => {
+        const cryptoId = card.getAttribute('data-id');
+        const cryptoName = card.querySelector('h2').textContent;
+        const canvasId = `chart-${cryptoId}`;
+        
+        if (document.getElementById(canvasId)) {
+            renderChart(canvasId, cryptoId, cryptoName);
+        } else {
+            console.warn(`Canvas no encontrado para ${cryptoName} (ID: ${canvasId})`);
+        }
+    });
+}
+
+// Favoritos
+function updateFavoriteButtons() {
+    document.querySelectorAll('.favorite-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            this.classList.toggle('active');
+        });
+    });
+}
 
 // Comparador
 const compareBtn = document.getElementById('compare-btn');
@@ -94,47 +105,58 @@ const comparisonContainer = document.getElementById('comparison-container');
 const closeComparison = document.getElementById('close-comparison');
 let selectedForComparison = [];
 
-document.querySelectorAll('.crypto-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-        // No hacer nada si se hace clic en el botón de favoritos o en un enlace
-        if (e.target.closest('.favorite-btn') || e.target.tagName === 'A') return;
-        
-        const cryptoId = card.getAttribute('data-id');
-        const cryptoName = card.querySelector('h2').textContent;
-        
-        if (selectedForComparison.length < 2 && !selectedForComparison.some(item => item.id === cryptoId)) {
-            selectedForComparison.push({ id: cryptoId, name: cryptoName });
-            card.style.border = '2px solid #6c5ce7';
-            
-            if (selectedForComparison.length === 2) {
-                compareCoins();
-            }
-        }
-    });
-});
-
-compareBtn.addEventListener('click', () => {
-    if (selectedForComparison.length === 2) {
-        compareCoins();
-    } else {
-        alert('Selecciona 2 criptomonedas haciendo clic en sus tarjetas');
-    }
-});
-
-closeComparison.addEventListener('click', () => {
-    comparisonContainer.style.display = 'none';
-    selectedForComparison = [];
+function updateSelectedCards() {
     document.querySelectorAll('.crypto-card').forEach(card => {
-        card.style.border = 'none';
+        const cryptoId = card.getAttribute('data-id');
+        const isSelected = selectedForComparison.some(item => item.id === cryptoId);
+        card.style.border = isSelected ? '2px solid #6c5ce7' : '1px solid #ddd';
+        card.style.boxShadow = isSelected ? '0 0 10px rgba(108, 92, 231, 0.5)' : 'none';
     });
-});
+}
+
+function addComparisonButtons() {
+    document.querySelectorAll('.crypto-card').forEach(card => {
+        const selectBtn = document.createElement('button');
+        selectBtn.className = 'select-btn';
+        selectBtn.innerHTML = 'Seleccionar para comparar';
+        
+        const actionsDiv = card.querySelector('.crypto-actions') || card;
+        actionsDiv.appendChild(selectBtn);
+        
+        selectBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            const cryptoId = card.getAttribute('data-id');
+            const cryptoName = card.querySelector('h2').textContent;
+            const index = selectedForComparison.findIndex(item => item.id === cryptoId);
+            
+            if (index === -1) {
+                if (selectedForComparison.length < 2) {
+                    selectedForComparison.push({ id: cryptoId, name: cryptoName });
+                } else {
+                    selectedForComparison[0] = { id: cryptoId, name: cryptoName };
+                }
+            } else {
+                selectedForComparison.splice(index, 1);
+            }
+            
+            updateSelectedCards();
+            compareBtn.textContent = `Comparar (${selectedForComparison.length}/2)`;
+            compareBtn.disabled = selectedForComparison.length !== 2;
+        });
+    });
+}
 
 function compareCoins() {
+    if (selectedForComparison.length !== 2) {
+        alert('Por favor, selecciona exactamente 2 criptomonedas para comparar');
+        return;
+    }
+    
     comparisonContainer.style.display = 'block';
     document.getElementById('coin1-name').textContent = selectedForComparison[0].name;
     document.getElementById('coin2-name').textContent = selectedForComparison[1].name;
     
-    // Destruir gráficos anteriores si existen
     const chart1 = Chart.getChart('comparison-chart1');
     const chart2 = Chart.getChart('comparison-chart2');
     if (chart1) chart1.destroy();
@@ -143,9 +165,31 @@ function compareCoins() {
     renderChart('comparison-chart1', selectedForComparison[0].id, selectedForComparison[0].name);
     renderChart('comparison-chart2', selectedForComparison[1].id, selectedForComparison[1].name);
     
-    // Desplazarse a la sección de comparación
     comparisonContainer.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Inicializar botones de favoritos al cargar
-updateFavoriteButtons();
+// Event listeners
+compareBtn.addEventListener('click', compareCoins);
+closeComparison.addEventListener('click', () => {
+    comparisonContainer.style.display = 'none';
+    selectedForComparison = [];
+    updateSelectedCards();
+    compareBtn.textContent = 'Comparar';
+    compareBtn.disabled = false;
+});
+
+// Inicialización completa
+document.addEventListener('DOMContentLoaded', () => {
+    initializeCharts();
+    updateFavoriteButtons();
+    addComparisonButtons();
+    
+    compareBtn.textContent = 'Comparar (0/2)';
+    compareBtn.disabled = true;
+});
+
+// Reinicializar gráficos cuando se añadan nuevas tarjetas (por búsqueda)
+document.addEventListener('newCryptoCardsAdded', () => {
+    initializeCharts();
+    addComparisonButtons();
+});
