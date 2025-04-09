@@ -251,7 +251,6 @@ if ($query_favoritos) {
 <div class="navbar">
 
     <a href="inicio.php" class="active">Inicio</a>
-    <a href="https://es.cointelegraph.com/tags/games">NOTICIAS</a>
     <a href="admin/proyectoslist.php">PROYECTOS</a>
     <a href="admin/redeslist.php">REDES</a>
     <a href="tienda.php">TIENDA</a>
@@ -335,7 +334,7 @@ if ($query_favoritos) {
     </div>
     
     <!-- Nueva sección de favoritos -->
-     
+
     <div class="profile-section">
         <h2>Mis Criptomonedas Favoritas</h2>
         <ul class="favorites-list">
@@ -375,6 +374,7 @@ if ($query_favoritos) {
             <button id="compare-btn" class="favorites-btn">Comparar</button>
         </div>
     </div>
+    
 
     <div class="crypto-grid">
         <?php
@@ -403,6 +403,7 @@ if ($query_favoritos) {
             }
         }
         
+
         function mostrarPerfilCripto($data) {
             global $conexion, $idusuario, $favoritos;
             
