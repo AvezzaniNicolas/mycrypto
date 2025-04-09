@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,14 +8,11 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>MyCrypto</title>
+        <title>My Crypto inicio</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -24,9 +20,13 @@ session_start();
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
+        <link href="css/proyectlist.css" rel="stylesheet">   
+        <link href="css/perfil.css" rel="stylesheet">
         
     </head>
-    <body id="page-top">
+    <body id="page-top" >
+    
     <?php 
         require ('conexion.php');
         $idusuario =$_SESSION['logueado'];
@@ -36,42 +36,26 @@ session_start();
         $rol = $_SESSION['rol'];
         }
     ?>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand"  href=""> <img src=" assets/img/sad.png" alt="..." /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars ms-1"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="../mycrypto/admin/redeslist.php">Redes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="admin/proyectoslist.php">Proyectos</a></li>
-                        <?php 
-                            if($rol == 1){
-                        ?>
-                            <li class="nav-item"><a class="nav-link" href="../mycrypto/productos.php">Productos</a></li>    
-                        <?php 
-                            }
-                        ?>
-                        <li class="nav-item"><a class="nav-link" href="../mycrypto/tienda.php">Tienda</a></li>
-                        <li class="nav-item"><a class="nav-link" href="https://es.cointelegraph.com/tags/games">Noticias</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link" href="perfil.php" > Perfil: <?php echo $nick; ?></a></li>
-                        
-                    </ul>
-                </div>
-            </div>
-        </nav>
+
+        <!-- Interruptor de modo oscuro -->
+        <div class="toggle-container">
+        <span class="toggle-label">Luces</span>
+        <label class="toggle-switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <?php include("header_usuario.php"); ?>
+
         <!-- Masthead-->
         <header class="masthead">
-            <div class="container">
                 <div class="masthead-subheading"></div>
                 <div class="masthead-heading text-uppercase"></div>
                 
                 <!-- CLASS MEASTHEAD ESPACIO DE GIF NO BORRAR -->
-            </div>
+            <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+            
         </header>
         <!-- Services-->
         <section class="page-section" >
@@ -148,11 +132,6 @@ session_start();
             </div>
         </selection>
 
-    
-        
-
-
-
         <!-- Team-->
         <section class="grupo-team" id="grupo-team">
             <div class="container">
@@ -195,37 +174,58 @@ session_start();
                 
             </div>
         </section>
-
-
-        
-
-        <!-- Footer-->
-        <footer class="footer py-4">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-4 text-lg-start">Copyright &copy; MyCrypto 2022</div>
-                    <div class="col-lg-4 my-3 my-lg-0">
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <div class="col-lg-4 text-lg-end">
-                        <a class="link-dark text-decoration-none me-3" href="#!">Politica de Privacidad</a>
-                        <a class="link-dark text-decoration-none" href="#!">Terminos y Condiciones</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        
-            
-        <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+
+        <script>
+             // Modo oscuro mejorado
+    document.addEventListener('DOMContentLoaded', function() {
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+        
+        // Verificar preferencias del sistema
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Función para aplicar modo oscuro
+        function applyDarkMode(enable) {
+            if (enable) {
+                body.classList.add('dark-mode');
+                if(darkModeToggle) darkModeToggle.checked = true;
+            } else {
+                body.classList.remove('dark-mode');
+                if(darkModeToggle) darkModeToggle.checked = false;
+            }
+        }
+        
+        // Cargar estado guardado o preferencia del sistema
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode === 'enabled' || (savedMode === null && prefersDarkScheme.matches)) {
+            applyDarkMode(true);
+        }
+        
+        // Escuchar cambios en el toggle
+        if(darkModeToggle) {
+            darkModeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('darkMode', 'enabled');
+                    applyDarkMode(true);
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                    applyDarkMode(false);
+                }
+            });
+        }
+        
+        // Escuchar cambios en las preferencias del sistema
+        prefersDarkScheme.addEventListener('change', e => {
+            if (localStorage.getItem('darkMode') === null) {
+                applyDarkMode(e.matches);
+            }
+        });
+    });
+        </script>
     </body>
+    <?php include("admin/footer_admin.php"); ?>
 </html>
