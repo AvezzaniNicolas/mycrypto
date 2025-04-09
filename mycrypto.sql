@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-04-2025 a las 19:18:02
+-- Tiempo de generación: 09-04-2025 a las 07:37:47
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -310,7 +310,8 @@ INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `pr
 (30, 'Crypto Legions', 'BLV3', '0.5', 'cryptolegions.PNG', 56, 1, 'Simulador', '7.2.4', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'cryptolegions.app/', 'whitepaper', 'noticias'),
 (31, 'Mining Network', 'ASIC', '1', 'minings.PNG', 56, 1, 'Farming', 'Finalizado', 'Mining network is a game on WAX blockchain. It combines FreeToPlay and PlayToEarn models. Every new user gets a free NFT to play and earn immediately after registering in the game.', 'https://miningnetwork.io/?ref=2rdaw.wam', 'whitepaper', 'noticias'),
 (32, 'Poly Island', 'POL', '0', 'poly.png', 68, 1, 'Farming', 'SCAM', 'asdoiahdnkjadbnjkasdnajsldkasd', 'https://twitter.com/home', 'whitepaper', 'noticias'),
-(33, 'Pinup warlords', 'PNIUP', '1', 'pinu.PNG', 56, 1, 'Cartas', 'Finalizado', 'Factions are made of Soldiers with different classes and officers', 'https://pinupwarlords.com/', 'whitepaper', 'noticias');
+(33, 'Pinup warlords', 'PNIUP', '1', 'pinu.PNG', 56, 1, 'Cartas', 'Finalizado', 'Factions are made of Soldiers with different classes and officers', 'https://pinupwarlords.com/', 'whitepaper', 'noticias'),
+(44, 'Proyecto de Prueba', 'PRO', '???', '67f42e899b6e7.png', 56, 1, 'TESTEO', 'Ongoing', 'Proyecto de testeo', 'www.proyectotesteo.com', 'www.proyectotesteo.comwww.proyectotestwww.proyectotesteo.com', 'www.proyectotesteo.comwww.proyectotesteo.comwww.pr');
 
 -- --------------------------------------------------------
 
@@ -438,6 +439,7 @@ CREATE TABLE `usuarios` (
   `nickname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `contrasenia` varchar(255) NOT NULL,
+  `fb_id` varchar(255) DEFAULT NULL,
   `foto` varchar(255) DEFAULT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
   `twitter` varchar(255) DEFAULT NULL,
@@ -445,20 +447,47 @@ CREATE TABLE `usuarios` (
   `facebook` varchar(255) DEFAULT NULL,
   `idestado` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `apellido` varchar(50) NOT NULL
+  `apellido` varchar(50) NOT NULL,
+  `discord_id` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `fecha_registro` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `foto`, `descripcion`, `twitter`, `instagram`, `facebook`, `idestado`, `nombre`, `apellido`) VALUES
-(17, 'nico_ave', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, 'esto es 9244', 'l', '', '', 1, '', ''),
-(27, 'ADMINISTRADOR', 'asd@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '1.jpg', '1234', NULL, NULL, NULL, 1, 'Nicolas Fernando', 'Zoppi'),
-(28, 'lolo', 'lolo@lolo.gov', '8aa40001b9b39cb257fe646a561a80840c806c55', NULL, NULL, NULL, NULL, NULL, 1, '', ''),
-(29, 'kilo', 'kilo@kilo.com', '8ff8800a239d91c648520ad5aea2d30e76e2850f', NULL, NULL, NULL, NULL, NULL, 1, '', ''),
-(30, 'pepe', 'pepe@gmail.com', '265392dc2782778664cc9d56c8e3cd9956661bb0', NULL, NULL, NULL, NULL, NULL, 1, '', ''),
-(33, 'CLIENTE', 'zoppinicolas@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'Listo que capo soy.jpg', NULL, NULL, NULL, NULL, 1, 'CLIENTE', 'CLIENTE');
+INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `fb_id`, `foto`, `descripcion`, `twitter`, `instagram`, `facebook`, `idestado`, `nombre`, `apellido`, `discord_id`, `avatar`, `fecha_registro`) VALUES
+(17, 'nico_ave', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, 'esto es 9244', 'l', '', '', 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
+(27, 'ADMINISTRADOR', 'asd@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, '1.jpg', '1234', NULL, NULL, NULL, 1, 'Nicolas Fernando', 'Zoppi', NULL, NULL, '2025-04-05 08:20:00'),
+(28, 'lolo', 'lolo@lolo.gov', '8aa40001b9b39cb257fe646a561a80840c806c55', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
+(29, 'kilo', 'kilo@kilo.com', '8ff8800a239d91c648520ad5aea2d30e76e2850f', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
+(30, 'pepe', 'pepe@gmail.com', '265392dc2782778664cc9d56c8e3cd9956661bb0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
+(33, 'CLIENTE', 'zoppinicolas@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, 'Listo que capo soy.jpg', NULL, NULL, NULL, NULL, 1, 'CLIENTE', 'CLIENTE', NULL, NULL, '2025-04-05 08:20:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario_favoritos`
+--
+
+CREATE TABLE `usuario_favoritos` (
+  `idfavorito` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL,
+  `crypto_id` varchar(50) NOT NULL,
+  `crypto_nombre` varchar(100) NOT NULL,
+  `fecha_agregado` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario_favoritos`
+--
+
+INSERT INTO `usuario_favoritos` (`idfavorito`, `idusuario`, `crypto_id`, `crypto_nombre`, `fecha_agregado`) VALUES
+(2, 27, 'solana', 'Solana', '2025-04-09 05:34:15'),
+(3, 27, 'bitcoin', 'Bitcoin', '2025-04-09 05:35:26'),
+(4, 27, 'ronin', 'Ronin', '2025-04-09 05:36:43'),
+(5, 27, 'ethereum', 'Ethereum', '2025-04-09 05:36:49');
 
 -- --------------------------------------------------------
 
@@ -589,6 +618,13 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`idusuario`);
 
 --
+-- Indices de la tabla `usuario_favoritos`
+--
+ALTER TABLE `usuario_favoritos`
+  ADD PRIMARY KEY (`idfavorito`),
+  ADD KEY `idusuario` (`idusuario`);
+
+--
 -- Indices de la tabla `usuario_redes`
 --
 ALTER TABLE `usuario_redes`
@@ -627,7 +663,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `rarezaitem`
@@ -639,7 +675,7 @@ ALTER TABLE `rarezaitem`
 -- AUTO_INCREMENT de la tabla `redes`
 --
 ALTER TABLE `redes`
-  MODIFY `idred` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `idred` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -651,13 +687,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario_favoritos`
+--
+ALTER TABLE `usuario_favoritos`
+  MODIFY `idfavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_redes`
 --
 ALTER TABLE `usuario_redes`
-  MODIFY `idred` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idred` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restricciones para tablas volcadas
@@ -703,6 +745,12 @@ ALTER TABLE `redes`
 ALTER TABLE `rol_usuarios`
   ADD CONSTRAINT `FK_rol` FOREIGN KEY (`idrol`) REFERENCES `roles` (`idrol`),
   ADD CONSTRAINT `FK_usuario` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `usuario_favoritos`
+--
+ALTER TABLE `usuario_favoritos`
+  ADD CONSTRAINT `usuario_favoritos_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuario`);
 
 --
 -- Filtros para la tabla `usuario_redes`
