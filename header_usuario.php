@@ -24,6 +24,11 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
 <link href="admin/css/dark-mode.css" rel="stylesheet">
 
 <div class="navbar">
+<?php if (basename($_SERVER['PHP_SELF']) == 'ver_perfil.php'): ?>
+        <a href="perfil.php" class="nav-link">
+            <i class="fas fa-user"></i> Volver a mi Perfil
+        </a>
+    <?php endif; ?>
     <a href="inicio.php" class="active">Inicio</a>
     <a href="admin/redeslist.php">REDES</a>
     <a href="admin/proyectoslist.php">PROYECTOS</a>
@@ -35,5 +40,11 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
         <span>Bienvenido, <?php echo $nick; ?></span>
         <span>(ID ROL:<?php echo $rol; ?>)</span>
         <a href="logout.php" style="color:rgb(0, 0, 0);">Cerrar Sesión</a>
+
+        <label class="toggle-switch">
+                <input type="checkbox" id="dark-mode-toggle">
+                <span class="slider"></span>
+                </label>
+                <span>Luces</span>
     </div>
 </div>

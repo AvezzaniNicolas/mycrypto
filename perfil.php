@@ -1,6 +1,5 @@
-<?php
-session_start();
-?>
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,154 +10,7 @@ session_start();
     <link href="admin/css/perfil.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* Estilos adicionales para el ABM */
-        .profile-section {
-            background: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .profile-section h2 {
-            margin-top: 0;
-            color: #333;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        
-        .social-media-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .social-media-list li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .social-media-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .social-icon {
-            margin-right: 10px;
-            color: #555;
-        }
-        
-        .social-actions a {
-            margin-left: 10px;
-            color: #555;
-            text-decoration: none;
-        }
-        
-        .social-actions a:hover {
-            color: #0066cc;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .btn {
-            background:rgb(212, 175, 55);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background:rgb(0, 0, 0);
-        }
-        
-        .btn-danger {
-            background: #cc0000;
-        }
-        
-        .btn-danger:hover {
-            background: #aa0000;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        
-        .modal-content {
-            background-color: #fff;
-            margin: 10% auto;
-            padding: 20px;
-            border-radius: 5px;
-            width: 80%;
-            max-width: 500px;
-        }
-        
-        .close {
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        /* Estilos para favoritos */
-        .favorite-btn.active {
-            color: gold;
-        }
-        
-        .favorites-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .favorites-list li {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-
-
-        .select-btn {
-    background: #6c5ce7;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8em;
-}
-
-.select-btn:hover {
-    background: #5649c0;
-}
-    </style>
+    <link href="admin/css/EstilosAdicionalesABM.css" rel="stylesheet">
 </head>
 <body>
 
@@ -371,6 +223,46 @@ if ($query_favoritos) {
             <?php endif; ?>
         </ul>
     </div>
+
+
+    <!-- Buscador de Perfiles -->
+<div class="profile-search-section">
+    <h2>Buscar otros usuarios</h2>
+    <form method="GET" action="" class="search-form">
+        <input type="text" name="buscar_usuario" placeholder="Nombre, apellido o nickname..." value="<?php echo $_GET['buscar_usuario'] ?? ''; ?>">
+        <button type="submit">Buscar</button>
+    </form>
+    
+    <?php
+    if (isset($_GET['buscar_usuario']) && !empty($_GET['buscar_usuario'])) {
+        $termino = mysqli_real_escape_string($conexion, $_GET['buscar_usuario']);
+        $query = "SELECT idusuario, nombre, apellido, nickname, foto FROM usuarios 
+                 WHERE nombre LIKE '%$termino%' 
+                 OR apellido LIKE '%$termino%' 
+                 OR nickname LIKE '%$termino%'
+                 AND idusuario != $idusuario"; // Excluye al usuario actual
+        $result = mysqli_query($conexion, $query);
+        
+        if (mysqli_num_rows($result) > 0) {
+            echo '<div class="user-results">';
+            while ($user = mysqli_fetch_assoc($result)) {
+                echo '<div class="user-card">';
+                echo '<img src="uploads/perfiles/'.$user['foto'].'" alt="'.$user['nombre'].'" class="user-avatar">';
+                echo '<div class="user-info">';
+                echo '<h3>'.$user['nombre'].' '.$user['apellido'].'</h3>';
+                echo '<p>@'.$user['nickname'].'</p>';
+                echo '<a href="ver_perfil.php?id='.$user['idusuario'].'" class="btn btn-small">Ver Perfil</a>';
+                echo '</div></div>';
+            }
+            echo '</div>';
+        } else {
+            echo '<p class="no-results">No se encontraron usuarios</p>';
+        }
+    }
+    ?>
+</div>
+
+
     
     <!-- Resto del contenido (criptomonedas) -->
     <header>
@@ -628,28 +520,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<script src="main.js"></script>
-<script src="darkModeModule.js"></script>
-<script src="chartModule.js"></script>
-<script src="comparisonModule.js"></script>
+<script src="js/perfil/main.js"></script>
+<script src="js/perfil/darkModeModule.js"></script>
+<script src="js/perfil/chartModule.js"></script>
+<script src="js/perfil/comparisonModule.js"></script>
 
 </body>
 
 <!-- Footer-->
-<footer class="footer py-4">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-4 text-lg-start">Copyright &copy; MyCrypto 2022</div>
-            <div class="col-lg-4 my-3 my-lg-0">
-                <a class="btn btn-dark btn-social mx-2" href="https://github.com/AvezzaniNicolas/mycrypto/tree/main" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <br>
-            <div class="col-lg-4 text-lg-end">
-                <a class="link-dark text-decoration-none me-3" href="#!">Politica de Privacidad</a>
-                <a class="link-dark text-decoration-none" href="#!">Terminos y Condiciones</a>
-            </div>
-        </div>
-    </div>
-</footer>
+<?php include("admin/footer_admin.php"); ?>
 
 </html>

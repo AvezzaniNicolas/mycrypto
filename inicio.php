@@ -36,13 +36,6 @@ session_start();
         }
     ?>
 
-        <!-- Interruptor de modo oscuro -->
-        <div class="toggle-container">
-        <span class="toggle-label">Luces</span>
-        <label class="toggle-switch">
-            <input type="checkbox" id="dark-mode-toggle">
-            <span class="slider"></span>
-        </label>
     </div>
 
     <?php include("header_usuario.php"); ?>
