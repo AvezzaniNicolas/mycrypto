@@ -1,6 +1,6 @@
 /* Estilos adicionales para el ABM */
 .profile-section {
-    background: #fff;
+    background: rgb(245, 245, 245);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
@@ -59,7 +59,7 @@
 .form-group input, .form-group select {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid rgb(221, 221, 221);
     border-radius: 4px;
 }
 
@@ -96,7 +96,7 @@
 }
 
 .modal-content {
-    background-color: #fff;
+    background-color: rgb(245, 245, 245);
     margin: 10% auto;
     padding: 20px;
     border-radius: 5px;
@@ -123,7 +123,7 @@
 
 .favorites-list li {
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgb(245, 245, 245);
     display: flex;
     justify-content: space-between;
     align-items: center;

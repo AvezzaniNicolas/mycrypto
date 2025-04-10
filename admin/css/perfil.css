@@ -467,7 +467,7 @@ input:checked + .slider:before {
 
   /* Buscador de perfiles */
 .profile-search-section {
-    background: #fff;
+    background: rgb(245, 245, 245);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
@@ -483,7 +483,7 @@ input:checked + .slider:before {
 .search-form input {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #a0a0a0;
     border-radius: 4px;
 }
 
@@ -507,7 +507,7 @@ input:checked + .slider:before {
     display: flex;
     align-items: center;
     padding: 15px;
-    background: rgb(212, 175, 55);
+    background: rgb(255, 230, 110);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: transform 0.2s;
