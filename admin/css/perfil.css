@@ -489,7 +489,7 @@ input:checked + .slider:before {
 
 .search-form button {
     padding: 10px 20px;
-    background: #6c5ce7;
+    background: rgb(212, 175, 55);
     color: white;
     border: none;
     border-radius: 4px;
@@ -507,7 +507,7 @@ input:checked + .slider:before {
     display: flex;
     align-items: center;
     padding: 15px;
-    background: #fff;
+    background: rgb(212, 175, 55);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: transform 0.2s;
