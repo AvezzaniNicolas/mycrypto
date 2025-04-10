@@ -23,7 +23,6 @@ session_start();
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
         <link href="css/proyectlist.css" rel="stylesheet">   
         <link href="css/perfil.css" rel="stylesheet">
-        
     </head>
     <body id="page-top" >
     

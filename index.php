@@ -121,4 +121,6 @@ session_start();
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 
 </body>
+
+<?php include("footer_admin.php"); ?>
 </html>

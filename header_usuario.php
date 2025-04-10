@@ -34,6 +34,6 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
     <div class="user-info">
         <span>Bienvenido, <?php echo $nick; ?></span>
         <span>(ID ROL:<?php echo $rol; ?>)</span>
-        <a href="../logout.php" style="color:rgb(0, 0, 0);">Cerrar Sesión</a>
+        <a href="logout.php" style="color:rgb(0, 0, 0);">Cerrar Sesión</a>
     </div>
 </div>

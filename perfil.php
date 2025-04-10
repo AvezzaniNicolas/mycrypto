@@ -142,6 +142,22 @@ session_start();
             justify-content: space-between;
             align-items: center;
         }
+
+
+
+        .select-btn {
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.select-btn:hover {
+    background: #5649c0;
+}
     </style>
 </head>
 <body>
@@ -517,17 +533,17 @@ if ($query_favoritos) {
         <form method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" value="<?php echo $nombre; ?>" required>
+                <input type="text" id="nombre" name="nombre" value="<?php echo $nombre; ?>" required autocomplete="given-name">
             </div>
             
             <div class="form-group">
                 <label for="apellido">Apellido</label>
-                <input type="text" id="apellido" name="apellido" value="<?php echo $apellido; ?>" required>
+                <input type="text" id="apellido" name="apellido" value="<?php echo $apellido; ?>" required autocomplete="family-name">
             </div>
             
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?php echo $email; ?>" required>
+                <input type="email" id="email" name="email" value="<?php echo $email; ?>" required autocomplete="email">
             </div>
             
             <div class="form-group">
@@ -612,7 +628,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<script src="funcionesperfil.js"></script>
+<script src="main.js"></script>
+<script src="darkModeModule.js"></script>
+<script src="chartModule.js"></script>
+<script src="comparisonModule.js"></script>
+
 </body>
 
 <!-- Footer-->
