@@ -54,11 +54,11 @@ while ($fav = mysqli_fetch_assoc($query_favoritos)) {
             $nombre_permiso = $r['descripcion'];
             
             switch($nombre_permiso) {
-                case 'alta proyecto': ?>
+                case 'modificar usuario': ?>
                     <div class="row">
                         <div class="col-xs-12 text-right">
-                            <a href='add_proyecto.php' class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus"></span> Modificar Perfil del usuario
+                            <a href='modificar_perfil.php?id=<?php echo $userId; ?>' class="btn btn-default">
+                                <i class="fas fa-edit"></i> Modificar Perfil del usuario
                             </a>
                         </div>
                     </div>
@@ -67,7 +67,7 @@ while ($fav = mysqli_fetch_assoc($query_favoritos)) {
             }
         }
     }
-    ?>
+?>
 
 <div class="container">
     <div class="profile-section">
