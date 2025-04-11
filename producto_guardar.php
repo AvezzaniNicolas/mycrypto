@@ -20,9 +20,12 @@ if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
     if($idcategoria == 2){
         $destino = "img/marcos/" . $nombreImagen;
         $nombreImagen = "marcos/".$nombreImagen;
-    }else{
+    }else if($idcategoria == 3){
         $destino = "img/banners/" . $nombreImagen;
         $nombreImagen = "banners/".$nombreImagen;
+    }else{
+        $destino = "img/logos/" . $nombreImagen;
+        $nombreImagen = "logos/".$nombreImagen;
     }
     move_uploaded_file($tmpName, $destino);
 }

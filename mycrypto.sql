@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-04-2025 a las 20:27:48
+-- Tiempo de generación: 11-04-2025 a las 04:14:51
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -77,6 +77,9 @@ CREATE TABLE `favoritos` (
 CREATE TABLE `inventarios` (
   `idinventario` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
+  `logo1` varchar(256) DEFAULT NULL,
+  `logo2` varchar(256) DEFAULT NULL,
+  `logo3` varchar(256) DEFAULT NULL,
   `imagen1` varchar(255) DEFAULT NULL,
   `imagen2` varchar(255) DEFAULT NULL,
   `imagen3` varchar(255) DEFAULT NULL,
@@ -90,22 +93,22 @@ CREATE TABLE `inventarios` (
 -- Volcado de datos para la tabla `inventarios`
 --
 
-INSERT INTO `inventarios` (`idinventario`, `idusuario`, `imagen1`, `imagen2`, `imagen3`, `banner1`, `banner2`, `banner3`, `moneda`) VALUES
-(1, 2, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(2, 3, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(3, 4, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(4, 16, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(5, 17, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(6, 18, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(7, 19, NULL, NULL, NULL, NULL, NULL, NULL, 20),
-(8, 20, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(9, 21, 'logos/1.png', 'logos/2.png', NULL, NULL, NULL, NULL, 153),
-(10, 22, 'logos/1.png', NULL, NULL, NULL, NULL, NULL, 178),
-(11, 29, 'logos/1.png', NULL, NULL, NULL, NULL, NULL, 190),
-(12, 30, NULL, NULL, NULL, NULL, NULL, NULL, 1500),
-(13, 31, 'marcos/1.jpg', 'marcos/2.png', NULL, NULL, NULL, NULL, 1466),
-(14, 32, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(15, 33, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `inventarios` (`idinventario`, `idusuario`, `logo1`, `logo2`, `logo3`, `imagen1`, `imagen2`, `imagen3`, `banner1`, `banner2`, `banner3`, `moneda`) VALUES
+(1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(2, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(3, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(4, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(5, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(6, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(7, 19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20),
+(8, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(9, 21, NULL, NULL, NULL, 'logos/1.png', 'logos/2.png', NULL, NULL, NULL, NULL, 153),
+(10, 22, NULL, NULL, NULL, 'logos/1.png', NULL, NULL, NULL, NULL, NULL, 178),
+(11, 29, NULL, NULL, NULL, 'logos/1.png', NULL, NULL, NULL, NULL, NULL, 190),
+(12, 30, 'logos/prod_67f87a0aeb361.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1480),
+(13, 31, NULL, NULL, NULL, 'marcos/1.jpg', 'marcos/2.png', NULL, NULL, NULL, NULL, 1466),
+(14, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(15, 33, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -230,7 +233,8 @@ INSERT INTO `productos` (`idproducto`, `nombre_producto`, `imagen`, `precio`, `i
 (5, 'Marco 2', 'marcos/2.png', 22, 1, 2),
 (6, 'Banner 1', 'banners/1.jpg', 23, 1, 3),
 (7, 'Banner 2', 'banners/2.jpg', 17, 1, 3),
-(9, 'Logo 4', 'logos/4.png', 32, 1, 1);
+(9, 'Logo 4', 'logos/4.png', 32, 1, 1),
+(10, 'logo 12', 'logos/prod_67f87a0aeb361.jpg', 20, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -250,6 +254,7 @@ CREATE TABLE `productos_categoria` (
 --
 
 INSERT INTO `productos_categoria` (`id`, `nombre`, `url`, `activo`) VALUES
+(1, 'Logos', 'tienda\\img\\banner_img_01.jpg', 1),
 (2, 'Marcos', './tienda/img/category_img_02.jpg', 1),
 (3, 'Banners', './tienda/img/category_img_03.jpg', 1);
 
@@ -403,7 +408,7 @@ INSERT INTO `rol_usuarios` (`idrol`, `idusuario`) VALUES
 (1, 27),
 (2, 28),
 (2, 29),
-(2, 30),
+(1, 30),
 (2, 33);
 
 -- --------------------------------------------------------
@@ -426,7 +431,8 @@ CREATE TABLE `tienda` (
 
 INSERT INTO `tienda` (`idtienda`, `nombre_tienda`, `imagen_tienda`, `idestado`, `orden`) VALUES
 (1, 'Marco Foto de Perfil', 'marco_perfil.png', 1, 1),
-(2, 'banners', 'banners_tienda.png', 1, 2);
+(2, 'banners', 'banners_tienda.png', 1, 2),
+(3, 'Logos', '', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -570,6 +576,12 @@ ALTER TABLE `permiso_roles`
   ADD KEY `idrol` (`idrol`);
 
 --
+-- Indices de la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD PRIMARY KEY (`idproducto`);
+
+--
 -- Indices de la tabla `productos_categoria`
 --
 ALTER TABLE `productos_categoria`
@@ -662,6 +674,12 @@ ALTER TABLE `noticias`
 --
 ALTER TABLE `permisos`
   MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `productos`
+--
+ALTER TABLE `productos`
+  MODIFY `idproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `proyectos`

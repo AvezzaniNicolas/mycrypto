@@ -19,6 +19,21 @@
     }else{
         $compraexito = 1;
         switch(intval($producto['idcategoria'])){
+            case 1:
+                if(!isset($inventario['logo1'])){
+                    $sql = "UPDATE inventarios SET logo1 = '".$producto['imagen']."' WHERE idusuario = ".$idusuario;
+                    $result = mysqli_query($conexion, $sql);                                
+                }else if(!isset($inventario['logo2'])){
+                    $sql = "UPDATE inventarios SET logo2 = '".$producto['imagen']."' WHERE idusuario = ".$idusuario;
+                    $result = mysqli_query($conexion, $sql);                                
+                }else if(!isset($inventario['logo2'])){
+                    $sql = "UPDATE inventarios SET logo3 = '".$producto['imagen']."' WHERE idusuario = ".$idusuario;
+                    $result = mysqli_query($conexion, $sql);                                
+                }else{
+                    echo "El inventario esta lleno.";
+                    $compraexito = 0;
+                }
+                break;
             case 2:
                 if(!isset($inventario['imagen1'])){
                     $sql = "UPDATE inventarios SET imagen1 = '".$producto['imagen']."' WHERE idusuario = ".$idusuario;

@@ -80,7 +80,6 @@ https://templatemo.com/tm-559-zay-shop
                                     <ul class="list-unstyled">
                                         <li><a class="btn btn-success text-white mt-2" href="buy.php?producto=<?php echo $row['idproducto']; ?>"><i class="fas fa-cart-plus"></i></a></li>
                                         <li><a class="btn btn-success text-white mt-2" href="producto_edit.php?id=<?php echo $row['idproducto']; ?>"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
