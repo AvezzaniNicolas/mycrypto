@@ -23,6 +23,8 @@ session_start();
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
         <link href="css/proyectlist.css" rel="stylesheet">   
         <link href="css/perfil.css" rel="stylesheet">
+        <!--Radio-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body id="page-top" >
     
@@ -39,6 +41,129 @@ session_start();
     </div>
 
     <?php include("header_usuario.php"); ?>
+
+<div class="radio-api-player container mt-4 p-3 bg-light rounded">
+    <h4 class="text-center mb-3">Selecciona una estación</h4>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <select class="form-select station-select mb-3">
+                <option value="" selected disabled>Elige una radio</option>
+                <option value="http://stream.laut.fm/rock">🎸 Rock</option>
+                <option value="http://stream.laut.fm/pop">🎵 POP</option>
+                <option value="https://stream.laut.fm/anime">🇯🇵 Laut.fm Anime Radio</option>
+                <!-- Más opciones -->
+            </select>
+            
+            <div class="d-flex align-items-center mb-3">
+                <audio controls class="station-player w-100"></audio>
+                <button class="btn btn-outline-secondary btn-sm ms-2 volume-control">
+                    <i class="bi bi-volume-up"></i>
+                </button>
+            </div>
+            
+            <div class="station-info alert alert-info d-none">
+                <strong>Reproduciendo:</strong> <span class="station-name"></span>
+            </div>
+            
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-primary btn-sm prev-station">Anterior</button>
+                <button class="btn btn-danger btn-sm stop-btn">Detener</button>
+                <button class="btn btn-primary btn-sm next-station">Siguiente</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const select = document.querySelector('.station-select');
+    const player = document.querySelector('.station-player');
+    const stationInfo = document.querySelector('.station-info');
+    const stationName = document.querySelector('.station-name');
+    const stopBtn = document.querySelector('.stop-btn');
+    const prevBtn = document.querySelector('.prev-station');
+    const nextBtn = document.querySelector('.next-station');
+    const volumeControl = document.querySelector('.volume-control');
+    
+    // Configuración inicial
+    player.volume = 0.2;
+    let stations = Array.from(select.options).filter(opt => opt.value);
+    let currentIndex = -1;
+    
+    // Cambiar estación
+    function changeStation(index) {
+        if (index >= 0 && index < stations.length) {
+            currentIndex = index;
+            const station = stations[currentIndex];
+            select.value = station.value;
+            player.src = station.value;
+            stationName.textContent = station.text;
+            stationInfo.classList.remove('d-none');
+            
+            player.play().catch(e => {
+                stationInfo.innerHTML = `<strong>Error:</strong> Haz click en play para reproducir. <button class="btn btn-sm btn-warning force-play">Forzar reproducción</button>`;
+                
+                document.querySelector('.force-play')?.addEventListener('click', () => {
+                    player.play();
+                });
+            });
+        }
+    }
+    
+    // Eventos
+    select.addEventListener('change', function() {
+        if (this.value) {
+            currentIndex = stations.findIndex(s => s.value === this.value);
+            changeStation(currentIndex);
+        }
+    });
+    
+    stopBtn.addEventListener('click', () => {
+        player.pause();
+        player.currentTime = 0;
+        stationInfo.classList.add('d-none');
+    });
+    
+    prevBtn.addEventListener('click', () => {
+        changeStation((currentIndex - 1 + stations.length) % stations.length);
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        changeStation((currentIndex + 1) % stations.length);
+    });
+    
+    volumeControl.addEventListener('click', () => {
+        player.volume = player.volume === 0 ? 0.7 : 0;
+        volumeControl.innerHTML = player.volume === 0 ? 
+            '<i class="bi bi-volume-mute"></i>' : '<i class="bi bi-volume-up"></i>';
+    });
+    
+    // Manejo de errores
+    player.addEventListener('error', () => {
+        stationInfo.innerHTML = '<strong>Error:</strong> No se puede conectar a la estación.';
+    });
+    
+    // Teclado
+    document.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' && !player.paused) {
+            player.pause();
+        } else if (e.code === 'ArrowLeft') {
+            changeStation((currentIndex - 1 + stations.length) % stations.length);
+        } else if (e.code === 'ArrowRight') {
+            changeStation((currentIndex + 1) % stations.length);
+        }
+    });
+});
+</script>
+
+<!-- Incluir Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+
+
+
+</div>
+
 
         <!-- Masthead-->
         <header class="masthead">
