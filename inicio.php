@@ -42,124 +42,222 @@ session_start();
 
     <?php include("header_usuario.php"); ?>
 
-<div class="radio-api-player container mt-4 p-3 bg-light rounded">
-    <h4 class="text-center mb-3">Selecciona una estación</h4>
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            <select class="form-select station-select mb-3">
-                <option value="" selected disabled>Elige una radio</option>
-                <option value="http://stream.laut.fm/rock">🎸 Rock</option>
-                <option value="http://stream.laut.fm/pop">🎵 POP</option>
-                <option value="https://stream.laut.fm/anime">🇯🇵 Laut.fm Anime Radio</option>
-                <!-- Más opciones -->
-            </select>
+<!-- Widget de Radio Flotante -->
+<div class="music-lake-radio-floating">
+    <div class="radio-floating-container">
+        <div class="radio-header d-flex justify-content-between align-items-center">
+            <h4 class="radio-title m-0">MYCRYPTO</h4>
+            <div class="live-badge">LIVE</div>
+        </div>
+        
+        <div class="radio-controls">
+            <audio id="musicLakePlayerFloating" controls></audio>
             
-            <div class="d-flex align-items-center mb-3">
-                <audio controls class="station-player w-100"></audio>
-                <button class="btn btn-outline-secondary btn-sm ms-2 volume-control">
-                    <i class="bi bi-volume-up"></i>
-                </button>
+            <div class="station-selector mt-2">
+                <select class="form-select station-select">
+                    <option value="" selected disabled>Seleccionar estación</option>
+                    <option value="http://stream.laut.fm/rock">🎸 Rock</option>
+                    <option value="http://stream.laut.fm/pop">🎵 Pop</option>
+                    <option value="https://stream.laut.fm/anime">🇯🇵 Anime</option>
+                    <option value="http://stream.laut.fm/chillout">🌿 Chill</option>
+                </select>
             </div>
             
-            <div class="station-info alert alert-info d-none">
-                <strong>Reproduciendo:</strong> <span class="station-name"></span>
-            </div>
-            
-            <div class="d-flex justify-content-between">
-                <button class="btn btn-primary btn-sm prev-station">Anterior</button>
-                <button class="btn btn-danger btn-sm stop-btn">Detener</button>
-                <button class="btn btn-primary btn-sm next-station">Siguiente</button>
+            <div class="now-playing mt-2">
+                <div class="np-title">Selecciona una estación</div>
             </div>
         </div>
+        
+        <button class="toggle-radio-btn">
+            <i class="fas fa-music"></i>
+        </button>
     </div>
 </div>
 
+<style>
+/* Estilos para el widget flotante */
+.music-lake-radio-floating {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    width: 300px;
+}
+
+.radio-floating-container {
+    background: linear-gradient(135deg,rgb(108, 89, 26),rgb(114, 114, 114), #fdbb2d);
+    color: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    transform: translateY(calc(100% - 40px));
+}
+
+.radio-floating-container.expanded {
+    transform: translateY(0);
+}
+
+.radio-title {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: white;
+}
+
+.live-badge {
+    background-color: #ff0000;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 15px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    animation: pulse 1.5s infinite;
+}
+
+.toggle-radio-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(212, 186, 38, 0.2);
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.toggle-radio-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.now-playing {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.np-title {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+audio {
+    width: 100%;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+audio::-webkit-media-controls-panel {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-mute-button {
+    background-color: white;
+    border-radius: 50%;
+}
+
+/* Modo oscuro */
+.dark-mode .radio-floating-container {
+    background: linear-gradient(135deg,rgb(182, 156, 40),rgb(0, 0, 0), #9e7a1c);
+}
+
+/* Animaciones */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .music-lake-radio-floating {
+        width: 260px;
+        right: 10px;
+        bottom: 10px;
+    }
+    
+    .radio-floating-container {
+        padding: 12px;
+    }
+}
+</style>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const select = document.querySelector('.station-select');
-    const player = document.querySelector('.station-player');
-    const stationInfo = document.querySelector('.station-info');
-    const stationName = document.querySelector('.station-name');
-    const stopBtn = document.querySelector('.stop-btn');
-    const prevBtn = document.querySelector('.prev-station');
-    const nextBtn = document.querySelector('.next-station');
-    const volumeControl = document.querySelector('.volume-control');
+    const player = document.getElementById('musicLakePlayerFloating');
+    const stationSelect = document.querySelector('.music-lake-radio-floating .station-select');
+    const npTitle = document.querySelector('.music-lake-radio-floating .np-title');
+    const radioContainer = document.querySelector('.radio-floating-container');
+    const toggleBtn = document.querySelector('.toggle-radio-btn');
     
     // Configuración inicial
     player.volume = 0.2;
-    let stations = Array.from(select.options).filter(opt => opt.value);
-    let currentIndex = -1;
+    let isExpanded = false;
     
-    // Cambiar estación
-    function changeStation(index) {
-        if (index >= 0 && index < stations.length) {
-            currentIndex = index;
-            const station = stations[currentIndex];
-            select.value = station.value;
-            player.src = station.value;
-            stationName.textContent = station.text;
-            stationInfo.classList.remove('d-none');
-            
-            player.play().catch(e => {
-                stationInfo.innerHTML = `<strong>Error:</strong> Haz click en play para reproducir. <button class="btn btn-sm btn-warning force-play">Forzar reproducción</button>`;
-                
-                document.querySelector('.force-play')?.addEventListener('click', () => {
-                    player.play();
-                });
-            });
+    // Función para alternar visibilidad
+    function toggleRadio() {
+        isExpanded = !isExpanded;
+        if(isExpanded) {
+            radioContainer.classList.add('expanded');
+            toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+            radioContainer.classList.remove('expanded');
+            toggleBtn.innerHTML = '<i class="fas fa-music"></i>';
         }
     }
     
-    // Eventos
-    select.addEventListener('change', function() {
+    // Evento para el botón de toggle
+    toggleBtn.addEventListener('click', toggleRadio);
+    
+    // Cambiar estación
+    stationSelect.addEventListener('change', function() {
         if (this.value) {
-            currentIndex = stations.findIndex(s => s.value === this.value);
-            changeStation(currentIndex);
+            player.src = this.value;
+            npTitle.textContent = this.options[this.selectedIndex].text.replace(/^[^\s]+\s/, '');
+            
+            player.play().catch(e => {
+                npTitle.textContent = "Click en play para reproducir";
+            });
+            
+            // Auto-expandir cuando se selecciona una estación
+            if(!isExpanded) toggleRadio();
         }
-    });
-    
-    stopBtn.addEventListener('click', () => {
-        player.pause();
-        player.currentTime = 0;
-        stationInfo.classList.add('d-none');
-    });
-    
-    prevBtn.addEventListener('click', () => {
-        changeStation((currentIndex - 1 + stations.length) % stations.length);
-    });
-    
-    nextBtn.addEventListener('click', () => {
-        changeStation((currentIndex + 1) % stations.length);
-    });
-    
-    volumeControl.addEventListener('click', () => {
-        player.volume = player.volume === 0 ? 0.7 : 0;
-        volumeControl.innerHTML = player.volume === 0 ? 
-            '<i class="bi bi-volume-mute"></i>' : '<i class="bi bi-volume-up"></i>';
     });
     
     // Manejo de errores
     player.addEventListener('error', () => {
-        stationInfo.innerHTML = '<strong>Error:</strong> No se puede conectar a la estación.';
+        npTitle.textContent = "Error al conectar";
     });
     
-    // Teclado
-    document.addEventListener('keydown', (e) => {
-        if (e.code === 'Space' && !player.paused) {
-            player.pause();
-        } else if (e.code === 'ArrowLeft') {
-            changeStation((currentIndex - 1 + stations.length) % stations.length);
-        } else if (e.code === 'ArrowRight') {
-            changeStation((currentIndex + 1) % stations.length);
-        }
+    // Actualizar título cuando se está cargando
+    player.addEventListener('waiting', () => {
+        npTitle.textContent = "Cargando...";
+    });
+    
+    // Actualizar título cuando está reproduciendo
+    player.addEventListener('playing', () => {
+        const stationName = stationSelect.options[stationSelect.selectedIndex].text.replace(/^[^\s]+\s/, '');
+        npTitle.textContent = stationName;
     });
 });
 </script>
-
-<!-- Incluir Bootstrap Icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-
-
 
 
 </div>
