@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-04-2025 a las 04:14:51
+-- Tiempo de generación: 11-04-2025 a las 15:54:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -175,7 +175,8 @@ INSERT INTO `permisos` (`idpermiso`, `descripcion`) VALUES
 (9, 'modificar item'),
 (10, 'alta tienda'),
 (11, 'baja tienda'),
-(12, 'modificar tienda');
+(12, 'modificar tienda'),
+(13, 'modificar usuario');
 
 -- --------------------------------------------------------
 
@@ -204,7 +205,8 @@ INSERT INTO `permiso_roles` (`idpermiso`, `idrol`) VALUES
 (9, 1),
 (10, 1),
 (11, 1),
-(12, 1);
+(12, 1),
+(13, 1);
 
 -- --------------------------------------------------------
 
@@ -673,7 +675,7 @@ ALTER TABLE `noticias`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
