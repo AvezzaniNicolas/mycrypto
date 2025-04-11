@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-04-2025 a las 17:19:45
+-- Tiempo de generación: 11-04-2025 a las 17:38:43
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -531,7 +531,8 @@ INSERT INTO `usuario_favoritos` (`idfavorito`, `idusuario`, `crypto_id`, `crypto
 (15, 17, 'bitcoin', 'Bitcoin', '2025-04-11 15:10:15'),
 (16, 17, 'ripple', 'XRP', '2025-04-11 15:10:36'),
 (17, 17, 'polkadot', 'Polkadot', '2025-04-11 15:10:45'),
-(18, 33, 'ripple', 'XRP', '2025-04-11 15:11:17');
+(18, 33, 'ripple', 'XRP', '2025-04-11 15:11:17'),
+(20, 17, 'iota', 'IOTA', '2025-04-11 15:35:20');
 
 -- --------------------------------------------------------
 
@@ -751,7 +752,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuario_favoritos`
 --
 ALTER TABLE `usuario_favoritos`
-  MODIFY `idfavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idfavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_redes`
