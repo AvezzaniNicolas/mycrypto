@@ -90,18 +90,6 @@ $query_favoritos = mysqli_query($conexion, "SELECT * FROM usuario_favoritos WHER
 while ($fav = mysqli_fetch_assoc($query_favoritos)) {
     $favoritos[] = $fav;
 }
-
-// Lista de criptomonedas populares para sugerencias
-$criptos_populares = [
-    ['id' => 'bitcoin', 'nombre' => 'Bitcoin'],
-    ['id' => 'ethereum', 'nombre' => 'Ethereum'],
-    ['id' => 'binancecoin', 'nombre' => 'Binance Coin'],
-    ['id' => 'solana', 'nombre' => 'Solana'],
-    ['id' => 'cardano', 'nombre' => 'Cardano'],
-    ['id' => 'ripple', 'nombre' => 'XRP'],
-    ['id' => 'polkadot', 'nombre' => 'Polkadot'],
-    ['id' => 'dogecoin', 'nombre' => 'Dogecoin']
-];
 ?>
 
 <!DOCTYPE html>
@@ -110,8 +98,11 @@ $criptos_populares = [
     <meta charset="UTF-8">
     <title>Editar Favoritos de <?php echo htmlspecialchars($user['nombre']); ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link href="../admin/css/perfil.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="css/perfil.css" rel="stylesheet">
+    <link href="css/EstilosAdicionalesABM.css" rel="stylesheet">
     <style>
         .cripto-list {
             display: flex;
@@ -120,7 +111,7 @@ $criptos_populares = [
             margin-bottom: 20px;
         }
         .cripto-item {
-            background: #f5f5f5;
+            background:rgb(233, 233, 233);
             padding: 10px 15px;
             border-radius: 20px;
             display: flex;
@@ -133,21 +124,18 @@ $criptos_populares = [
             background: none;
             border: none;
         }
-        .suggestions {
+        .select2-container {
+            width: 100% !important;
+            margin-bottom: 15px;
+        }
+        .select2-results__option {
             display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 15px 0;
+            align-items: center;
         }
-        .suggestion {
-            background: #e0e0e0;
-            padding: 5px 10px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .suggestion:hover {
-            background: #d0d0d0;
+        .crypto-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -198,24 +186,12 @@ $criptos_populares = [
         
         <form method="POST" action="editar_favoritos.php?id=<?php echo $userId; ?>">
             <div class="form-group">
-                <label for="crypto_id">ID de la criptomoneda:</label>
-                <input type="text" id="crypto_id" name="crypto_id" required>
+                <label for="crypto_search">Buscar criptomoneda:</label>
+                <select id="crypto_search" class="crypto-select" style="width: 100%"></select>
             </div>
             
-            <div class="form-group">
-                <label for="crypto_nombre">Nombre:</label>
-                <input type="text" id="crypto_nombre" name="crypto_nombre" required>
-            </div>
-            
-            <div class="suggestions">
-                <p>Sugerencias: </p>
-                <?php foreach ($criptos_populares as $cripto): ?>
-                    <div class="suggestion" onclick="document.getElementById('crypto_id').value='<?php echo $cripto['id']; ?>'; 
-                                                   document.getElementById('crypto_nombre').value='<?php echo $cripto['nombre']; ?>'">
-                        <?php echo $cripto['nombre']; ?>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+            <input type="hidden" id="crypto_id" name="crypto_id" required>
+            <input type="hidden" id="crypto_nombre" name="crypto_nombre" required>
             
             <div class="form-actions">
                 <button type="submit" name="agregar_cripto" class="btn btn-primary">Agregar</button>
@@ -225,11 +201,64 @@ $criptos_populares = [
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-// Función para autocompletar desde una API (opcional)
-document.getElementById('crypto_id').addEventListener('input', function() {
-    // Aquí podrías implementar llamada a una API como CoinGecko
-    // para autocompletar el nombre basado en el ID
+$(document).ready(function() {
+    // Inicializar Select2 con búsqueda en tiempo real
+    $('.crypto-select').select2({
+        placeholder: "Busque una criptomoneda...",
+        minimumInputLength: 2,
+        ajax: {
+            url: 'https://api.coingecko.com/api/v3/search',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    query: params.term
+                };
+            },
+            processResults: function (data) {
+                var results = [];
+                $.each(data.coins, function(index, coin) {
+                    results.push({
+                        id: coin.id,
+                        text: coin.name + ' (' + coin.symbol.toUpperCase() + ')',
+                        icon: coin.thumb,
+                        name: coin.name
+                    });
+                });
+                return {
+                    results: results
+                };
+            },
+            cache: true
+        },
+        templateResult: formatCrypto,
+        templateSelection: formatCryptoSelection
+    });
+
+    // Cuando se selecciona una criptomoneda
+    $('.crypto-select').on('select2:select', function (e) {
+        var data = e.params.data;
+        $('#crypto_id').val(data.id);
+        $('#crypto_nombre').val(data.name);
+    });
+
+    // Formatear los resultados de búsqueda
+    function formatCrypto(coin) {
+        if (!coin.id) { return coin.text; }
+        var $result = $(
+            '<span><img src="' + coin.icon + '" class="crypto-icon"/> ' + coin.text + '</span>'
+        );
+        return $result;
+    }
+
+    // Formatear la selección actual
+    function formatCryptoSelection(coin) {
+        if (!coin.id) { return coin.text; }
+        return coin.text;
+    }
 });
 </script>
 <script src="../js/perfil/main.js"></script>
