@@ -3,7 +3,7 @@ session_start();
 require 'conexion.php';
 
 // Verificar si el usuario es administrador
-if (!isset($_SESSION['logueado']) {
+if (!isset($_SESSION['logueado'])) {
     header("Location: login.php");
     exit;
 }
@@ -12,7 +12,7 @@ if (!isset($_SESSION['logueado']) {
 $idrol = $_SESSION['rol'];
 $permiso_admin = false;
 $permiso = mysqli_query($conexion, "SELECT p.descripcion FROM permisos AS p, permiso_roles AS pr 
-                                   WHERE p.idpermiso = pr.idpermiso AND pr.idrol = $idrol;");
+                                   WHERE p.idpermiso = pr.idpermiso AND pr.idrol = $idrol");
 
 while($r = mysqli_fetch_array($permiso)) {
     if ($r['descripcion'] == 'modificar usuario') {
@@ -86,7 +86,7 @@ while ($estado = mysqli_fetch_assoc($query_estados)) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Modificar Perfil de <?php echo $user['nombre']; ?></title>
+    <title>Modificar Perfil de <?php echo htmlspecialchars($user['nombre']); ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="admin/css/perfil.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -100,11 +100,11 @@ while ($estado = mysqli_fetch_assoc($query_estados)) {
     <h1>Modificar Perfil de Usuario</h1>
     
     <?php if (isset($_SESSION['mensaje'])): ?>
-        <div class="alert alert-success"><?php echo $_SESSION['mensaje']; unset($_SESSION['mensaje']); ?></div>
+        <div class="alert alert-success"><?php echo htmlspecialchars($_SESSION['mensaje']); unset($_SESSION['mensaje']); ?></div>
     <?php endif; ?>
     
     <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
+        <div class="alert alert-danger"><?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></div>
     <?php endif; ?>
     
     <form method="POST" action="modificar_perfil.php?id=<?php echo $userId; ?>">
@@ -159,6 +159,7 @@ while ($estado = mysqli_fetch_assoc($query_estados)) {
         </ul>
     </div>
 </div>
-
+<script src="js/perfil/main.js"></script>
+<script src="js/perfil/darkModeModule.js"></script>
 </body>
 </html>
