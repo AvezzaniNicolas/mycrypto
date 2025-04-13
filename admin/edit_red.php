@@ -38,74 +38,75 @@ $active_banner = "active";
     <?php include("header_admin.php"); ?>
 
     <div class="container">
-        <div class="row">
-            <div class="col-md-7">
-                <h3><span class="glyphicon glyphicon-edit"></span> Editar Red</h3>
-                
-                <form action="abm_red.php" class="form-horizontal" method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="nombre_red" class="col-sm-3 control-label">Nombre Red</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="nombre_red" value="<?php echo $nombre_red; ?>" required name="nombre_red">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="orden" class="col-sm-3 control-label">Orden</label>
-                        <div class="col-sm-9">
-                            <input type="number" class="form-control" id="orden" name="orden" value="<?php echo $orden; ?>">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="idestado" class="col-sm-3 control-label">Estado</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" id="estado" required name="estado">
-                                <?php while ($r = mysqli_fetch_array($SELECT)) { ?>
-                                    <option value="<?php echo $r['idestado']; ?>" <?php if ($idestado == $r['idestado']) { echo 'selected'; } ?>>
-                                        <?php echo $r['descripcion'] ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div id='loader'></div>
-                        <div class='outer_div'></div>
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <input type="text" name="idred" id="idred" value="<?php echo $idred; ?>" hidden> 
-                            <button name="update" id="update" value="update" type="submit" class="btn btn-success">Actualizar datos</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3><span class="glyphicon glyphicon-edit"></span> Editar Red</h3>
             
-            <div class="col-md-5">
-                <h3><span class="glyphicon glyphicon-picture"></span> Imagen</h3>
-                
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                            <div class="fileinput-new thumbnail" style="max-width: 100%;">
-                                <img class="img-rounded" src="../img/Redes/<?php echo $imagen_red; ?>" />
+            <form action="abm_red.php" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label for="nombre_red" class="col-sm-3 control-label">Nombre Red</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="nombre_red" value="<?php echo $nombre_red; ?>" required name="nombre_red">
                             </div>
-                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 250px; max-height: 250px;"></div>
-                            <div>
-                                <span class="btn btn-info btn-file"><span class="fileinput-new">Selecciona una imagen</span>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <input type="file" name="imagen" class="form-control" id="imagen">
-                                    </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="orden" class="col-sm-3 control-label">Orden</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="orden" name="orden" value="<?php echo $orden; ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="idestado" class="col-sm-3 control-label">Estado</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="estado" required name="estado">
+                                    <?php 
+                                    $SELECT = mysqli_query($conexion, "SELECT * FROM estados");
+                                    while ($r = mysqli_fetch_array($SELECT)) { ?>
+                                        <option value="<?php echo $r['idestado']; ?>" <?php if ($idestado == $r['idestado']) { echo 'selected'; } ?>>
+                                            <?php echo $r['descripcion'] ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="control-label">Imagen Actual</label>
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                    <img src="../img/Redes/<?php echo $imagen_red; ?>" alt="Imagen actual">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                                <div>
+                                    <span class="btn btn-default btn-file">
+                                        <span class="fileinput-new">Seleccionar imagen</span>
+                                        <span class="fileinput-exists">Cambiar</span>
+                                        <input type="file" name="imagen">
+                                    </span>
+                                    
                                 </div>
                             </div>
+                            <small class="text-muted">Tamaño máximo: 2MB. Formatos: JPG, PNG, GIF</small>
                         </div>
-                        <div class="upload-msg"></div>
                     </div>
                 </div>
-            </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <input type="hidden" name="idred" value="<?php echo $idred; ?>">
+                        <button type="submit" name="update" class="btn btn-success">Guardar Cambios</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </div><!-- /container -->
+    </div>
+</div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
