@@ -121,8 +121,13 @@ if(isset($_POST['update'])) {
             idestado = $estado, 
             imagen_red = '$imagen_actual' 
             WHERE idred = $idred";
+
+    // Actualizar otros proyectos
+    $sql2 = "UPDATE proyectos SET 
+            idestado=$estado
+            WHERE idred = $idred";
     
-    if(mysqli_query($conexion, $sql)) {
+    if(mysqli_query($conexion, $sql,)&& mysqli_query($conexion, $sql2)) {
         header("Location: redeslist.php?success=1");
         exit();
     } else {
@@ -133,3 +138,4 @@ if(isset($_POST['update'])) {
         die("Error al actualizar: ".mysqli_error($conexion));
     }
 }
+?>
