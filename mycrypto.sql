@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-04-2025 a las 04:14:51
+-- Tiempo de generación: 13-04-2025 a las 16:45:30
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -175,7 +175,8 @@ INSERT INTO `permisos` (`idpermiso`, `descripcion`) VALUES
 (9, 'modificar item'),
 (10, 'alta tienda'),
 (11, 'baja tienda'),
-(12, 'modificar tienda');
+(12, 'modificar tienda'),
+(13, 'modificar usuario');
 
 -- --------------------------------------------------------
 
@@ -204,7 +205,8 @@ INSERT INTO `permiso_roles` (`idpermiso`, `idrol`) VALUES
 (9, 1),
 (10, 1),
 (11, 1),
-(12, 1);
+(12, 1),
+(13, 1);
 
 -- --------------------------------------------------------
 
@@ -285,8 +287,8 @@ CREATE TABLE `proyectos` (
 --
 
 INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `precio_proyecto`, `imagen_proyecto`, `idred`, `idestado`, `tipo_proyecto`, `estado_proyecto`, `descripcion_proyecto`, `pagina_proyecto`, `whitepaper_proyecto`, `descripcion2_proyecto`) VALUES
-(3, 'Axie Inifnity Origin', 'SLP, AXS', '1', 'Axie-Origin-Guide.jpeg', 66, 1, 'Estrategia, Cartas', 'V3', 'Axie Infinity fue lanzado por Sky Mavis en marzo de 2018. Es un juego de batallas de cartas en tiempo real creado en Ronin Network, una cadena lateral vinculada a Ethereum. Todo el metaverso de Axie Infinity está construido alrededor de criaturas de fantasía llamadas Axies', 'https://axieinfinity.com/', '', 'value = Axie'),
-(4, 'AlienWorlds', 'TLM', '0.15', 'mqdefault.jpg', 56, 1, 'Cartas/Farm', '7.2.3', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://alienworlds.io/', 'RARITY', 'Seek'),
+(3, 'Axie Inifnity Origin', 'SLP, AXS', '1', 'Axie-Origin-Guide.jpeg', 66, 2, 'Estrategia, Cartas', 'V3', 'Axie Infinity fue lanzado por Sky Mavis en marzo de 2018. Es un juego de batallas de cartas en tiempo real creado en Ronin Network, una cadena lateral vinculada a Ethereum. Todo el metaverso de Axie Infinity está construido alrededor de criaturas de fantasía llamadas Axies', 'https://axieinfinity.com/', 'a', 'value = Axie'),
+(4, 'AlienWorlds', 'TLM', '0.15', 'mqdefault.jpg', 56, 1, 'Cartas/Farm', '7.2.3', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://alienworlds.io/', 'RARIT3\r\n', 'Seek'),
 (5, 'Avegotchi', 'GHST', '0.54', 'ave.PNG', 56, 1, 'Aventura', 'Finalizado', 'Aavegotchi is a DeFi-enabled crypto collectibles game developed by Singapore-based Pixelcraft Studios that allows players to stake Non-fungible tokens (NFTs) avatars with interest-generating tokens and interact with the Aavegotchi metaverse. It is a unique combination of Decentralized Finance (DeFi) and NFTs.', 'https://www.aavegotchi.com/', 'To level up their Aavegotchis, players can participate in a variety of activities including mini-games, governance, and meetups. Aavegotchis can also increase their rarity level by equipping in-game wearables and leveling up.', 'noticias'),
 (6, 'Crypto Cars', 'CARS', '1', 'cryptocars1.png', 67, 1, 'Simulador', 'Finalizado', 'Proyecto Cerrado: La economía de todo el metaverso Cryto City quebró por mala administración del equipo desarrollador. Se habla de un “rugpull” sigiloso o una quiebra planificada, según testimonios de algunos moderadores.  Crypto Cars es un juego NFT del género de racing con ciertas características del RPG que presenta al jugador la modalidad de juego de simulación de carreras y eventualmente lanzarán una forma de PVP para competir contra otros jugadores. Este título junto a Crypto Planes y Crypto Guards forman parte del metaverso Crypto City creado por los mismos desarrolladores.', 'https://www.nftgamearena.com/play-to-earn/racing/crypto-cars/', 'whitepaper', 'noticias'),
 (7, 'Crypto Cars Worlds', 'CARS', '0.03', 'cryptocars.png', 67, 1, 'Carreras', 'Abandonado', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'Proyecto Caido', 'whitepaper', 'noticias'),
@@ -316,7 +318,7 @@ INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `pr
 (31, 'Mining Network', 'ASIC', '1', 'minings.PNG', 56, 1, 'Farming', 'Finalizado', 'Mining network is a game on WAX blockchain. It combines FreeToPlay and PlayToEarn models. Every new user gets a free NFT to play and earn immediately after registering in the game.', 'https://miningnetwork.io/?ref=2rdaw.wam', 'whitepaper', 'noticias'),
 (32, 'Poly Island', 'POL', '0', 'poly.png', 68, 1, 'Farming', 'SCAM', 'asdoiahdnkjadbnjkasdnajsldkasd', 'https://twitter.com/home', 'whitepaper', 'noticias'),
 (33, 'Pinup warlords', 'PNIUP', '1', 'pinu.PNG', 56, 1, 'Cartas', 'Finalizado', 'Factions are made of Soldiers with different classes and officers', 'https://pinupwarlords.com/', 'whitepaper', 'noticias'),
-(44, 'Proyecto de Prueba', 'PRO', '???', '67f42e899b6e7.png', 56, 1, 'TESTEO', 'Ongoing', 'Proyecto de testeo', 'www.proyectotesteo.com', 'www.proyectotesteo.comwww.proyectotestwww.proyectotesteo.com', 'www.proyectotesteo.comwww.proyectotesteo.comwww.pr');
+(49, 'Proyecto de Pruebo 4', 'PRO', '0.05', '67fbc7fe6afd4.jpg', 56, 1, 'TESTEO', 'Ongoin', 'Proyecto de testeo', 'www.proyectotesteo.com', 'www.proyectotesteo.comwww.proyectotestwww.proyectotesteo.com', 'www.proyectotesteo.comwww.proyectotesteo.comww.pr');
 
 -- --------------------------------------------------------
 
@@ -409,7 +411,8 @@ INSERT INTO `rol_usuarios` (`idrol`, `idusuario`) VALUES
 (2, 28),
 (2, 29),
 (1, 30),
-(2, 33);
+(2, 33),
+(2, 18);
 
 -- --------------------------------------------------------
 
@@ -464,12 +467,42 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `fb_id`, `foto`, `descripcion`, `twitter`, `instagram`, `facebook`, `idestado`, `nombre`, `apellido`, `discord_id`, `avatar`, `fecha_registro`) VALUES
-(17, 'nico_ave', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, 'esto es 9244', 'l', '', '', 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
+(1, 'juanito23', 'juanito23@mail.com', 'pass1234', NULL, 'foto1.jpg', 'Amante de los videojuegos', '@juanito', '@juanito23', 'fb.com/juanito23', 1, 'Juan', 'Pérez', 'juan#1234', 'avatar1.png', '2025-04-11 12:19:30'),
+(2, 'laura_love', 'laura.love@mail.com', 'secure456', 'fb12345', 'foto2.jpg', 'Diseñadora gráfica', '@laura_love', NULL, 'fb.com/laura.love', 2, 'Laura', 'Gómez', NULL, NULL, '2025-04-11 12:19:30'),
+(3, 'dragonX', 'dragonx@mail.com', 'dr4g0n!', NULL, NULL, 'Streamer y gamer', '@dragonx', '@dragonx_gaming', NULL, 1, 'Carlos', 'Ruiz', 'dragonx#9988', 'avatar3.png', '2025-04-11 12:19:30'),
+(4, 'nelly98', 'nelly98@mail.com', 'myp@ss987', NULL, 'foto4.jpg', NULL, NULL, NULL, NULL, 3, 'Nelly', 'Fernández', NULL, NULL, '2025-04-11 12:19:30'),
+(5, 'tomas_dev', 'tomasdev@mail.com', 'devlife2024', NULL, 'foto5.jpg', 'Desarrollador web', '@tomas_dev', NULL, NULL, 1, 'Tomás', 'López', NULL, NULL, '2025-04-11 12:19:30'),
+(6, 'valenrock', 'valenrock@mail.com', 'valenROCK@2023', NULL, NULL, 'Fan del rock clásico', NULL, '@valen.rock', 'fb.com/valenrock', 2, 'Valentina', 'Sánchez', 'valen#3210', NULL, '2025-04-11 12:19:30'),
+(7, 'kikogamer', 'kiko@mail.com', 'g@merK1ko', NULL, 'foto7.jpg', NULL, '@kikogamer', NULL, NULL, 1, 'Enrique', 'Martínez', 'kikogamer#123', NULL, '2025-04-11 12:19:30'),
+(8, 'luciawrites', 'luciawrites@mail.com', 'escritoraL', NULL, NULL, 'Escritora de cuentos', '@luciawrites', NULL, NULL, 3, 'Lucía', 'Paredes', NULL, 'avatar8.jpg', '2025-04-11 12:19:30'),
+(9, 'xavi_art', 'xavi.art@mail.com', 'arteX123', NULL, 'foto9.jpg', 'Pintor digital', '@xaviart', '@xavi.art', NULL, 2, 'Xavier', 'Ortiz', NULL, NULL, '2025-04-11 12:19:30'),
+(10, 'dani_musik', 'dani@mail.com', 'musicPass', 'fb8765', 'foto10.jpg', 'Músico independiente', '@danimusic', NULL, 'fb.com/dani.music', 3, 'Daniela', 'Cruz', 'dani#5567', NULL, '2025-04-11 12:19:30'),
+(11, 'user11', 'user11@mail.com', 'pass11', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Once', NULL, NULL, '2025-04-11 12:19:30'),
+(12, 'user12', 'user12@mail.com', 'pass12', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Doce', NULL, NULL, '2025-04-11 12:19:30'),
+(13, 'user13', 'user13@mail.com', 'pass13', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Trece', NULL, NULL, '2025-04-11 12:19:30'),
+(14, 'user14', 'user14@mail.com', 'pass14', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Catorce', NULL, NULL, '2025-04-11 12:19:30'),
+(15, 'user15', 'user15@mail.com', 'pass15', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Quince', NULL, NULL, '2025-04-11 12:19:30'),
+(16, 'user16', 'user16@mail.com', 'pass16', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Dieciséis', NULL, NULL, '2025-04-11 12:19:30'),
+(17, 'nico_ave', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, 'Contraseña 9244', 'l', '', '', 1, 'Nicolas ', 'Avezzani', NULL, NULL, '2025-04-05 08:20:00'),
+(18, 'user18', 'user18@mail.com', '5a032830ea6db6e3f7117e2661968e74331f4f3a', NULL, 'b4698af76ba4918fc1bed1a95281d6ef4fff3cd09c8295b1941d9756e8ac9daf.png', '', NULL, NULL, NULL, 1, 'User', 'Dieciocho A', NULL, NULL, '2025-04-11 12:19:30'),
+(19, 'user19', 'user19@mail.com', 'pass19', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Diecinueve', NULL, NULL, '2025-04-11 12:19:30'),
+(20, 'user20', 'user20@mail.com', 'pass20', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Veinte', NULL, NULL, '2025-04-11 12:19:30'),
+(21, 'ale_rocker', 'ale@mail.com', 'rocky123', NULL, 'ale.jpg', 'Rockeando desde el 2000', NULL, NULL, NULL, 2, 'Alejandro', 'Torres', NULL, 'avatar21.png', '2025-04-11 12:19:30'),
+(22, 'maria_fit', 'mariafit@mail.com', 'fit4life', NULL, 'maria.jpg', 'Entrenadora personal', '@mariafit', '@fitmaria', 'fb.com/maria.fit', 3, 'María', 'Alonso', NULL, NULL, '2025-04-11 12:19:30'),
+(23, 'gamerpro', 'gamerpro@mail.com', 'g@m3rPr0', NULL, 'gamer.jpg', 'Jugador competitivo', NULL, NULL, NULL, 1, 'Pedro', 'Jiménez', 'gamer#2222', NULL, '2025-04-11 12:19:30'),
+(24, 'clau_blog', 'clau@mail.com', 'blogLife23', NULL, NULL, 'Bloguera de estilo de vida', '@clau_blog', NULL, NULL, 2, 'Claudia', 'Morales', NULL, NULL, '2025-04-11 12:19:30'),
+(25, 'rafart', 'rafa@mail.com', 'artLove45', NULL, 'rafa.jpg', 'Diseñador UI/UX', NULL, '@rafart', NULL, 3, 'Rafael', 'Aguilar', NULL, NULL, '2025-04-11 12:19:30'),
+(26, 'sofi_digital', 'sofi@mail.com', 'd1g1t@l!', NULL, NULL, NULL, NULL, '@sofi.digital', 'fb.com/sofi.digital', 2, 'Sofía', 'Mendoza', NULL, 'avatar26.jpg', '2025-04-11 12:19:30'),
 (27, 'ADMINISTRADOR', 'asd@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, '1.jpg', '1234', NULL, NULL, NULL, 1, 'Nicolas Fernando', 'Zoppi', NULL, NULL, '2025-04-05 08:20:00'),
 (28, 'lolo', 'lolo@lolo.gov', '8aa40001b9b39cb257fe646a561a80840c806c55', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
 (29, 'kilo', 'kilo@kilo.com', '8ff8800a239d91c648520ad5aea2d30e76e2850f', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
 (30, 'pepe', 'pepe@gmail.com', '265392dc2782778664cc9d56c8e3cd9956661bb0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
-(33, 'CLIENTE', 'zoppinicolas@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, 'Listo que capo soy.jpg', NULL, NULL, NULL, NULL, 1, 'CLIENTE', 'CLIENTE', NULL, NULL, '2025-04-05 08:20:00');
+(33, 'CLIENTE', 'zoppinicolas@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, 'Listo que capo soy.jpg', '1234', NULL, NULL, NULL, 1, 'CLIENTE', 'CLIENTEa', NULL, NULL, '2025-04-05 08:20:00'),
+(37, 'leo_code', 'leo@mail.com', 'cod3r2024', NULL, 'leo.png', 'Full-stack dev', '@leo_code', NULL, NULL, 1, 'Leonardo', 'Castro', NULL, NULL, '2025-04-11 12:19:30'),
+(38, 'jess_art', 'jess@mail.com', 'pa$$jess', NULL, NULL, 'Ilustradora', NULL, '@jessart', NULL, 3, 'Jessica', 'Herrera', 'jess#1212', NULL, '2025-04-11 12:19:30'),
+(39, 'mike_tech', 'mike@mail.com', 'techMike99', NULL, 'mike.jpg', 'Tech reviewer', NULL, NULL, NULL, 1, 'Miguel', 'Reyes', NULL, NULL, '2025-04-11 12:19:30'),
+(40, 'andrea_music', 'andrea@mail.com', 'andreamusic1', NULL, NULL, 'Cantante y compositora', '@andreamusic', NULL, NULL, 2, 'Andrea', 'Luna', 'andrea#2323', NULL, '2025-04-11 12:19:30'),
+(67, 'user17', 'user17@mail.com', 'pass17', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Diecisiete', NULL, NULL, '2025-04-11 12:19:30');
 
 -- --------------------------------------------------------
 
@@ -495,7 +528,16 @@ INSERT INTO `usuario_favoritos` (`idfavorito`, `idusuario`, `crypto_id`, `crypto
 (8, 27, 'bitcoin', 'Bitcoin', '2025-04-09 05:44:38'),
 (10, 27, 'ethereum', 'Ethereum', '2025-04-09 14:26:08'),
 (11, 33, 'ronin', 'Ronin', '2025-04-09 14:31:01'),
-(14, 27, 'bnc', 'BNC', '2025-04-10 17:08:36');
+(14, 27, 'bnc', 'BNC', '2025-04-10 17:08:36'),
+(15, 17, 'bitcoin', 'Bitcoin', '2025-04-11 15:10:15'),
+(16, 17, 'ripple', 'XRP', '2025-04-11 15:10:36'),
+(17, 17, 'polkadot', 'Polkadot', '2025-04-11 15:10:45'),
+(18, 33, 'ripple', 'XRP', '2025-04-11 15:11:17'),
+(20, 17, 'iota', 'IOTA', '2025-04-11 15:35:20'),
+(21, 33, 'the-graph', 'The Graph', '2025-04-11 16:15:44'),
+(22, 18, 'superfarm', 'SuperVerse', '2025-04-11 22:55:13'),
+(23, 18, 'staked-hype', 'Staked HYPE', '2025-04-11 22:55:22'),
+(26, 33, 'bnc', 'BNC', '2025-04-11 23:00:46');
 
 -- --------------------------------------------------------
 
@@ -520,8 +562,7 @@ INSERT INTO `usuario_redes` (`idred`, `idusuario`, `tipo_red`, `url_red`, `fecha
 (11, 33, 'Twitter', 'https://hacktorrent.to/', '2025-04-03 15:10:01'),
 (17, 27, 'Twitter', 'https://hacktorrent.to/', '2025-04-03 15:32:59'),
 (18, 27, 'YouTube', 'https://www.youtube.com/results?search_query=lofi', '2025-04-03 16:00:47'),
-(20, 27, 'TikTok', 'https://hacktorrent.to/', '2025-04-09 05:45:04'),
-(21, 27, 'TikTok', 'https://hacktorrent.to/', '2025-04-09 05:46:09');
+(20, 27, 'TikTok', 'https://hacktorrent.to/', '2025-04-09 05:45:04');
 
 --
 -- Índices para tablas volcadas
@@ -673,7 +714,7 @@ ALTER TABLE `noticias`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -685,7 +726,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `rarezaitem`
@@ -697,7 +738,7 @@ ALTER TABLE `rarezaitem`
 -- AUTO_INCREMENT de la tabla `redes`
 --
 ALTER TABLE `redes`
-  MODIFY `idred` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `idred` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -709,13 +750,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_favoritos`
 --
 ALTER TABLE `usuario_favoritos`
-  MODIFY `idfavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idfavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_redes`
