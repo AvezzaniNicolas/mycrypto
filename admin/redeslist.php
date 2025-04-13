@@ -41,34 +41,30 @@ $rol = $_SESSION['rol'] ?? '';
 </head>
 
 <body>
-  
-    
     <?php include("header_admin.php"); ?>
     
     <?php 
+    // Mostrar botón de agregar solo si tiene permiso
     $permiso = mysqli_query($conexion, 
         "SELECT p.descripcion 
-         FROM permisos AS p
-         JOIN permiso_roles AS pr ON p.idpermiso = pr.idpermiso
-         WHERE pr.idrol = $rol");
+         FROM permisos p
+         JOIN permiso_roles pr ON p.idpermiso = pr.idpermiso
+         WHERE pr.idrol = $rol AND p.descripcion = 'alta red'");
     
-    while($r = mysqli_fetch_assoc($permiso)) {
-        if ($r['descripcion'] === 'alta red') {
-            echo '<div class="row">
-                <div class="col-xs-12 text-right">
-                    <a href="add_red.php" class="btn btn-default">
-                        <span class="glyphicon glyphicon-plus"></span> Agregar Red
-                    </a>
-                </div>
-            </div>';
-            break;
-        }
+    if(mysqli_num_rows($permiso) > 0) {
+        echo '<div class="row">
+            <div class="col-xs-12 text-right">
+                <a href="add_red.php" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus"></span> Agregar Red
+                </a>
+            </div>
+        </div>';
     }
     ?>
     
     <br>
     <div id="loader" class="text-center">
-        <span><img src="./img/ajax-loader.gif" alt="Cargando..."></span> <!-- Alt para accesibilidad -->
+        <span><img src="./img/ajax-loader.gif" alt="Cargando..."></span>
     </div>
     <div class="outer_div"></div><!-- Datos ajax Final -->
     
@@ -126,7 +122,8 @@ $rol = $_SESSION['rol'] ?? '';
             url: './ajax/red_ajax.php',
             data: { 
                 "action": "ajax",
-                "page": page 
+                "page": page,
+                "rol": <?php echo $rol; ?> // Pasamos el rol al servidor
             },
             beforeSend: function() {
                 $("#loader").html("<img src='../img/ajax-loader.gif' alt='Cargando'>");
@@ -143,13 +140,14 @@ $rol = $_SESSION['rol'] ?? '';
     }
 
     function eliminar_slide(idred) {
-        if(confirm('Esta acción eliminará de forma permanente el banner \n\n¿Desea continuar?')) {
+        if(confirm('Esta acción eliminará de forma permanente la red \n\n¿Desea continuar?')) {
             $.ajax({
                 url: './ajax/red_ajax.php',
                 data: {
                     "action": "ajax",
                     "page": 1,
-                    "idred": idred
+                    "idred": idred,
+                    "rol": <?php echo $rol; ?> // Pasamos el rol al servidor
                 },
                 beforeSend: function() {
                     $("#loader").html("<img src='../images/ajax-loader.gif' alt='Procesando'>");
