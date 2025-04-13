@@ -51,7 +51,7 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
             <div class="row">
                 <div class="col-xs-12 text-right">
                     <a href='add_proyecto.php' class="btn btn-default">
-                        <span class="glyphicon glyphicon-plus"></span> Agregar Proyectos
+                        <span class="glyphicon glyphicon-plus"></span> Agregar Proyecto
                     </a>
                 </div>
             </div>
