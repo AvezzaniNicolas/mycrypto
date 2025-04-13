@@ -4,7 +4,12 @@ include("../conexion.php");
 $active_config = "active";
 $active_banner = "active";
 session_start();
-require('../conexion.php');
+
+// Verificar sesión
+if(!isset($_SESSION['logueado'])) {
+    header("Location: login.php");
+    exit();
+}
 
 $idusuario = $_SESSION['logueado'];
 $consulta = mysqli_query($conexion, "SELECT * FROM usuarios WHERE idusuario = $idusuario");
@@ -30,32 +35,27 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
     <link href="css/proyectlist.css" rel="stylesheet">   
     <link href="css/perfil.css" rel="stylesheet">
-    
 </head>
 <body>
     <?php include("header_admin.php"); ?>
 
     <?php 
-    if(isset($_SESSION['logueado']) && $_SESSION['logueado'] > 0) {
+    // Mostrar botón de agregar solo si tiene permiso
+    if(isset($_SESSION['logueado'])) {
         $idrol = $_SESSION['rol'];
-        $permiso = mysqli_query($conexion, "SELECT p.descripcion, pr.idpermiso FROM permisos AS p, permiso_roles AS pr WHERE p.idpermiso = pr.idpermiso AND pr.idrol = $idrol;");
-
-        while($r = mysqli_fetch_array($permiso)) {
-            $nombre_permiso = $r['descripcion'];
-            
-            switch($nombre_permiso) {
-                case 'alta proyecto': ?>
-                    <div class="row">
-                        <div class="col-xs-12 text-right">
-                            <a href='add_proyecto.php' class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus"></span> Agregar Proyectos
-                            </a>
-                        </div>
-                    </div>
-                    <?php 
-                    break;
-            }
-        }
+        $permiso = mysqli_query($conexion, "SELECT p.descripcion FROM permisos p 
+                  JOIN permiso_roles pr ON p.idpermiso = pr.idpermiso 
+                  WHERE pr.idrol = $idrol AND p.descripcion = 'alta proyecto'");
+        
+        if(mysqli_num_rows($permiso) > 0): ?>
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    <a href='add_proyecto.php' class="btn btn-default">
+                        <span class="glyphicon glyphicon-plus"></span> Agregar Proyectos
+                    </a>
+                </div>
+            </div>
+        <?php endif;
     }
     ?>
     
@@ -70,8 +70,6 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     
     <?php include("footer_admin.php"); ?>
-
-    
 
     <script>
     // Modo oscuro mejorado
@@ -120,7 +118,7 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
         });
     });
 
-    // Tu código AJAX existente
+    // Cargar proyectos al iniciar
     $(document).ready(function() {
         load(1);
     });
@@ -131,15 +129,15 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
             "page": page
         };
         
+        // Agregar ID de red si está presente en la URL
+        var url = './ajax/proyecto_ajax.php';
+        if(window.location.href.indexOf('id=') > -1) {
+            var idred = window.location.href.split('id=')[1];
+            url += '?id=' + idred;
+        }
+        
         $.ajax({
-            <?php 
-            if(isset($_GET['id']) && !empty($_GET['id'])) {
-                $idred = $_GET['id'];
-            ?>
-                url: './ajax/proyecto_ajax.php?id=<?php echo $idred; ?>',
-            <?php } else { ?>
-                url: './ajax/proyecto_ajax.php',
-            <?php } ?>
+            url: url,
             data: parametros,
             beforeSend: function(objeto) {
                 $("#loader").html("<img src='../img/ajax-loader.gif'>");
@@ -159,7 +157,7 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
             "idproyecto": idproyecto
         };
         
-        if(confirm('Esta acción eliminará de forma permanente el banner \n\n Desea continuar?')) {
+        if(confirm('Esta acción eliminará de forma permanente el proyecto \n\n Desea continuar?')) {
             $.ajax({
                 url: './ajax/proyecto_ajax.php',
                 data: parametros,
