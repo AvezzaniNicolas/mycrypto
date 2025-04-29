@@ -11,7 +11,9 @@ $producto = [
     'imagen' => '',
     'precio' => '',
     'idestado' => 1,
-    'idcategoria' => ''
+    'idcategoria' => '',
+    'descripcion' => '',
+    'destacado' => false
 ];
 
 if ($modoEdicion) {
@@ -72,7 +74,7 @@ $categorias = mysqli_query($conexion, "SELECT id, nombre FROM productos_categori
     <?php if ($modoEdicion && $producto['imagen']): ?>
       <img src="img/<?php echo $producto['imagen']; ?>" width="100"><br><br>
     <?php endif; ?>
-    <input type="file" name="imagen" class="form-control-file" accept="image/*">
+    <input type="file" name="imagen" class="form-control-file" accept="image/*" >
   </div>
 
   <div class="form-group">
@@ -81,10 +83,23 @@ $categorias = mysqli_query($conexion, "SELECT id, nombre FROM productos_categori
   </div>
 
   <div class="form-group">
+    <label>Descripcion</label>
+    <input type="textarea" name="descripcion" class="form-control" value="<?php echo htmlspecialchars($producto['descripcion']); ?>" required>
+  </div>
+
+  <div class="form-group">
     <label>Estado</label>
     <select name="idestado" class="form-control" required>
       <option value="1" <?php echo $producto['idestado'] == 1 ? 'selected' : ''; ?>>Habilitado</option>
       <option value="0" <?php echo $producto['idestado'] == 0 ? 'selected' : ''; ?>>Deshabilitado</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Destacado</label>
+    <select name="destacado" class="form-control" required>
+      <option value="1" <?php echo $producto['destacado'] == 1 ? 'selected' : ''; ?>>Destacado</option>
+      <option value="0" <?php echo $producto['destacado'] == 0 ? 'selected' : ''; ?>>No Destacado</option>
     </select>
   </div>
 

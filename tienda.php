@@ -5,6 +5,10 @@ require ("conexion.php");
 $sql = "SELECT * FROM productos_categoria WHERE activo = 1";
 
 $result = mysqli_query($conexion, $sql);
+$sql = "SELECT * FROM productos WHERE destacado = 1";
+
+$productos = mysqli_query($conexion, $sql);
+
 
 ?>
 
@@ -134,10 +138,10 @@ https://templatemo.com/tm-559-zay-shop
                 while ($row = mysqli_fetch_assoc($result)) {
             ?>
 
-            <div class="col-12 col-md-6 p-5 mt-3">
+            <div class="col-12 col-md-4 p-5 mt-3">
                 <a href="#"><img src="<?php echo $row['url']; ?>" class="rounded-circle img-fluid border"></a>
                 <h5 class="text-center mt-3 mb-3"><?php echo $row['nombre']; ?></h5>
-                <p class="text-center"><a class="btn btn-success" href="shop.php?categoria=<?php echo $row['id']; ?>">Go Shop</a></p>
+                <p class="text-center"><a class="btn btn-success" href="shop.php?categoria=<?php echo $row['id']; ?>">Comprar</a></p>
             </div>
             <?php } ?>
 
@@ -151,84 +155,50 @@ https://templatemo.com/tm-559-zay-shop
         <div class="container py-5">
             <div class="row text-center py-3">
                 <div class="col-lg-6 m-auto">
-                    <h1 class="h1">Productos Destacadoss</h1>
+                    <h1 class="h1">Productos Destacados</h1>
                    
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="img\Proyectos2\tomkpunkt_the_midjourney_multiverse_of_madness_grimm_and_cold_q_879291f1-bd06-408e-8474-890548f95f73.png" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                            <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$240.00</li>
-                            </ul>
-                            <p class="card-text">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt in culpa qui officia deserunt.
-                            </p>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark"></a>
-                            
-                            <p class="text-muted"></p>
+            <?php
+                    while ($row = mysqli_fetch_assoc($productos)) {
+                ?>
+                <div class="col-md-4">
+                        <div class="card mb-4 product-wap rounded-0">
+                            <div class="card rounded-0">
+                                <img class="card-img rounded-0 img-fluid" src="img/<?php echo $row['imagen']; ?>">
+                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                    <ul class="list-unstyled">
+                                        <li><a class="btn btn-success text-white mt-2" href="buy.php?producto=<?php echo $row['idproducto']; ?>"><i class="fas fa-cart-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <a href="shop-single.html" class="h3 text-decoration-none"><?php echo $row['nombre_producto']; ?></a>
+                                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                                    <li class="pt-2">
+                                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+                                    </li>
+                                </ul>
+                                <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                    <li>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                    </li>
+                                </ul>
+                                <p class="text-center mb-0">$<?php echo $row['precio']; ?></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="img\Proyectos2\alevi813_midjourney_multiverse_of_eyeball_galaxies_c3f4e7f5-fcd0-4f1f-8530-b04b836859e3.png" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                    <i class="text-muted fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$480.00</li>
-                            </ul>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark"></a>
-                            <p class="card-text">
-                                Aenean gravida dignissim finibus. Nullam ipsum diam, posuere vitae pharetra sed, commodo ullamcorper.
-                            </p>
-                            <p class="text-muted"></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-4">
-                    <div class="card h-100">
-                        <a href="shop-single.html">
-                            <img src="img\Proyectos2\alevi813_midjourney_multiverse_of_eyeball_galaxies_6270e4aa-f83d-4b64-972f-513c5090afc8.png" class="card-img-top" alt="...">
-                        </a>
-                        <div class="card-body">
-                            <ul class="list-unstyled d-flex justify-content-between">
-                                <li>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                    <i class="text-warning fa fa-star"></i>
-                                </li>
-                                <li class="text-muted text-right">$360.00</li>
-                            </ul>
-                            <p class="card-text">
-                                Curabitur ac mi sit amet diam luctus porta. Phasellus pulvinar sagittis diam, et scelerisque ipsum lobortis nec.
-                            </p>
-                            <a href="shop-single.html" class="h2 text-decoration-none text-dark"></a>
-                            <p class="text-muted"></p>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
+        
             </div>
         </div>
     </section>

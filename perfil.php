@@ -27,6 +27,39 @@ while($respuesta = mysqli_fetch_assoc($consulta)) {
     $rol = $_SESSION['rol'];
 }
 
+$sql = "SELECT * FROM inventarios WHERE idusuario = ".$idusuario;
+    $result = mysqli_query($conexion, $sql);
+    $inventario = mysqli_fetch_assoc($result);
+    $logo = '';
+    if (!empty($inventario['logo3'])) {
+        $logo = $inventario['logo3'];
+    } elseif (!empty($inventario['logo2'])) {
+        $logo = $inventario['logo2'];
+    } elseif (!empty($inventario['logo1'])) {
+        $logo = $inventario['logo1'];
+    }
+    echo "logo:".$logo;    
+    $banner = '';
+    if (!empty($inventario['banner3'])) {
+        $banner = $inventario['banner3'];
+    } elseif (!empty($inventario['banner2'])) {
+        $banner = $inventario['banner2'];
+    } elseif (!empty($inventario['banner1'])) {
+        $banner = $inventario['banner1'];
+    }
+    $estiloFondo = "margin-top: 120px;";
+    if (!empty($banner)) {
+        $estiloFondo .= " background-image: url('img/$banner'); background-size: cover; background-position: center;";
+    }
+    $marco = '';
+    if (!empty($inventario['imagen3'])) {
+        $marco = $inventario['imagen3'];
+    } elseif (!empty($inventario['imagen2'])) {
+        $marco = $inventario['imagen2'];
+    } elseif (!empty($inventario['imagen1'])) {
+        $marco = $inventario['imagen1'];
+    }
+
 // Procesar formularios
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Agregar red social
@@ -136,12 +169,26 @@ if ($query_favoritos) {
    
 </div>
 
-<div class="container">
+<div class="container" style="<?php echo $estiloFondo; ?>">
     <!-- Sección de perfil del usuario -->
     <div class="profile-section">
         <h2>Mi Perfil</h2>
         <div style="display: flex; align-items: center; margin-bottom: 20px;">
-            <img src="uploads/perfiles/<?php echo $foto; ?>" alt="Foto de perfil" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-right: 20px;">
+        <div style="width: 160px; height: 160px; 
+                  <?php if (!empty($marco)): ?>
+                      background-image: url('img/<?php echo $marco; ?>');
+                  <?php endif; ?>
+                  background-size: cover; background-position: center; 
+                  display: flex; align-items: center; justify-content: center;">
+                    
+                  <img src="<?php 
+                    if (isset($logo) && $logo != '') {
+                        echo 'img/' . $logo;
+                    } else {
+                        echo 'https://bootdey.com/img/Content/avatar/avatar6.png';
+                    }
+                  ?>" alt="Admin" class="rounded-circle" width="100">
+                </div>
             <div>
                 <h3><?php echo $nombre . ' ' . $apellido; ?></h3>
                 <p><?php echo $email; ?></p>

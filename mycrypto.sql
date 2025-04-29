@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-04-2025 a las 18:19:52
+-- Tiempo de generación: 30-04-2025 a las 01:37:07
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -105,7 +105,7 @@ INSERT INTO `inventarios` (`idinventario`, `idusuario`, `logo1`, `logo2`, `logo3
 (9, 21, NULL, NULL, NULL, 'logos/1.png', 'logos/2.png', NULL, NULL, NULL, NULL, 153),
 (10, 22, NULL, NULL, NULL, 'logos/1.png', NULL, NULL, NULL, NULL, NULL, 178),
 (11, 29, NULL, NULL, NULL, 'logos/1.png', NULL, NULL, NULL, NULL, NULL, 190),
-(12, 30, 'logos/prod_67f87a0aeb361.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1480),
+(12, 30, 'logos/prod_680cf43f80066.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1380),
 (13, 31, NULL, NULL, NULL, 'marcos/1.jpg', 'marcos/2.png', NULL, NULL, NULL, NULL, 1466),
 (14, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (15, 33, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
@@ -175,8 +175,7 @@ INSERT INTO `permisos` (`idpermiso`, `descripcion`) VALUES
 (9, 'modificar item'),
 (10, 'alta tienda'),
 (11, 'baja tienda'),
-(12, 'modificar tienda'),
-(13, 'modificar usuario');
+(12, 'modificar tienda');
 
 -- --------------------------------------------------------
 
@@ -205,8 +204,7 @@ INSERT INTO `permiso_roles` (`idpermiso`, `idrol`) VALUES
 (9, 1),
 (10, 1),
 (11, 1),
-(12, 1),
-(13, 1);
+(12, 1);
 
 -- --------------------------------------------------------
 
@@ -220,23 +218,26 @@ CREATE TABLE `productos` (
   `imagen` varchar(255) NOT NULL,
   `precio` int(11) NOT NULL,
   `idestado` int(11) NOT NULL,
-  `idcategoria` int(11) NOT NULL
+  `idcategoria` int(11) NOT NULL,
+  `destacado` tinyint(1) NOT NULL,
+  `descripcion` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`idproducto`, `nombre_producto`, `imagen`, `precio`, `idestado`, `idcategoria`) VALUES
-(1, 'Logo 1', 'logos/1.png', 10, 1, 1),
-(2, 'Logo 2', 'logos/2.png', 25, 1, 1),
-(3, 'Logo 3', 'logos/3.png', 30, 1, 1),
-(4, 'Marco 1', 'marcos/1.jpg', 12, 1, 2),
-(5, 'Marco 2', 'marcos/2.png', 22, 1, 2),
-(6, 'Banner 1', 'banners/1.jpg', 23, 1, 3),
-(7, 'Banner 2', 'banners/2.jpg', 17, 1, 3),
-(9, 'Logo 4', 'logos/4.png', 32, 1, 1),
-(10, 'logo 12', 'logos/prod_67f87a0aeb361.jpg', 20, 1, 1);
+INSERT INTO `productos` (`idproducto`, `nombre_producto`, `imagen`, `precio`, `idestado`, `idcategoria`, `destacado`, `descripcion`) VALUES
+(16, 'logo 1', 'logos/prod_680cf1fcb9d43.jpg', 20, 1, 1, 1, ''),
+(17, 'logo 2', 'logos/prod_680cf21dbe2ba.jpg', 20, 1, 1, 0, 'enrique'),
+(18, 'logo 3 ', 'logos/prod_680cf3435a3c0.jpg', 20, 1, 1, 0, ''),
+(19, 'logo 4 ', 'logos/prod_680cf36e36a57.jpg', 20, 1, 1, 0, ''),
+(20, 'logo 5 ', 'logos/prod_680cf43f80066.jpg', 20, 1, 1, 0, ''),
+(21, 'banner 1', 'banners/prod_681159fe5fda2.jpg', 20, 1, 3, 0, 'hola'),
+(22, 'banner 2', 'banners/prod_68115c61c717e.jpg', 20, 1, 3, 0, 'adios'),
+(23, 'marco 1 ', 'marcos/prod_68115c7546ba1.jpg', 20, 1, 2, 1, 'marco'),
+(24, 'banner 4', 'banners/prod_68115d5d662d0.jpg', 20, 1, 3, 1, 'banner'),
+(25, 'marco 2', 'marcos/prod_68115e354cf7f.jpg', 20, 1, 2, 0, 'marco');
 
 -- --------------------------------------------------------
 
@@ -256,9 +257,9 @@ CREATE TABLE `productos_categoria` (
 --
 
 INSERT INTO `productos_categoria` (`id`, `nombre`, `url`, `activo`) VALUES
-(1, 'Logos', 'tienda\\img\\banner_img_01.jpg', 1),
-(2, 'Marcos', './tienda/img/category_img_02.jpg', 1),
-(3, 'Banners', './tienda/img/category_img_03.jpg', 1);
+(1, 'Logos', 'img\\item\\asdasd.png', 1),
+(2, 'Marcos', 'img\\item2\\perfil.png', 1),
+(3, 'Banners', 'img\\item2\\fondo.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -287,16 +288,16 @@ CREATE TABLE `proyectos` (
 --
 
 INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `precio_proyecto`, `imagen_proyecto`, `idred`, `idestado`, `tipo_proyecto`, `estado_proyecto`, `descripcion_proyecto`, `pagina_proyecto`, `whitepaper_proyecto`, `descripcion2_proyecto`) VALUES
-(3, 'Axie Inifnity Origin', 'SLP, AXS', '1', 'Axie-Origin-Guide.jpeg', 66, 2, 'Estrategia, Cartas', 'V3', 'Axie Infinity fue lanzado por Sky Mavis en marzo de 2018. Es un juego de batallas de cartas en tiempo real creado en Ronin Network, una cadena lateral vinculada a Ethereum. Todo el metaverso de Axie Infinity está construido alrededor de criaturas de fantasía llamadas Axies', 'https://axieinfinity.com/', 'a', 'value = Axie'),
-(4, 'AlienWorlds', 'TLM', '0.15', 'mqdefault.jpg', 56, 1, 'Cartas/Farm', '7.2.3', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://alienworlds.io/', 'RARIT3\r\n', 'Seek'),
+(3, 'Axie Inifnity Origin', 'SLP, AXS', '1', 'Axie-Origin-Guide.jpeg', 66, 1, 'Estrategia, Cartas', 'V3', 'Axie Infinity fue lanzado por Sky Mavis en marzo de 2018. Es un juego de batallas de cartas en tiempo real creado en Ronin Network, una cadena lateral vinculada a Ethereum. Todo el metaverso de Axie Infinity está construido alrededor de criaturas de fantasía llamadas Axies', 'https://axieinfinity.com/', '', 'value = Axie'),
+(4, 'AlienWorlds', 'TLM', '0.15', 'mqdefault.jpg', 56, 1, 'Cartas/Farm', '7.2.3', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://alienworlds.io/', 'RARITY', 'Seek'),
 (5, 'Avegotchi', 'GHST', '0.54', 'ave.PNG', 56, 1, 'Aventura', 'Finalizado', 'Aavegotchi is a DeFi-enabled crypto collectibles game developed by Singapore-based Pixelcraft Studios that allows players to stake Non-fungible tokens (NFTs) avatars with interest-generating tokens and interact with the Aavegotchi metaverse. It is a unique combination of Decentralized Finance (DeFi) and NFTs.', 'https://www.aavegotchi.com/', 'To level up their Aavegotchis, players can participate in a variety of activities including mini-games, governance, and meetups. Aavegotchis can also increase their rarity level by equipping in-game wearables and leveling up.', 'noticias'),
 (6, 'Crypto Cars', 'CARS', '1', 'cryptocars1.png', 67, 1, 'Simulador', 'Finalizado', 'Proyecto Cerrado: La economía de todo el metaverso Cryto City quebró por mala administración del equipo desarrollador. Se habla de un “rugpull” sigiloso o una quiebra planificada, según testimonios de algunos moderadores.  Crypto Cars es un juego NFT del género de racing con ciertas características del RPG que presenta al jugador la modalidad de juego de simulación de carreras y eventualmente lanzarán una forma de PVP para competir contra otros jugadores. Este título junto a Crypto Planes y Crypto Guards forman parte del metaverso Crypto City creado por los mismos desarrolladores.', 'https://www.nftgamearena.com/play-to-earn/racing/crypto-cars/', 'whitepaper', 'noticias'),
 (7, 'Crypto Cars Worlds', 'CARS', '0.03', 'cryptocars.png', 67, 1, 'Carreras', 'Abandonado', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'Proyecto Caido', 'whitepaper', 'noticias'),
 (8, 'Alienship', 'ALS', '2.2', 'alienship.jpg', 56, 1, 'Disparos', 'Finalizado', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'http://ww62.alienships.io/', 'aily', 'To'),
 (9, 'Plant Vs Undead', 'PVU', '0.01', 'PVU.jpeg', 67, 1, 'Farming', 'Finalizado', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://es-la.facebook.com/pages/category/Video-Game/PvUNFTGarden/posts/', 'aily Trilium Allocation to Planets (DTAP)Every 24 hours a Planet may call the Federation contract once to get its new supply of Trilium.The amount of Trilium each Planet can claim is given by:TLM due to NFT componentplusTLM due to staked componentWhere:TL', 'Seek your fortune Find NFTs you can use to connect and play with others. Earn Trilium that gives you power in the Planet Decentralised Autonomous Organizations (Planet DAOs) – where much of the action happens.'),
-(10, 'Pegaxy', 'PEGA', '0.03', 'pegaxy.PNG', 68, 2, 'Simulador', 'Finalizado', 'Pegaxy is a play-to-earn PVP style horse racing game where players compete for top 3 placement against 14 other racers. Each race has randomised elemental variables which include wind, water, fire, speed and more. Using strategic upgrades, food and skill, players must place in the top 3 to earn the platforms utility token, VIS (Vigorus).  Within the game, players are able to breed, merge, rent, sell, and of course race their Pega to earn VIS tokens. This system has proven to be a sound long-term economic approach when building an NFT/Blockchain based game as it enables teams to build large guilds, scholarship programs, and even provides solo players the opportunity to earn in game tokens through daily racing.', 'https://pegaxy.io/', 'The', 'The'),
+(10, 'Pegaxy', 'PEGA', '0.03', 'pegaxy.PNG', 68, 1, 'Simulador', 'Finalizado', 'Pegaxy is a play-to-earn PVP style horse racing game where players compete for top 3 placement against 14 other racers. Each race has randomised elemental variables which include wind, water, fire, speed and more. Using strategic upgrades, food and skill, players must place in the top 3 to earn the platforms utility token, VIS (Vigorus).  Within the game, players are able to breed, merge, rent, sell, and of course race their Pega to earn VIS tokens. This system has proven to be a sound long-term economic approach when building an NFT/Blockchain based game as it enables teams to build large guilds, scholarship programs, and even provides solo players the opportunity to earn in game tokens through daily racing.', 'https://pegaxy.io/', 'The', 'The'),
 (11, 'Mir4', 'M4', '2.2', 'mira.jpeg', 56, 1, 'MMORPG', '2022.10.23', 'Enfrenta a jefes más poderosos con hasta 15 miembros de tu clan en los asaltos infernales. Participa y obtén las mejores recompensas. ¡Mejores serán las recompensas mientras más participantes haya!', 'https://mir4global.com/?lang=es', 'RARITY', 'Seek'),
-(12, 'The Sandbox', 'SAND', '100', 'The-Sandbox.jpg', 56, 2, 'Aventura', 'Finalizado', 'The Sandbox is a community-driven platform where creators can monetize voxel ASSETS and gaming experiences on the blockchain', 'https://www.sandbox.game/en/', 'To level up their Aavegotchis, players can participate in a variety of activities including mini-games, governance, and meetups. Aavegotchis can also increase their rarity level by equipping in-game wearables and leveling up.', 'Seek your fortune Find NFTs you can use to connect and play with others. Earn Trilium that gives you power in the Planet Decentralised Autonomous Organizations (Planet DAOs) – where much of the action happens.'),
+(12, 'The Sandbox', 'SAND', '100', 'The-Sandbox.jpg', 56, 1, 'Aventura', 'Finalizado', 'The Sandbox is a community-driven platform where creators can monetize voxel ASSETS and gaming experiences on the blockchain', 'https://www.sandbox.game/en/', 'To level up their Aavegotchis, players can participate in a variety of activities including mini-games, governance, and meetups. Aavegotchis can also increase their rarity level by equipping in-game wearables and leveling up.', 'Seek your fortune Find NFTs you can use to connect and play with others. Earn Trilium that gives you power in the Planet Decentralised Autonomous Organizations (Planet DAOs) – where much of the action happens.'),
 (13, 'Splinterlands', 'SPLi', '0.03', 'splinterlands_logo.png', 56, 1, 'Cartas', 'Finalizado', 'Since the days of the Splintering, the face of the world has been shaped by blood and power. As factions battle for control, primal energies are harnessed and unleashed.', 'https://splinterlands.com/', 'whitepaper', 'noticias'),
 (14, 'CropBytes', 'CBX', '1.07', 'copp.png', 65, 1, 'Cartas/Farm', 'CropBytes is a game of business based on real world farming. You can play the game to own assets and increase your farm’s output, or trade them with other players for returns in crypto.', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://www.cropbytes.com/', 'whitepaper', 'Seek your fortune Find NFTs you can use to connect and play with others. Earn Trilium that gives you power in the Planet Decentralised Autonomous Organizations (Planet DAOs) – where much of the action happens.'),
 (15, 'Dragonary', 'CYT', '0.02', 'dragonary.jpg', 67, 1, 'Simulador', 'Finalizado', 'Dragonary es un juego y como tal, cualquiera puede jugarlo, tenga o no, conocimientos sobre criptomonedas y blockchain. No necesitas descargar ningún software adicional. No necesitas sincronizar una billetera virtual, ni utilizar aplicaciones de terceros para jugarlo. Descarga y juega.', 'https://dragonary.com/es/', 'whitepaper', 'noticias'),
@@ -306,19 +307,19 @@ INSERT INTO `proyectos` (`idproyecto`, `nombre_proyecto`, `moneda_proyecto`, `pr
 (19, 'Bomb Crypto', 'BCOIN', '2.2', 'bombchaincover wpp gitbook.png', 56, 1, 'Aventura', '0.2.5.34', 'BCOIN token is the main in-game currency. It will be used to buy Bomber hero, Upgrade Bomber level, mainly in the first phase.', 'https://bombcrypto.io/', 'whitepaper', 'noticias'),
 (20, 'Crypto Blades', 'SKILL', '336', 'cryptoblades.png', 67, 1, 'Simulador', 'Finalizado', 'Earn $SKILL tokens by defeating enemies, winning on PVP, and staking your gains.', 'https://www.cryptoblades.io/', 'whitepaper', 'noticias'),
 (21, 'Rising Star', 'HIVE', '0.000004', 'rising.jpg', 65, 1, 'Simulador', 'Finalizado', 'Start as a lowly busker and work your way up to a global mega star!', 'https://www.risingstargame.com/', 'whitepaper', 'noticias'),
-(22, 'Zombies Factory', 'ZFA', '0.15', 'UK-Zombie-Experience-Battles.png', 67, 2, 'Simulador', 'SCAM', 'heffield has fallen. The epidemic has swept through the city leaving just a few pockets that provide safe havens – a select few buildings that are the only hope for the authorities to regroup and retake Sheffield. But now one such outpost has been sabotaged & thousands of infected have breached the quarantine sector…', 'http://zombieexperiences.co.uk/zombie-factory/', 'whitepaper', 'noticias'),
+(22, 'Zombies Factory', 'ZFA', '0.15', 'UK-Zombie-Experience-Battles.png', 67, 1, 'Simulador', 'SCAM', 'heffield has fallen. The epidemic has swept through the city leaving just a few pockets that provide safe havens – a select few buildings that are the only hope for the authorities to regroup and retake Sheffield. But now one such outpost has been sabotaged & thousands of infected have breached the quarantine sector…', 'http://zombieexperiences.co.uk/zombie-factory/', 'whitepaper', 'noticias'),
 (23, 'CRYPTO VILLAGES', 'DDD', '0.03', 'village.PNG', 67, 1, 'Simulador', '7.2.4', 'We are currently restoring full website functionality. In the interim, we have enabled building purchases to allow interested investors the chance to purchase buildings for the game. We thank you for your support, and appreciate your patience as we optimize the website!', 'https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGFKdi1SbWNpMUhuTmFJU09DOU1oZmlhbDZkZ3xBQ3Jtc0trZFZyUDVybnpRSW1nczJ3MWcwSGdlX015SGtsQWRwUjVFX2pHS1BDZFRJQUMxM20yRmZ3YTc3MmNOOGFra3J6T3h2VVZBTmFxM1cyMlJGZXpneDdWaTRhMERiMGdacG4xVz', 'whitepaper', 'noticias'),
 (24, 'Age of Holders', 'AHG', '0.1', 'age of holders.png', 67, 1, '', '', 'Contrye tu ejercito, mejoralo y derrota a tus enemigos......', 'https://ageofholders.com/', 'whitepaper', 'noticias'),
 (25, 'Ev.IO', 'EVIO', '1', 'ev io.PNG', 70, 1, 'Disparos', 'On Going', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://ev.io/', 'whitepaper', 'noticias'),
 (26, '3Speak', '3S', '1', '3s.PNG', 65, 1, 'Red Social', 'Finalizado', '3Speak', 'https://3speak.tv/', 'whitepaper', 'noticias'),
-(27, 'GEMLAND', 'GEM', '1.3', 'gemland.PNG', 56, 2, 'Cartas', '7.2.4', 'Gemland is an economic NFT game on the WAX blockchain. Mine resources, build trade relationships, explore new skills and opportunities in this world, control dragons, build ships, get paid for owning land, play and earn!', 'https://gemland.world/', 'whitepaper', 'noticias'),
+(27, 'GEMLAND', 'GEM', '1.3', 'gemland.PNG', 56, 1, 'Cartas', '7.2.4', 'Gemland is an economic NFT game on the WAX blockchain. Mine resources, build trade relationships, explore new skills and opportunities in this world, control dragons, build ships, get paid for owning land, play and earn!', 'https://gemland.world/', 'whitepaper', 'noticias'),
 (28, 'LEAGUE OF PETS', 'PETS', '0.19', 'pets league.PNG', 65, 1, 'Simulador', 'SCAM', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://game.leagueofpets.com/dashboard?referral_code=2037', 'whitepaper', 'noticias'),
-(29, 'NBOX', 'NBOX', '0.01', 'NBOX.PNG', 68, 2, 'Cartas', '5.6.32', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://www.nbox.io/HIKrQ', 'whitepaper', 'noticias'),
+(29, 'NBOX', 'NBOX', '0.01', 'NBOX.PNG', 68, 1, 'Cartas', '5.6.32', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'https://www.nbox.io/HIKrQ', 'whitepaper', 'noticias'),
 (30, 'Crypto Legions', 'BLV3', '0.5', 'cryptolegions.PNG', 56, 1, 'Simulador', '7.2.4', 'Missions Lease Spacecrafts to send on missions across the Metaverse. Explore Missions, Discover NFTs', 'cryptolegions.app/', 'whitepaper', 'noticias'),
 (31, 'Mining Network', 'ASIC', '1', 'minings.PNG', 56, 1, 'Farming', 'Finalizado', 'Mining network is a game on WAX blockchain. It combines FreeToPlay and PlayToEarn models. Every new user gets a free NFT to play and earn immediately after registering in the game.', 'https://miningnetwork.io/?ref=2rdaw.wam', 'whitepaper', 'noticias'),
-(32, 'Poly Island', 'POL', '0', 'poly.png', 68, 2, 'Farming', 'SCAM', 'asdoiahdnkjadbnjkasdnajsldkasd', 'https://twitter.com/home', 'whitepaper', 'noticias'),
+(32, 'Poly Island', 'POL', '0', 'poly.png', 68, 1, 'Farming', 'SCAM', 'asdoiahdnkjadbnjkasdnajsldkasd', 'https://twitter.com/home', 'whitepaper', 'noticias'),
 (33, 'Pinup warlords', 'PNIUP', '1', 'pinu.PNG', 56, 1, 'Cartas', 'Finalizado', 'Factions are made of Soldiers with different classes and officers', 'https://pinupwarlords.com/', 'whitepaper', 'noticias'),
-(49, 'Proyecto de Pruebo 3', 'PRO', '0.05', '67fbc7fe6afd4.jpg', 56, 2, 'TESTEO', 'Ongoin', 'Proyecto de testeo', 'www.proyectotesteo.com', 'www.proyectotesteo.comwww.proyectotestwww.proyectotesteo.com', 'www.proyectotesteo.comwww.proyectotesteo.comww.pr');
+(44, 'Proyecto de Prueba', 'PRO', '???', '67f42e899b6e7.png', 56, 1, 'TESTEO', 'Ongoing', 'Proyecto de testeo', 'www.proyectotesteo.com', 'www.proyectotesteo.comwww.proyectotestwww.proyectotesteo.com', 'www.proyectotesteo.comwww.proyectotesteo.comwww.pr');
 
 -- --------------------------------------------------------
 
@@ -360,9 +361,9 @@ CREATE TABLE `redes` (
 --
 
 INSERT INTO `redes` (`idred`, `nombre_red`, `moneda_red`, `precio_red`, `imagen_red`, `idestado`, `orden`) VALUES
-(56, 'WaxP', '', '', 'waxp.png', 2, 1),
+(56, 'WaxP', '', '', 'waxp.png', 1, 1),
 (59, 'Avalanche', '', '', 'avalanche-avax.png', 1, 2),
-(65, 'Hive', '', '', 'hive.png', 2, 3),
+(65, 'Hive', '', '', 'hive.png', 1, 3),
 (66, 'Ronin Network', '', '', 'ronin.png', 1, 5),
 (67, 'Binance Smart Chain', '', '', 'Binance-Coin-icon.png', 1, 5),
 (68, 'Polygon Matic', '', '', 'polygon-matic22.png', 1, 6),
@@ -411,8 +412,7 @@ INSERT INTO `rol_usuarios` (`idrol`, `idusuario`) VALUES
 (2, 28),
 (2, 29),
 (1, 30),
-(2, 33),
-(2, 18);
+(2, 33);
 
 -- --------------------------------------------------------
 
@@ -467,42 +467,12 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `fb_id`, `foto`, `descripcion`, `twitter`, `instagram`, `facebook`, `idestado`, `nombre`, `apellido`, `discord_id`, `avatar`, `fecha_registro`) VALUES
-(1, 'juanito23', 'juanito23@mail.com', 'pass1234', NULL, 'foto1.jpg', 'Amante de los videojuegos', '@juanito', '@juanito23', 'fb.com/juanito23', 1, 'Juan', 'Pérez', 'juan#1234', 'avatar1.png', '2025-04-11 12:19:30'),
-(2, 'laura_love', 'laura.love@mail.com', 'secure456', 'fb12345', 'foto2.jpg', 'Diseñadora gráfica', '@laura_love', NULL, 'fb.com/laura.love', 2, 'Laura', 'Gómez', NULL, NULL, '2025-04-11 12:19:30'),
-(3, 'dragonX', 'dragonx@mail.com', 'dr4g0n!', NULL, NULL, 'Streamer y gamer', '@dragonx', '@dragonx_gaming', NULL, 1, 'Carlos', 'Ruiz', 'dragonx#9988', 'avatar3.png', '2025-04-11 12:19:30'),
-(4, 'nelly98', 'nelly98@mail.com', 'myp@ss987', NULL, 'foto4.jpg', NULL, NULL, NULL, NULL, 3, 'Nelly', 'Fernández', NULL, NULL, '2025-04-11 12:19:30'),
-(5, 'tomas_dev', 'tomasdev@mail.com', 'devlife2024', NULL, 'foto5.jpg', 'Desarrollador web', '@tomas_dev', NULL, NULL, 1, 'Tomás', 'López', NULL, NULL, '2025-04-11 12:19:30'),
-(6, 'valenrock', 'valenrock@mail.com', 'valenROCK@2023', NULL, NULL, 'Fan del rock clásico', NULL, '@valen.rock', 'fb.com/valenrock', 2, 'Valentina', 'Sánchez', 'valen#3210', NULL, '2025-04-11 12:19:30'),
-(7, 'kikogamer', 'kiko@mail.com', 'g@merK1ko', NULL, 'foto7.jpg', NULL, '@kikogamer', NULL, NULL, 1, 'Enrique', 'Martínez', 'kikogamer#123', NULL, '2025-04-11 12:19:30'),
-(8, 'luciawrites', 'luciawrites@mail.com', 'escritoraL', NULL, NULL, 'Escritora de cuentos', '@luciawrites', NULL, NULL, 3, 'Lucía', 'Paredes', NULL, 'avatar8.jpg', '2025-04-11 12:19:30'),
-(9, 'xavi_art', 'xavi.art@mail.com', 'arteX123', NULL, 'foto9.jpg', 'Pintor digital', '@xaviart', '@xavi.art', NULL, 2, 'Xavier', 'Ortiz', NULL, NULL, '2025-04-11 12:19:30'),
-(10, 'dani_musik', 'dani@mail.com', 'musicPass', 'fb8765', 'foto10.jpg', 'Músico independiente', '@danimusic', NULL, 'fb.com/dani.music', 3, 'Daniela', 'Cruz', 'dani#5567', NULL, '2025-04-11 12:19:30'),
-(11, 'user11', 'user11@mail.com', 'pass11', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Once', NULL, NULL, '2025-04-11 12:19:30'),
-(12, 'user12', 'user12@mail.com', 'pass12', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Doce', NULL, NULL, '2025-04-11 12:19:30'),
-(13, 'user13', 'user13@mail.com', 'pass13', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Trece', NULL, NULL, '2025-04-11 12:19:30'),
-(14, 'user14', 'user14@mail.com', 'pass14', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Catorce', NULL, NULL, '2025-04-11 12:19:30'),
-(15, 'user15', 'user15@mail.com', 'pass15', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Quince', NULL, NULL, '2025-04-11 12:19:30'),
-(16, 'user16', 'user16@mail.com', 'pass16', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Dieciséis', NULL, NULL, '2025-04-11 12:19:30'),
-(17, 'nico_ave', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, 'Contraseña 9244', 'l', '', '', 1, 'Nicolas ', 'Avezzani', NULL, NULL, '2025-04-05 08:20:00'),
-(18, 'user18', 'user18@mail.com', '5a032830ea6db6e3f7117e2661968e74331f4f3a', NULL, 'b4698af76ba4918fc1bed1a95281d6ef4fff3cd09c8295b1941d9756e8ac9daf.png', '', NULL, NULL, NULL, 1, 'User', 'Dieciocho A', NULL, NULL, '2025-04-11 12:19:30'),
-(19, 'user19', 'user19@mail.com', 'pass19', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Diecinueve', NULL, NULL, '2025-04-11 12:19:30'),
-(20, 'user20', 'user20@mail.com', 'pass20', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Veinte', NULL, NULL, '2025-04-11 12:19:30'),
-(21, 'ale_rocker', 'ale@mail.com', 'rocky123', NULL, 'ale.jpg', 'Rockeando desde el 2000', NULL, NULL, NULL, 2, 'Alejandro', 'Torres', NULL, 'avatar21.png', '2025-04-11 12:19:30'),
-(22, 'maria_fit', 'mariafit@mail.com', 'fit4life', NULL, 'maria.jpg', 'Entrenadora personal', '@mariafit', '@fitmaria', 'fb.com/maria.fit', 3, 'María', 'Alonso', NULL, NULL, '2025-04-11 12:19:30'),
-(23, 'gamerpro', 'gamerpro@mail.com', 'g@m3rPr0', NULL, 'gamer.jpg', 'Jugador competitivo', NULL, NULL, NULL, 1, 'Pedro', 'Jiménez', 'gamer#2222', NULL, '2025-04-11 12:19:30'),
-(24, 'clau_blog', 'clau@mail.com', 'blogLife23', NULL, NULL, 'Bloguera de estilo de vida', '@clau_blog', NULL, NULL, 2, 'Claudia', 'Morales', NULL, NULL, '2025-04-11 12:19:30'),
-(25, 'rafart', 'rafa@mail.com', 'artLove45', NULL, 'rafa.jpg', 'Diseñador UI/UX', NULL, '@rafart', NULL, 3, 'Rafael', 'Aguilar', NULL, NULL, '2025-04-11 12:19:30'),
-(26, 'sofi_digital', 'sofi@mail.com', 'd1g1t@l!', NULL, NULL, NULL, NULL, '@sofi.digital', 'fb.com/sofi.digital', 2, 'Sofía', 'Mendoza', NULL, 'avatar26.jpg', '2025-04-11 12:19:30'),
+(17, 'nico_ave', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, 'esto es 9244', 'l', '', '', 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
 (27, 'ADMINISTRADOR', 'asd@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, '1.jpg', '1234', NULL, NULL, NULL, 1, 'Nicolas Fernando', 'Zoppi', NULL, NULL, '2025-04-05 08:20:00'),
 (28, 'lolo', 'lolo@lolo.gov', '8aa40001b9b39cb257fe646a561a80840c806c55', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
 (29, 'kilo', 'kilo@kilo.com', '8ff8800a239d91c648520ad5aea2d30e76e2850f', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
 (30, 'pepe', 'pepe@gmail.com', '265392dc2782778664cc9d56c8e3cd9956661bb0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
-(33, 'CLIENTE', 'zoppinicolas@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, 'Listo que capo soy.jpg', '1234', NULL, NULL, NULL, 1, 'CLIENTE', 'CLIENTEa', NULL, NULL, '2025-04-05 08:20:00'),
-(37, 'leo_code', 'leo@mail.com', 'cod3r2024', NULL, 'leo.png', 'Full-stack dev', '@leo_code', NULL, NULL, 1, 'Leonardo', 'Castro', NULL, NULL, '2025-04-11 12:19:30'),
-(38, 'jess_art', 'jess@mail.com', 'pa$$jess', NULL, NULL, 'Ilustradora', NULL, '@jessart', NULL, 3, 'Jessica', 'Herrera', 'jess#1212', NULL, '2025-04-11 12:19:30'),
-(39, 'mike_tech', 'mike@mail.com', 'techMike99', NULL, 'mike.jpg', 'Tech reviewer', NULL, NULL, NULL, 1, 'Miguel', 'Reyes', NULL, NULL, '2025-04-11 12:19:30'),
-(40, 'andrea_music', 'andrea@mail.com', 'andreamusic1', NULL, NULL, 'Cantante y compositora', '@andreamusic', NULL, NULL, 2, 'Andrea', 'Luna', 'andrea#2323', NULL, '2025-04-11 12:19:30'),
-(67, 'user17', 'user17@mail.com', 'pass17', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Diecisiete', NULL, NULL, '2025-04-11 12:19:30');
+(33, 'CLIENTE', 'zoppinicolas@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, 'Listo que capo soy.jpg', NULL, NULL, NULL, NULL, 1, 'CLIENTE', 'CLIENTE', NULL, NULL, '2025-04-05 08:20:00');
 
 -- --------------------------------------------------------
 
@@ -528,16 +498,7 @@ INSERT INTO `usuario_favoritos` (`idfavorito`, `idusuario`, `crypto_id`, `crypto
 (8, 27, 'bitcoin', 'Bitcoin', '2025-04-09 05:44:38'),
 (10, 27, 'ethereum', 'Ethereum', '2025-04-09 14:26:08'),
 (11, 33, 'ronin', 'Ronin', '2025-04-09 14:31:01'),
-(14, 27, 'bnc', 'BNC', '2025-04-10 17:08:36'),
-(15, 17, 'bitcoin', 'Bitcoin', '2025-04-11 15:10:15'),
-(16, 17, 'ripple', 'XRP', '2025-04-11 15:10:36'),
-(17, 17, 'polkadot', 'Polkadot', '2025-04-11 15:10:45'),
-(18, 33, 'ripple', 'XRP', '2025-04-11 15:11:17'),
-(20, 17, 'iota', 'IOTA', '2025-04-11 15:35:20'),
-(21, 33, 'the-graph', 'The Graph', '2025-04-11 16:15:44'),
-(22, 18, 'superfarm', 'SuperVerse', '2025-04-11 22:55:13'),
-(23, 18, 'staked-hype', 'Staked HYPE', '2025-04-11 22:55:22'),
-(26, 33, 'bnc', 'BNC', '2025-04-11 23:00:46');
+(14, 27, 'bnc', 'BNC', '2025-04-10 17:08:36');
 
 -- --------------------------------------------------------
 
@@ -562,7 +523,8 @@ INSERT INTO `usuario_redes` (`idred`, `idusuario`, `tipo_red`, `url_red`, `fecha
 (11, 33, 'Twitter', 'https://hacktorrent.to/', '2025-04-03 15:10:01'),
 (17, 27, 'Twitter', 'https://hacktorrent.to/', '2025-04-03 15:32:59'),
 (18, 27, 'YouTube', 'https://www.youtube.com/results?search_query=lofi', '2025-04-03 16:00:47'),
-(20, 27, 'TikTok', 'https://hacktorrent.to/', '2025-04-09 05:45:04');
+(20, 27, 'TikTok', 'https://hacktorrent.to/', '2025-04-09 05:45:04'),
+(21, 27, 'TikTok', 'https://hacktorrent.to/', '2025-04-09 05:46:09');
 
 --
 -- Índices para tablas volcadas
@@ -714,19 +676,19 @@ ALTER TABLE `noticias`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `idproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `idproyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `rarezaitem`
@@ -738,7 +700,7 @@ ALTER TABLE `rarezaitem`
 -- AUTO_INCREMENT de la tabla `redes`
 --
 ALTER TABLE `redes`
-  MODIFY `idred` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `idred` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -750,13 +712,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_favoritos`
 --
 ALTER TABLE `usuario_favoritos`
-  MODIFY `idfavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `idfavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_redes`

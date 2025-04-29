@@ -9,6 +9,8 @@ $nombre = $_POST['nombre_producto'];
 $precio = floatval($_POST['precio']);
 $idestado = intval($_POST['idestado']);
 $idcategoria = intval($_POST['idcategoria']);
+$descripcion = $_POST['descripcion'];
+$destacado = intval($_POST['destacado']);
 
 // Procesar imagen si se subió una nueva
 $nombreImagen = '';
@@ -35,22 +37,22 @@ if ($idproducto > 0) {
     // UPDATE
     if ($nombreImagen != '') {
         // Si se subió una nueva imagen, actualizarla también
-        $sql = "UPDATE productos SET nombre_producto=?, imagen=?, precio=?, idestado=?, idcategoria=? WHERE idproducto=?";
+        $sql = "UPDATE productos SET nombre_producto=?, imagen=?, precio=?, idestado=?, idcategoria=?, descripcion=?, destacado=? WHERE idproducto=?";
         $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("ssddii", $nombre, $nombreImagen, $precio, $idestado, $idcategoria, $idproducto);
+        $stmt->bind_param("ssddisii", $nombre, $nombreImagen, $precio, $idestado, $idcategoria,$descripcion, $destacado,  $idproducto );
     } else {
         // No se subió nueva imagen, mantener la anterior
-        $sql = "UPDATE productos SET nombre_producto=?, precio=?, idestado=?, idcategoria=? WHERE idproducto=?";
+        $sql = "UPDATE productos SET nombre_producto=?, precio=?, idestado=?, idcategoria=?, descripcion=?, destacado=? WHERE idproducto=?";
         $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("sddii", $nombre, $precio, $idestado, $idcategoria, $idproducto);
+        $stmt->bind_param("sddisii", $nombre, $precio, $idestado, $idcategoria,$descripcion, $destacado, $idproducto);
     }
     $stmt->execute();
     $stmt->close();
 } else {
     // INSERT
-    $sql = "INSERT INTO productos (nombre_producto, imagen, precio, idestado, idcategoria) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO productos (nombre_producto, imagen, precio, idestado, idcategoria, destacado , descripcion) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("ssdii", $nombre, $nombreImagen, $precio, $idestado, $idcategoria);
+    $stmt->bind_param("ssdiiis", $nombre, $nombreImagen, $precio, $idestado, $idcategoria, $destacado, $descripcion);
     $stmt->execute();
     $stmt->close();
 }
