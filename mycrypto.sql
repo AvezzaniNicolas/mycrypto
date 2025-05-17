@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-04-2025 a las 01:37:07
+-- Tiempo de generación: 18-05-2025 a las 01:50:36
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -105,7 +105,7 @@ INSERT INTO `inventarios` (`idinventario`, `idusuario`, `logo1`, `logo2`, `logo3
 (9, 21, NULL, NULL, NULL, 'logos/1.png', 'logos/2.png', NULL, NULL, NULL, NULL, 153),
 (10, 22, NULL, NULL, NULL, 'logos/1.png', NULL, NULL, NULL, NULL, NULL, 178),
 (11, 29, NULL, NULL, NULL, 'logos/1.png', NULL, NULL, NULL, NULL, NULL, 190),
-(12, 30, 'logos/prod_680cf43f80066.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1380),
+(12, 30, 'logos/prod_67f87a0aeb361.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1480),
 (13, 31, NULL, NULL, NULL, 'marcos/1.jpg', 'marcos/2.png', NULL, NULL, NULL, NULL, 1466),
 (14, 32, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (15, 33, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
@@ -175,7 +175,8 @@ INSERT INTO `permisos` (`idpermiso`, `descripcion`) VALUES
 (9, 'modificar item'),
 (10, 'alta tienda'),
 (11, 'baja tienda'),
-(12, 'modificar tienda');
+(12, 'modificar tienda'),
+(13, 'modificar usuario');
 
 -- --------------------------------------------------------
 
@@ -204,7 +205,8 @@ INSERT INTO `permiso_roles` (`idpermiso`, `idrol`) VALUES
 (9, 1),
 (10, 1),
 (11, 1),
-(12, 1);
+(12, 1),
+(13, 1);
 
 -- --------------------------------------------------------
 
@@ -220,24 +222,23 @@ CREATE TABLE `productos` (
   `idestado` int(11) NOT NULL,
   `idcategoria` int(11) NOT NULL,
   `destacado` tinyint(1) NOT NULL,
-  `descripcion` varchar(256) NOT NULL
+  `descripción` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`idproducto`, `nombre_producto`, `imagen`, `precio`, `idestado`, `idcategoria`, `destacado`, `descripcion`) VALUES
-(16, 'logo 1', 'logos/prod_680cf1fcb9d43.jpg', 20, 1, 1, 1, ''),
-(17, 'logo 2', 'logos/prod_680cf21dbe2ba.jpg', 20, 1, 1, 0, 'enrique'),
-(18, 'logo 3 ', 'logos/prod_680cf3435a3c0.jpg', 20, 1, 1, 0, ''),
-(19, 'logo 4 ', 'logos/prod_680cf36e36a57.jpg', 20, 1, 1, 0, ''),
-(20, 'logo 5 ', 'logos/prod_680cf43f80066.jpg', 20, 1, 1, 0, ''),
-(21, 'banner 1', 'banners/prod_681159fe5fda2.jpg', 20, 1, 3, 0, 'hola'),
-(22, 'banner 2', 'banners/prod_68115c61c717e.jpg', 20, 1, 3, 0, 'adios'),
-(23, 'marco 1 ', 'marcos/prod_68115c7546ba1.jpg', 20, 1, 2, 1, 'marco'),
-(24, 'banner 4', 'banners/prod_68115d5d662d0.jpg', 20, 1, 3, 1, 'banner'),
-(25, 'marco 2', 'marcos/prod_68115e354cf7f.jpg', 20, 1, 2, 0, 'marco');
+INSERT INTO `productos` (`idproducto`, `nombre_producto`, `imagen`, `precio`, `idestado`, `idcategoria`, `destacado`, `descripción`) VALUES
+(1, 'Logo 1', 'logos/1.png', 10, 1, 1, 0, ''),
+(2, 'Logo 2', 'logos/2.png', 25, 1, 1, 0, ''),
+(3, 'Logo 3', 'logos/3.png', 30, 1, 1, 0, ''),
+(4, 'Marco 1', 'marcos/1.jpg', 12, 1, 2, 0, ''),
+(5, 'Marco 2', 'marcos/2.png', 22, 1, 2, 0, ''),
+(6, 'Banner 1', 'banners/1.jpg', 23, 1, 3, 0, ''),
+(7, 'Banner 2', 'banners/2.jpg', 17, 1, 3, 0, ''),
+(9, 'Logo 4', 'logos/4.png', 32, 1, 1, 0, ''),
+(10, 'logo 12', 'logos/prod_67f87a0aeb361.jpg', 20, 1, 1, 0, '');
 
 -- --------------------------------------------------------
 
@@ -257,9 +258,9 @@ CREATE TABLE `productos_categoria` (
 --
 
 INSERT INTO `productos_categoria` (`id`, `nombre`, `url`, `activo`) VALUES
-(1, 'Logos', 'img\\item\\asdasd.png', 1),
-(2, 'Marcos', 'img\\item2\\perfil.png', 1),
-(3, 'Banners', 'img\\item2\\fondo.jpg', 1);
+(1, 'Logos', 'tienda\\img\\banner_img_01.jpg', 1),
+(2, 'Marcos', './tienda/img/category_img_02.jpg', 1),
+(3, 'Banners', './tienda/img/category_img_03.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -467,12 +468,42 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`idusuario`, `nickname`, `email`, `contrasenia`, `fb_id`, `foto`, `descripcion`, `twitter`, `instagram`, `facebook`, `idestado`, `nombre`, `apellido`, `discord_id`, `avatar`, `fecha_registro`) VALUES
-(17, 'nico_ave', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, 'esto es 9244', 'l', '', '', 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
+(1, 'juanito23', 'juanito23@mail.com', 'pass1234', NULL, 'foto1.jpg', 'Amante de los videojuegos', '@juanito', '@juanito23', 'fb.com/juanito23', 1, 'Juan', 'Pérez', 'juan#1234', 'avatar1.png', '2025-04-11 12:19:30'),
+(2, 'laura_love', 'laura.love@mail.com', 'secure456', 'fb12345', 'foto2.jpg', 'Diseñadora gráfica', '@laura_love', NULL, 'fb.com/laura.love', 2, 'Laura', 'Gómez', NULL, NULL, '2025-04-11 12:19:30'),
+(3, 'dragonX', 'dragonx@mail.com', 'dr4g0n!', NULL, NULL, 'Streamer y gamer', '@dragonx', '@dragonx_gaming', NULL, 1, 'Carlos', 'Ruiz', 'dragonx#9988', 'avatar3.png', '2025-04-11 12:19:30'),
+(4, 'nelly98', 'nelly98@mail.com', 'myp@ss987', NULL, 'foto4.jpg', NULL, NULL, NULL, NULL, 3, 'Nelly', 'Fernández', NULL, NULL, '2025-04-11 12:19:30'),
+(5, 'tomas_dev', 'tomasdev@mail.com', 'devlife2024', NULL, 'foto5.jpg', 'Desarrollador web', '@tomas_dev', NULL, NULL, 1, 'Tomás', 'López', NULL, NULL, '2025-04-11 12:19:30'),
+(6, 'valenrock', 'valenrock@mail.com', 'valenROCK@2023', NULL, NULL, 'Fan del rock clásico', NULL, '@valen.rock', 'fb.com/valenrock', 2, 'Valentina', 'Sánchez', 'valen#3210', NULL, '2025-04-11 12:19:30'),
+(7, 'kikogamer', 'kiko@mail.com', 'g@merK1ko', NULL, 'foto7.jpg', NULL, '@kikogamer', NULL, NULL, 1, 'Enrique', 'Martínez', 'kikogamer#123', NULL, '2025-04-11 12:19:30'),
+(8, 'luciawrites', 'luciawrites@mail.com', 'escritoraL', NULL, NULL, 'Escritora de cuentos', '@luciawrites', NULL, NULL, 3, 'Lucía', 'Paredes', NULL, 'avatar8.jpg', '2025-04-11 12:19:30'),
+(9, 'xavi_art', 'xavi.art@mail.com', 'arteX123', NULL, 'foto9.jpg', 'Pintor digital', '@xaviart', '@xavi.art', NULL, 2, 'Xavier', 'Ortiz', NULL, NULL, '2025-04-11 12:19:30'),
+(10, 'dani_musik', 'dani@mail.com', 'musicPass', 'fb8765', 'foto10.jpg', 'Músico independiente', '@danimusic', NULL, 'fb.com/dani.music', 3, 'Daniela', 'Cruz', 'dani#5567', NULL, '2025-04-11 12:19:30'),
+(11, 'user11', 'user11@mail.com', 'pass11', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Once', NULL, NULL, '2025-04-11 12:19:30'),
+(12, 'user12', 'user12@mail.com', 'pass12', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Doce', NULL, NULL, '2025-04-11 12:19:30'),
+(13, 'user13', 'user13@mail.com', 'pass13', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Trece', NULL, NULL, '2025-04-11 12:19:30'),
+(14, 'user14', 'user14@mail.com', 'pass14', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Catorce', NULL, NULL, '2025-04-11 12:19:30'),
+(15, 'user15', 'user15@mail.com', 'pass15', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Quince', NULL, NULL, '2025-04-11 12:19:30'),
+(16, 'user16', 'user16@mail.com', 'pass16', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Dieciséis', NULL, NULL, '2025-04-11 12:19:30'),
+(17, 'nico_ave', 'nicolas9244@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', NULL, NULL, 'Contraseña 9244', 'l', '', '', 1, 'Nicolas ', 'Avezzani', NULL, NULL, '2025-04-05 08:20:00'),
+(18, 'user18', 'user18@mail.com', 'pass18', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Dieciocho', NULL, NULL, '2025-04-11 12:19:30'),
+(19, 'user19', 'user19@mail.com', 'pass19', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Diecinueve', NULL, NULL, '2025-04-11 12:19:30'),
+(20, 'user20', 'user20@mail.com', 'pass20', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Veinte', NULL, NULL, '2025-04-11 12:19:30'),
+(21, 'ale_rocker', 'ale@mail.com', 'rocky123', NULL, 'ale.jpg', 'Rockeando desde el 2000', NULL, NULL, NULL, 2, 'Alejandro', 'Torres', NULL, 'avatar21.png', '2025-04-11 12:19:30'),
+(22, 'maria_fit', 'mariafit@mail.com', 'fit4life', NULL, 'maria.jpg', 'Entrenadora personal', '@mariafit', '@fitmaria', 'fb.com/maria.fit', 3, 'María', 'Alonso', NULL, NULL, '2025-04-11 12:19:30'),
+(23, 'gamerpro', 'gamerpro@mail.com', 'g@m3rPr0', NULL, 'gamer.jpg', 'Jugador competitivo', NULL, NULL, NULL, 1, 'Pedro', 'Jiménez', 'gamer#2222', NULL, '2025-04-11 12:19:30'),
+(24, 'clau_blog', 'clau@mail.com', 'blogLife23', NULL, NULL, 'Bloguera de estilo de vida', '@clau_blog', NULL, NULL, 2, 'Claudia', 'Morales', NULL, NULL, '2025-04-11 12:19:30'),
+(25, 'rafart', 'rafa@mail.com', 'artLove45', NULL, 'rafa.jpg', 'Diseñador UI/UX', NULL, '@rafart', NULL, 3, 'Rafael', 'Aguilar', NULL, NULL, '2025-04-11 12:19:30'),
+(26, 'sofi_digital', 'sofi@mail.com', 'd1g1t@l!', NULL, NULL, NULL, NULL, '@sofi.digital', 'fb.com/sofi.digital', 2, 'Sofía', 'Mendoza', NULL, 'avatar26.jpg', '2025-04-11 12:19:30'),
 (27, 'ADMINISTRADOR', 'asd@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, '1.jpg', '1234', NULL, NULL, NULL, 1, 'Nicolas Fernando', 'Zoppi', NULL, NULL, '2025-04-05 08:20:00'),
 (28, 'lolo', 'lolo@lolo.gov', '8aa40001b9b39cb257fe646a561a80840c806c55', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
 (29, 'kilo', 'kilo@kilo.com', '8ff8800a239d91c648520ad5aea2d30e76e2850f', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
 (30, 'pepe', 'pepe@gmail.com', '265392dc2782778664cc9d56c8e3cd9956661bb0', NULL, NULL, NULL, NULL, NULL, NULL, 1, '', '', NULL, NULL, '2025-04-05 08:20:00'),
-(33, 'CLIENTE', 'zoppinicolas@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, 'Listo que capo soy.jpg', NULL, NULL, NULL, NULL, 1, 'CLIENTE', 'CLIENTE', NULL, NULL, '2025-04-05 08:20:00');
+(33, 'CLIENTE', 'zoppinicolas@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', NULL, 'Listo que capo soy.jpg', '', NULL, NULL, NULL, 1, 'CLIENTE', 'CLIENTEa', NULL, NULL, '2025-04-05 08:20:00'),
+(37, 'leo_code', 'leo@mail.com', 'cod3r2024', NULL, 'leo.png', 'Full-stack dev', '@leo_code', NULL, NULL, 1, 'Leonardo', 'Castro', NULL, NULL, '2025-04-11 12:19:30'),
+(38, 'jess_art', 'jess@mail.com', 'pa$$jess', NULL, NULL, 'Ilustradora', NULL, '@jessart', NULL, 3, 'Jessica', 'Herrera', 'jess#1212', NULL, '2025-04-11 12:19:30'),
+(39, 'mike_tech', 'mike@mail.com', 'techMike99', NULL, 'mike.jpg', 'Tech reviewer', NULL, NULL, NULL, 1, 'Miguel', 'Reyes', NULL, NULL, '2025-04-11 12:19:30'),
+(40, 'andrea_music', 'andrea@mail.com', 'andreamusic1', NULL, NULL, 'Cantante y compositora', '@andreamusic', NULL, NULL, 2, 'Andrea', 'Luna', 'andrea#2323', NULL, '2025-04-11 12:19:30'),
+(67, 'user17', 'user17@mail.com', 'pass17', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'User', 'Diecisiete', NULL, NULL, '2025-04-11 12:19:30');
 
 -- --------------------------------------------------------
 
@@ -498,7 +529,12 @@ INSERT INTO `usuario_favoritos` (`idfavorito`, `idusuario`, `crypto_id`, `crypto
 (8, 27, 'bitcoin', 'Bitcoin', '2025-04-09 05:44:38'),
 (10, 27, 'ethereum', 'Ethereum', '2025-04-09 14:26:08'),
 (11, 33, 'ronin', 'Ronin', '2025-04-09 14:31:01'),
-(14, 27, 'bnc', 'BNC', '2025-04-10 17:08:36');
+(14, 27, 'bnc', 'BNC', '2025-04-10 17:08:36'),
+(15, 17, 'bitcoin', 'Bitcoin', '2025-04-11 15:10:15'),
+(16, 17, 'ripple', 'XRP', '2025-04-11 15:10:36'),
+(17, 17, 'polkadot', 'Polkadot', '2025-04-11 15:10:45'),
+(18, 33, 'ripple', 'XRP', '2025-04-11 15:11:17'),
+(20, 17, 'iota', 'IOTA', '2025-04-11 15:35:20');
 
 -- --------------------------------------------------------
 
@@ -676,13 +712,13 @@ ALTER TABLE `noticias`
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idpermiso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `idproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idproducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `proyectos`
@@ -712,13 +748,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_favoritos`
 --
 ALTER TABLE `usuario_favoritos`
-  MODIFY `idfavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idfavorito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_redes`
